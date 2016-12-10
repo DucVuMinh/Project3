@@ -356,6 +356,20 @@ public class Festival implements java.io.Serializable, InterfaceEntity, Interfac
         return lDes;
 
     }
+    public static List getAllInstance() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria cr = session.createCriteria(Festival.class);
+        cr.setFetchMode("rankingfestivals", FetchMode.EAGER)
+                .setFetchMode("usersFavorite", FetchMode.EAGER)
+                .setFetchMode("imagedetailFestivals", FetchMode.EAGER)
+                .setFetchMode("discription", FetchMode.EAGER)
+                .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+        cr.add(Restrictions.eq("state", 1));
+        List lDes = cr.list();
+        session.close();
+        return lDes;
+
+    }
 
     @Override
     public String getJson() {
