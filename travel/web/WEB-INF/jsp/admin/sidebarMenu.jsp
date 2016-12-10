@@ -11,14 +11,14 @@
         <ul class="nav side-menu"> 
             <li><a href="index.htm"><i class="fa fa-home"></i> Trang chủ </a>
             </li>
-            <li><a href="UserManage.html"><i class="fa fa-user"></i> Người dùng</a>
+            <li><a href="userManage.htm"><i class="fa fa-user"></i> Người dùng</a>
             </li>
             <li><a href="destinationManage.htm"><i class="fa fa-map-marker"></i> Địa điểm </a>
             </li>
             <li class=""><a><i class="fa fa-star"></i> Thắng cảnh, lễ hội <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu" style="display: none;">
-                    <li><a href="ScenicManage.html">Quản lý thắng cảnh</a></li>
-                    <li><a href="FestivalManage.html">Quản lý lễ hội</a></li>
+                    <li><a href="landscapeManage.htm">Quản lý thắng cảnh</a></li>
+                    <li><a href="festivalManage.htm">Quản lý lễ hội</a></li>
                 </ul>
             </li>
             <li><a href="postsManage.htm"><i class="fa fa-file-text-o"></i> Bài viết </a>

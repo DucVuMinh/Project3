@@ -34,6 +34,34 @@
         <!-- Upload Image Banner -->
         <link rel="stylesheet" type="text/css" href="../admin/css/bootstrap-imageupload.css">
 
+        <style>
+            input[type="file"] {
+                display: block;
+            }
+            .imageThumb {
+                max-height: 75px;
+                border: 2px solid;
+                padding: 1px;
+                cursor: pointer;
+            }
+            .pip {
+                display: inline-block;
+                margin: 10px 10px 0 0;
+            }
+            .remove {
+                display: block;
+                background: #444;
+                border: 1px solid black;
+                color: white;
+                text-align: center;
+                cursor: pointer;
+            }
+            .remove:hover {
+                background: white;
+                color: black;
+            }
+        </style>
+
     </head>
     <body class="nav-md">
         <div class="container body">
@@ -118,13 +146,13 @@
 
                                 <div class="x_content">
                                     <br/>
-                                    <form id="form-addlocation" data-parsley-validate class="form-horizontal form-label-left">
+                                    <form id="form-addlocation" data-parsley-validate class="form-horizontal form-label-left" action="addDestination.htm">
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name-location">
                                                 Tên địa điểm <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" name="name-location" id="name-location" required="required" class="form-control col-md-7 col-xs-12">
+                                                <input type="text" name="name-destination" id="name-destination" required="required" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -133,13 +161,13 @@
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <div class="btn-group" data-toggle="buttons">
                                                     <label class="btn btn-default">
-                                                        <input type="radio" name="name-domain" id="name-domain1"> Miền Bắc
+                                                        <input type="radio" name="name-domain" required="required" value="bac"> Miền Bắc
                                                     </label>
                                                     <label class="btn btn-default">
-                                                        <input type="radio" name="name-domain" id="name-domain2"> Miền Trung
+                                                        <input type="radio" name="name-domain" value="trung"> Miền Trung
                                                     </label>
                                                     <label class="btn btn-default">
-                                                        <input type="radio" name="name-domain" id="name-domain3"> Miền Nam
+                                                        <input type="radio" name="name-domain" value="nam"> Miền Nam
                                                     </label>
                                                 </div>
                                             </div>
@@ -149,7 +177,7 @@
                                                 Giới thiệu <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <textarea class="resizable_textarea form-control" placeholder="Giới thiệu ngắn gọn về địa điểm.............."></textarea>
+                                                <textarea class="resizable_textarea form-control" placeholder="Giới thiệu ngắn gọn về địa điểm.............." required="required"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -171,35 +199,23 @@
                                                 </div>
                                             </div>
                                         </div>
+
+
+                                        <div class="field" align="left">
+                                            <h3>Upload your images</h3>
+                                            <input type="file" id="files" name="files[]" multiple />
+                                        </div>
+
+
+
                                         <div class="ln_solid"></div>
                                         <div class="form-group">
                                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                                 <button type="submit" class="btn btn-success">Lưu</button>
-                                                <button type="submit" class="btn btn-primary">Hủy</button>
+                                                <button  class="btn btn-primary">Hủy</button>
                                             </div>
                                         </div>
                                     </form>
-                                </div>
-                            </div>
-
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Hình ảnh địa điểm</h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a href=""></a></li>
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-
-                                <div class="x_content">
-                                    <form action="addLocation.html" class="dropzone">
-                                    </form>
-                                    <br />
-                                    <br />
-                                    <br />
-                                    <br />
                                 </div>
                             </div>
                         </div>
@@ -241,7 +257,7 @@
                 allowedFormats: ["jpg", "jpeg", "png", "gif"],
                 previewWidth: 350,
                 previewHeight: 350,
-                maxFileSizeKb: 2048
+                maxFileSizeKb: 4048
             });
         </script>
         <!-- /Upload Image Banner -->
@@ -249,6 +265,42 @@
         <script>
             $(document).ready(function () {
                 autosize($('.resizable_textarea'));
+            });
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                if (window.File && window.FileList && window.FileReader) {
+                    $("#files").on("change", function (e) {
+                        var files = e.target.files,
+                                filesLength = files.length;
+                        for (var i = 0; i < filesLength; i++) {
+                            var f = files[i]
+                            var fileReader = new FileReader();
+                            fileReader.onload = (function (e) {
+                                var file = e.target;
+                                $("<span class=\"pip\">" +
+                                        "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+                                        "<br/><span class=\"remove\">Remove image</span>" +
+                                        "</span>").insertAfter("#files");
+                                $(".remove").click(function () {
+                                    $(this).parent(".pip").remove();
+                                });
+
+                                // Old code here
+                                /*$("<img></img>", {
+                                 class: "imageThumb",
+                                 src: e.target.result,
+                                 title: file.name + " | Click to remove"
+                                 }).insertAfter("#files").click(function(){$(this).remove();});*/
+
+                            });
+                            fileReader.readAsDataURL(f);
+                        }
+                    });
+                } else {
+                    alert("Your browser doesn't support to File API")
+                }
             });
         </script>
         <!-- /Autosize -->

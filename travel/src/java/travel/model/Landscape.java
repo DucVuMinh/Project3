@@ -245,8 +245,8 @@ public class Landscape implements java.io.Serializable, InterfaceEntity, Interfa
                 .setFetchMode("usersFavorite", FetchMode.EAGER).setFetchMode("rankinglandscapes", FetchMode.EAGER)
                 .setFetchMode("destination", FetchMode.EAGER)
                 .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-        
-        cr.add(Restrictions.eq("title",title));
+
+        cr.add(Restrictions.eq("title", title));
         System.out.println(cr.toString());
         List listLand = cr.list();
         if (listLand != null && !listLand.isEmpty()) {
@@ -355,7 +355,8 @@ public class Landscape implements java.io.Serializable, InterfaceEntity, Interfa
         session.close();
         return lDes;
     }
-    public static List getAllInstance () {
+
+    public static List getAllInstance() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Criteria cr = session.createCriteria(Landscape.class);
         cr.setFetchMode("imagedetailLandscapes", FetchMode.EAGER)
@@ -385,10 +386,8 @@ public class Landscape implements java.io.Serializable, InterfaceEntity, Interfa
     }
 
     public static void main(String args[]) {
-        
-        Landscape temp=Landscape.getLandscapeByTitle("Đền Bạch Mã");
-        List list=temp.search("Ha Noi");
-        System.out.println(list.size());
-        System.out.println(temp.getDiscription());
+
+        List listLand = Landscape.getAllInstance();
+        System.out.println(listLand.get(3));
     }
 }
