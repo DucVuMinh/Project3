@@ -38,48 +38,56 @@ import travel.model.User;
 public class PostsController {
 
     @RequestMapping(value = "/customposts", method = RequestMethod.GET)
-    public ModelAndView destination(ModelMap mm, HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView destination(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView mv = new ModelAndView();
         try {
             String idl = (String) (request.getParameter("id"));
             Posts p = Posts.getPostsById(Integer.valueOf(idl));
-            ArrayList listImgDetail = new ArrayList<String>();
-            ArrayList commentSet = new ArrayList<>();
-            if (p.getImagedetailPostses() != null) {
-                for (Object temp : p.getImagedetailPostses()) {
-                    ImagedetailPosts imgtemp = (ImagedetailPosts) temp;
-                    listImgDetail.add("http://localhost:8080/travel/img/posts/detail/" + imgtemp.getIdImage() + ".png");
+            System.out.println("ducvu: state" +p.getState());
+            if (p.getState() == 1||p.getState() == 0) {
+                ArrayList listImgDetail = new ArrayList<String>();
+                ArrayList commentSet = new ArrayList<>();
+                if (p.getImagedetailPostses() != null) {
+                    for (Object temp : p.getImagedetailPostses()) {
+                        ImagedetailPosts imgtemp = (ImagedetailPosts) temp;
+                        listImgDetail.add("http://localhost:8080/travel/img/posts/detail/" + imgtemp.getIdImage() + ".png");
+                    }
                 }
-            }
-            HttpSession session = request.getSession();
-            String username = (String) session.getAttribute("username");
-            PostsTemp ptemp;
-            if (username != null) {
-                User u = User.getUserByUserName(username);
-                Rankinglandscape userRank = Rankinglandscape.
-                        getRankingLandscapeById(new RankinglandscapeId(p.getIdPosts(), u.getIdUser()));
-                if (userRank != null) {
-                    ptemp = new PostsTemp(p);
-                    ptemp.setRankOfUser(userRank.getRank());
+                HttpSession session = request.getSession();
+                String username = (String) session.getAttribute("username");
+                PostsTemp ptemp;
+                if (username != null) {
+                    User u = User.getUserByUserName(username);
+                    Rankinglandscape userRank = Rankinglandscape.
+                            getRankingLandscapeById(new RankinglandscapeId(p.getIdPosts(), u.getIdUser()));
+                    if (userRank != null) {
+                        ptemp = new PostsTemp(p);
+                        ptemp.setRankOfUser(userRank.getRank());
+                    } else {
+                        ptemp = new PostsTemp(p);
+                        ptemp.setRankOfUser(5);
+                    }
                 } else {
                     ptemp = new PostsTemp(p);
                     ptemp.setRankOfUser(5);
                 }
+                for (Object c : p.getComments()) {
+                    Comment ctemp = (Comment) c;
+                    if (ctemp.getState() == 1) {
+                        commentSet.add(Comment.getCommentById(ctemp.getIdComment()));
+                    }
+                }
+
+                mm.put("infpos", ptemp);
+                mm.put("imgDetail", listImgDetail);
+                mm.put("comment", commentSet);
+                mv.setViewName("customposts");
             } else {
-                ptemp = new PostsTemp(p);
-                ptemp.setRankOfUser(5);
+                response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
             }
-            for (Object c : p.getComments()) {
-                Comment ctemp = (Comment) c;
-                commentSet.add(Comment.getCommentById(ctemp.getIdComment()));
-            }
-            System.out.println("ducvu: "+ptemp.getAvgRank()+" " +ptemp.getRankOfUser()+" "+ptemp.getNumberUserRank());
-            mm.put("infpos", ptemp);
-            mm.put("imgDetail", listImgDetail);
-            mm.put("comment", commentSet);
-            mv.setViewName("customposts");
         } catch (Exception e) {
             e.printStackTrace();
+            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
         }
         return mv;
     }
@@ -100,7 +108,7 @@ public class PostsController {
             if (arr.length == 2) {
                 int idpost = Integer.valueOf(arr[0]);
                 Posts p = Posts.getPostsById(idpost);
-                if (p != null) {
+                if (p != null&&p.getState()==1) {
                     System.out.println("ducvu: " + p.getIdPosts());
                     HttpSession session = request.getSession();
                     String username = (String) session.getAttribute("username");
@@ -157,7 +165,7 @@ public class PostsController {
                     if (p != null) {
                         Comment comment = new Comment(p, u, new Date(), 1, arr[1]);
                         comment.add();
-                        out.print(u.getUsername()+"|"+arr[1]);
+                        out.print(u.getUsername() + "|" + arr[1]);
                     }
 
                 } else {

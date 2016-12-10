@@ -50,3 +50,7 @@ comment.controller('commentpostsctr',function($scope, $http,$location){
         nodeComment.appendChild(noderow);
     };
 });
+
+angular.element(document).ready(function() {
+   angular.bootstrap(document.getElementById("writepost"), ['commentposts']);
+});

@@ -68,14 +68,7 @@
                             </ul>
 
                             <div class="tab-content">
-                                <div id="writepost" class="tab-pane fade in active" ng-app="commentposts" ng-controller="commentpostsctr">
-                                    Viết bình luận:
-                                    <form  ng-submit="sendComment()">
-                                        <textarea name="message" rows="5" cols="100" style="border:1px solid #ddd" class="form-control" ng-model="content"></textarea>
-                                        <br>
-                                        <input type="submit" class="btn btn-default" style="background:#1d508d">
-                                    </form>
-                                </div>
+
                                 <div id="menu1" class="tab-pane fade">
                                     <div ng-app="starApp" ng-controller="StarCtrl" ng-init="setRate(${infpos.avgRank},${infpos.rankOfUser},${infpos.numberUserRank})"> 
                                         <div class=col-md-12>
@@ -97,6 +90,14 @@
                                         </div>
                                     </div>
 
+                                </div>
+                                <div id="writepost" class="tab-pane fade in active" ng-app="commentposts" ng-controller="commentpostsctr">
+                                    Viết bình luận:
+                                    <form  ng-submit="sendComment()">
+                                        <textarea name="message" rows="5" cols="100" style="border:1px solid #ddd" class="form-control" ng-model="content"></textarea>
+                                        <br>
+                                        <input type="submit" class="btn btn-default" style="background:#1d508d">
+                                    </form>
                                 </div>
                             </div>
                             <div class="comment-of-post" id="comment-of-post">
@@ -134,74 +135,77 @@
 
     </body>
     <script type="text/javascript">
-                                            var $item = $('.carousel .item');
-                                            var $wHeight = $(window).height();
-                                            $item.eq(0).addClass('active');
-                                            $item.height($wHeight);
-                                            $item.addClass('full-screen');
+        angular.element(document).ready(function () {
+            angular.bootstrap(document.getElementById("writepost"), ['commentposts']);
+        });
+        var $item = $('.carousel .item');
+        var $wHeight = $(window).height();
+        $item.eq(0).addClass('active');
+        $item.height($wHeight);
+        $item.addClass('full-screen');
 
-                                            $('.carousel img').each(function () {
-                                                var $src = $(this).attr('src');
-                                                var $color = $(this).attr('data-color');
-                                                $(this).parent().css({
-                                                    'background-image': 'url(' + $src + ')',
-                                                    'background-color': $color
-                                                });
-                                                $(this).remove();
-                                            });
+        $('.carousel img').each(function () {
+            var $src = $(this).attr('src');
+            var $color = $(this).attr('data-color');
+            $(this).parent().css({
+                'background-image': 'url(' + $src + ')',
+                'background-color': $color
+            });
+            $(this).remove();
+        });
 
-                                            $(window).on('resize', function () {
-                                                $wHeight = $(window).height();
-                                                $item.height($wHeight);
-                                            });
+        $(window).on('resize', function () {
+            $wHeight = $(window).height();
+            $item.height($wHeight);
+        });
 
-                                            $('.carousel').carousel({
-                                                interval: 6000,
-                                                pause: "false"
-                                            });
+        $('.carousel').carousel({
+            interval: 6000,
+            pause: "false"
+        });
 
-                                            var currentImage;
-                                            var currentIndex = -1;
-                                            var interval;
-                                            function showImage(index) {
-                                                if (index < $('#bigPic img').length) {
-                                                    var indexImage = $('#bigPic img')[index]
-                                                    if (currentImage) {
-                                                        if (currentImage != indexImage) {
-                                                            $(currentImage).css('z-index', 2);
-                                                            clearTimeout(myTimer);
-                                                            $(currentImage).fadeOut(250, function () {
-                                                                myTimer = setTimeout("showNext()", 3000);
-                                                                $(this).css({'display': 'none', 'z-index': 1})
-                                                            });
-                                                        }
-                                                    }
-                                                    $(indexImage).css({'display': 'block', 'opacity': 1});
-                                                    currentImage = indexImage;
-                                                    currentIndex = index;
-                                                    $('#thumbs li').removeClass('active');
-                                                    $($('#thumbs li')[index]).addClass('active');
-                                                }
-                                            }
-                                            ;
+        var currentImage;
+        var currentIndex = -1;
+        var interval;
+        function showImage(index) {
+            if (index < $('#bigPic img').length) {
+                var indexImage = $('#bigPic img')[index]
+                if (currentImage) {
+                    if (currentImage != indexImage) {
+                        $(currentImage).css('z-index', 2);
+                        clearTimeout(myTimer);
+                        $(currentImage).fadeOut(250, function () {
+                            myTimer = setTimeout("showNext()", 3000);
+                            $(this).css({'display': 'none', 'z-index': 1})
+                        });
+                    }
+                }
+                $(indexImage).css({'display': 'block', 'opacity': 1});
+                currentImage = indexImage;
+                currentIndex = index;
+                $('#thumbs li').removeClass('active');
+                $($('#thumbs li')[index]).addClass('active');
+            }
+        }
+        ;
 
-                                            function showNext() {
-                                                var len = $('#bigPic img').length;
-                                                var next = currentIndex < (len - 1) ? currentIndex + 1 : 0;
-                                                showImage(next);
-                                            }
-                                            ;
+        function showNext() {
+            var len = $('#bigPic img').length;
+            var next = currentIndex < (len - 1) ? currentIndex + 1 : 0;
+            showImage(next);
+        }
+        ;
 
-                                            var myTimer;
+        var myTimer;
 
-                                            $(document).ready(function () {
-                                                myTimer = setTimeout("showNext()", 3000);
-                                                showNext(); //loads first image
-                                                $('#thumbs li').bind('click', function (e) {
-                                                    var count = $(this).attr('rel');
-                                                    showImage(parseInt(count) - 1);
-                                                });
-                                            });
+        $(document).ready(function () {
+            myTimer = setTimeout("showNext()", 3000);
+            showNext(); //loads first image
+            $('#thumbs li').bind('click', function (e) {
+                var count = $(this).attr('rel');
+                showImage(parseInt(count) - 1);
+            });
+        });
     </script>
 
 </html>

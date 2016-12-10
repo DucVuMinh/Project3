@@ -20,6 +20,7 @@ starApp.controller('StarCtrl', function ($scope, $http, $location) {
         if ($scope.ratings[0].isClick) {
             var url = $location.absUrl().split('?')[1].split('=')[1];
             var rank = url + '|' + $scope.ratings[1].current;
+            alert('send rating');
             $http({
                 method: 'POST',
                 url: 'http://localhost:8080/travel/rankingpost.htm',
