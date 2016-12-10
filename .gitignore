@@ -1,8 +1,12 @@
 travel/build/
 #travel/build/web/img/
+
 travel/dist/travel.war
-#travel/src/java/hibernate.cfg.xml
+
+travel/src/java/hibernate.cfg.xml
+
 travel/nbproject/private/private.properties
 travel/nbproject/private/private.xml
+
 /travel/dist/
-#travel/nbproject/
+travel/nbproject/
