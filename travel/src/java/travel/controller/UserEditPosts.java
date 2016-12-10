@@ -64,56 +64,61 @@ public class UserEditPosts extends HttpServlet {
             int length = arrParts.length;
             int idpost = Integer.valueOf(request.getParameter("idposts"));
             Posts p = Posts.getPostsById(Integer.valueOf(idpost));
-            p.setTitle(title);
-            p.setContext(context);
-            p.update();
-            for (int i = 1; i < length - 2; i++) {
+            if (p.getUserPost().getIdUser() == u.getIdUser()) {
+                p.setTitle(title);
+                p.setContext(context);
+                p.update();
+                for (int i = 1; i < length - 2; i++) {
 
-                Part filePart = (Part) arrParts[i];
-                String fileName = getFileName(filePart);
+                    Part filePart = (Part) arrParts[i];
+                    String fileName = getFileName(filePart);
 
-                OutputStream out = null;
-                InputStream filecontent = null;
-                if (fileName != null && fileName.length() > 3) {
-                    try {
-                        ImagedetailPosts img = new ImagedetailPosts(p);
-                        int idimg = img.add();
-                        System.out.println("ducvu: add image");
-                        String absoluteDiskPath = getServletContext().getRealPath("img/posts/detail");
-                        File fimg = new File(absoluteDiskPath + "/"
-                                + idimg + ".png");
-                        out = new FileOutputStream(fimg);
-                        filecontent = filePart.getInputStream();
+                    OutputStream out = null;
+                    InputStream filecontent = null;
+                    if (fileName != null && fileName.length() > 3) {
+                        try {
+                            ImagedetailPosts img = new ImagedetailPosts(p);
+                            int idimg = img.add();
+                            System.out.println("ducvu: add image");
+                            String absoluteDiskPath = getServletContext().getRealPath("img/posts/detail");
+                            File fimg = new File(absoluteDiskPath + "/"
+                                    + idimg + ".png");
+                            out = new FileOutputStream(fimg);
+                            filecontent = filePart.getInputStream();
 
-                        int read = 0;
-                        final byte[] bytes = new byte[1024];
+                            int read = 0;
+                            final byte[] bytes = new byte[1024];
 
-                        while ((read = filecontent.read(bytes)) != -1) {
-                            out.write(bytes, 0, read);
-                        }
-                        LOGGER.log(Level.INFO, "File{0}being uploaded to {1}",
-                                new Object[]{fileName, ""});
+                            while ((read = filecontent.read(bytes)) != -1) {
+                                out.write(bytes, 0, read);
+                            }
+                            LOGGER.log(Level.INFO, "File{0}being uploaded to {1}",
+                                    new Object[]{fileName, ""});
 
-                    } catch (FileNotFoundException fne) {
-                        PrintWriter writer = response.getWriter();
-                        writer.println("You either did not specify a file to upload or are "
-                                + "trying to upload a file to a protected or nonexistent "
-                                + "location.");
-                        writer.println("<br/> ERROR: " + fne.getMessage());
+                        } catch (FileNotFoundException fne) {
+                            PrintWriter writer = response.getWriter();
+                            writer.println("You either did not specify a file to upload or are "
+                                    + "trying to upload a file to a protected or nonexistent "
+                                    + "location.");
+                            writer.println("<br/> ERROR: " + fne.getMessage());
 
-                        LOGGER.log(Level.SEVERE, "Problems during file upload. Error: {0}",
-                                new Object[]{fne.getMessage()});
-                    } finally {
-                        if (out != null) {
-                            out.close();
-                        }
-                        if (filecontent != null) {
-                            filecontent.close();
+                            LOGGER.log(Level.SEVERE, "Problems during file upload. Error: {0}",
+                                    new Object[]{fne.getMessage()});
+                            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+                        } finally {
+                            if (out != null) {
+                                out.close();
+                            }
+                            if (filecontent != null) {
+                                filecontent.close();
+                            }
                         }
                     }
                 }
+                response.sendRedirect("http://localhost:8080/travel/customposts.htm?id=" + idpost);
+            } else {
+                response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
             }
-            response.sendRedirect("http://localhost:8080/travel/customposts.htm?id=" + idpost);
         } else {
             response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
         }

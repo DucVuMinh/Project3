@@ -33,26 +33,40 @@ import travel.model.User;
  */
 @Controller
 public class ManageUserPostsController {
+
     @RequestMapping(value = "/writeposts", method = RequestMethod.GET)
-    public ModelAndView showWritePosts(ModelMap mm) {
+    public ModelAndView showWritePosts(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
         ModelAndView mv = new ModelAndView();
-        List lisDes=Destination.getLazyAllListDes();
-        mm.put("lisDes",lisDes);
-        System.out.println("ducvu: "+lisDes.size());
         mv.setViewName("writeposts");
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            List lisDes = Destination.getLazyAllListDes();
+            mm.put("lisDes", lisDes);
+            System.out.println("ducvu: " + lisDes.size());
+
+        } else {
+            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+        }
+
         return mv;
     }
+
     @RequestMapping(value = "/customuserposts", method = RequestMethod.GET)
-    public ModelAndView showManagePosts(ModelMap mm) {
+    public ModelAndView showManagePosts(ModelMap mm, HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");
+
         ModelAndView mv = new ModelAndView();
-        List lisDes=Destination.getLazyAllListDes();
-        mm.put("lisDes",lisDes);
-        System.out.println("ducvu: "+lisDes.size());
+        List lisDes = Destination.getLazyAllListDes();
+        mm.put("lisDes", lisDes);
+        System.out.println("ducvu: " + lisDes.size());
         mv.setViewName("customuserposts");
         return mv;
     }
+
     @RequestMapping(value = "/customeditposts", method = RequestMethod.GET)
-    public ModelAndView showEditPosts(ModelMap mm,HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView showEditPosts(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView mv = new ModelAndView();
         try {
             String idl = (String) (request.getParameter("id"));
@@ -67,16 +81,23 @@ public class ManageUserPostsController {
             }
             HttpSession session = request.getSession();
             String username = (String) session.getAttribute("username");
+            User u = User.getUserByUserName(username);
             PostsTemp ptemp;
             ptemp = new PostsTemp(p);
-            mm.put("infpos", ptemp);
-            mm.put("imgDetail", listImgDetail);
-        }catch(Exception ex){
+            if (u.getIdUser() == p.getUserPost().getIdUser()) {
+                mm.put("infpos", ptemp);
+                mm.put("imgDetail", listImgDetail);
+            } else {
+                response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            }
+        } catch (Exception ex) {
             ex.printStackTrace();
+            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
         }
         mv.setViewName("customeditposts");
         return mv;
     }
+
     @RequestMapping(value = "/deleteimgposts", method = RequestMethod.POST)
     public void deletePostsImg(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
@@ -88,7 +109,7 @@ public class ManageUserPostsController {
             while ((str = br.readLine()) != null) {
                 sb.append(str);
             }
-            int idimg =Integer.valueOf(sb.toString());
+            int idimg = Integer.valueOf(sb.toString());
             ServletOutputStream out = response.getOutputStream();
             ImagedetailPosts imgdetail = ImagedetailPosts.getImageDetailPostsId(idimg);
             imgdetail.delete();

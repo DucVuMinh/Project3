@@ -303,7 +303,7 @@ public class Posts implements java.io.Serializable, InterfaceEntity, InterfacePa
 
     @Override
     public List getTop(int numberTop) {
-        String sql = "SELECT R.posts  FROM Rankingposts R GROUP BY R.posts ORDER BY avg(rank) DESC";
+        String sql = "SELECT R.posts  FROM Rankingposts R WHERE R.posts.state=1 GROUP BY R.posts ORDER BY avg(rank) DESC";
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(sql);
         List results = query.list();

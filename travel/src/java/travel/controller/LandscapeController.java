@@ -34,94 +34,99 @@ import travel.model.User;
 public class LandscapeController {
 
     @RequestMapping(value = "/customlandscape", method = RequestMethod.GET)
-    public ModelAndView destination(ModelMap mm, HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView destination(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView mv = new ModelAndView();
         try {
             String idl = (String) (request.getParameter("id"));
             Landscape l = Landscape.getLandscapeById(Integer.valueOf(idl));
-            ArrayList listImgDetail = new ArrayList<String>();
-            for (Object temp : l.getImagedetailLandscapes()) {
-                ImagedetailLandscape imgtemp = (ImagedetailLandscape) temp;
-                listImgDetail.add("http://localhost:8080/travel/img/landscape/detail/" + imgtemp.getIdImage() + ".png");
-            }
+            if (l.getState() == 1) {
+                ArrayList listImgDetail = new ArrayList<String>();
+                for (Object temp : l.getImagedetailLandscapes()) {
+                    ImagedetailLandscape imgtemp = (ImagedetailLandscape) temp;
+                    listImgDetail.add("http://localhost:8080/travel/img/landscape/detail/" + imgtemp.getIdImage() + ".png");
+                }
 
-            HttpSession session = request.getSession();
-            String username = (String) session.getAttribute("username");
-            Landtemp ltemp;
-            if (username != null) {
-                User u = User.getUserByUserName(username);
-                Rankinglandscape userRank = Rankinglandscape.
-                        getRankingLandscapeById(new RankinglandscapeId(l.getIdLandscape(), u.getIdUser()));
-                if (userRank != null) {
-                    ltemp = new Landtemp(l.getIdLandscape(),l.getTitle(), l.getDiscription(),
-                            l.getRankinglandscapes().size(), (int) l.getRank(), userRank.getRank());
+                HttpSession session = request.getSession();
+                String username = (String) session.getAttribute("username");
+                Landtemp ltemp;
+                if (username != null) {
+                    User u = User.getUserByUserName(username);
+                    Rankinglandscape userRank = Rankinglandscape.
+                            getRankingLandscapeById(new RankinglandscapeId(l.getIdLandscape(), u.getIdUser()));
+                    if (userRank != null) {
+                        ltemp = new Landtemp(l.getIdLandscape(), l.getTitle(), l.getDiscription(),
+                                l.getRankinglandscapes().size(), (int) l.getRank(), userRank.getRank());
+                    } else {
+                        ltemp = new Landtemp(l.getIdLandscape(), l.getTitle(), l.getDiscription(),
+                                l.getRankinglandscapes().size(), (int) l.getRank(), 5);
+                    }
                 } else {
-                    ltemp = new Landtemp(l.getIdLandscape(),l.getTitle(), l.getDiscription(),
+                    ltemp = new Landtemp(l.getIdLandscape(), l.getTitle(), l.getDiscription(),
                             l.getRankinglandscapes().size(), (int) l.getRank(), 5);
                 }
+                mm.put("infland", ltemp);
+                mm.put("imgDetail", listImgDetail);
+                System.out.println("ducvu" + ltemp.getTitle());
+                mv.setViewName("customlandscape");
             } else {
-                ltemp = new Landtemp(l.getIdLandscape(),l.getTitle(), l.getDiscription(),
-                        l.getRankinglandscapes().size(), (int) l.getRank(), 5);
+                response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
             }
-            mm.put("infland", ltemp);
-            mm.put("imgDetail", listImgDetail);
-            System.out.println("ducvu" + ltemp.getTitle());
-            mv.setViewName("customlandscape");
         } catch (Exception e) {
             e.printStackTrace();
+            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
         }
-        System.out.println("ducvu: okie5");
+        
         return mv;
     }
+
     @RequestMapping(value = "/rankingland", method = RequestMethod.POST)
-    public void rankingLand(HttpServletRequest request, HttpServletResponse response){
+    public void rankingLand(HttpServletRequest request, HttpServletResponse response) {
         try {
             StringBuilder sb = new StringBuilder();
-            String inputStr=request.getParameter("rankinf");
+            String inputStr = request.getParameter("rankinf");
             BufferedReader br = request.getReader();
-            System.out.println("ducvu: rankinf "+inputStr);
+            System.out.println("ducvu: rankinf " + inputStr);
             String str = null;
             while ((str = br.readLine()) != null) {
                 sb.append(str);
             }
-            String arr[]=sb.toString().split("\\|");
+            String arr[] = sb.toString().split("\\|");
             ServletOutputStream out = response.getOutputStream();
-            System.out.println("ducvu: test ranking landscape "+sb.toString());
+            System.out.println("ducvu: test ranking landscape " + sb.toString());
             response.setContentType("text/html;charset=UTF-8");
-            if(arr.length==2){
-                int idLand=Integer.valueOf(arr[0]);
-                Landscape l=Landscape.getLandscapeById(idLand);
-                if(l!=null){
-                    System.out.println("ducvu: "+l.getIdLandscape());
+            if (arr.length == 2) {
+                int idLand = Integer.valueOf(arr[0]);
+                Landscape l = Landscape.getLandscapeById(idLand);
+                if (l != null) {
+                    System.out.println("ducvu: " + l.getIdLandscape());
                     HttpSession session = request.getSession();
                     String username = (String) session.getAttribute("username");
-                    if(username!=null){
+                    if (username != null) {
                         User u = User.getUserByUserName(username);
-                        int rank=Integer.valueOf(arr[1]);
-                        Rankinglandscape userRankingLand=
-                                new Rankinglandscape(
-                                        new RankinglandscapeId(l.getIdLandscape(), u.getIdUser()), l, u,rank );
+                        int rank = Integer.valueOf(arr[1]);
+                        Rankinglandscape userRankingLand
+                                = new Rankinglandscape(
+                                        new RankinglandscapeId(l.getIdLandscape(), u.getIdUser()), l, u, rank);
                         userRankingLand.add();
                         System.out.println(l.getRankinglandscapes().size());
-                        if(l.getRankinglandscapes().contains(userRankingLand)){
+                        if (l.getRankinglandscapes().contains(userRankingLand)) {
                             l.getRankinglandscapes().remove(userRankingLand);
                             l.getRankinglandscapes().add(userRankingLand);
-                        }else{
+                        } else {
                             l.getRankinglandscapes().add(userRankingLand);
                         }
-                        
-                        out.print(l.getRank()+"|"+l.getRankinglandscapes().size());
-                    }else{
+
+                        out.print(l.getRank() + "|" + l.getRankinglandscapes().size());
+                    } else {
                         out.print("login");
                     }
-                }else{
+                } else {
                     System.out.println("landscape null");
                 }
-            }else{
+            } else {
                 out.print("error");
             }
-            
-            
+
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }

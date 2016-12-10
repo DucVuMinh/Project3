@@ -43,7 +43,7 @@
 
         <div class="container" style="padding-top:200px;padding-bottom:30px" >
             <div class= "container-border">
-                <div class="title"> Chức năng dành riêng cho thành viên</div>
+                <div class="title"> Bạn không có quyền thực hiện chức năng này, hoặc dữ liêu không khả dụng </div>
             </div>
             
         </div>

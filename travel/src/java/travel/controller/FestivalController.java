@@ -37,90 +37,96 @@ import travel.model.User;
  */
 @Controller
 public class FestivalController {
+
     @RequestMapping(value = "/customfestival", method = RequestMethod.GET)
-    public ModelAndView destination(ModelMap mm, HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView destination(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView mv = new ModelAndView();
         try {
             String idl = (String) (request.getParameter("id"));
             Festival f = Festival.getFestivalById(Integer.valueOf(idl));
-            ArrayList listImgDetail = new ArrayList<String>();
-            for (Object temp : f.getImagedetailFestivals()) {
-                ImagedetailFestival imgtemp = (ImagedetailFestival) temp;
-                listImgDetail.add("http://localhost:8080/travel/img/festival/detail/" + imgtemp.getIdImage() + ".png");
-            }
-            HttpSession session = request.getSession();
-            String username = (String) session.getAttribute("username");
-            FestivalTemp ftemp;
-            if (username != null) {
-                User u = User.getUserByUserName(username);
-                Rankingfestival userRank = Rankingfestival.
-                        getRankingFestivalById(new RankingfestivalId(f.getIdFestival(), u.getIdUser()));
-                if (userRank != null) {
-                    ftemp = new FestivalTemp(f);
-                    ftemp.setRankOfUser(userRank.getRank());
+            if (f.getState() == 1) {
+                ArrayList listImgDetail = new ArrayList<String>();
+                for (Object temp : f.getImagedetailFestivals()) {
+                    ImagedetailFestival imgtemp = (ImagedetailFestival) temp;
+                    listImgDetail.add("http://localhost:8080/travel/img/festival/detail/" + imgtemp.getIdImage() + ".png");
+                }
+                HttpSession session = request.getSession();
+                String username = (String) session.getAttribute("username");
+                FestivalTemp ftemp;
+                if (username != null) {
+                    User u = User.getUserByUserName(username);
+                    Rankingfestival userRank = Rankingfestival.
+                            getRankingFestivalById(new RankingfestivalId(f.getIdFestival(), u.getIdUser()));
+                    if (userRank != null) {
+                        ftemp = new FestivalTemp(f);
+                        ftemp.setRankOfUser(userRank.getRank());
+                    } else {
+                        ftemp = new FestivalTemp(f);
+                        ftemp.setRankOfUser(5);
+                    }
                 } else {
                     ftemp = new FestivalTemp(f);
                     ftemp.setRankOfUser(5);
                 }
+                mm.put("inffes", ftemp);
+                mm.put("imgDetail", listImgDetail);
+                mv.setViewName("customfestival");
             } else {
-                ftemp = new FestivalTemp(f);
-                ftemp.setRankOfUser(5);
+                response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
             }
-            mm.put("inffes", ftemp);
-            mm.put("imgDetail", listImgDetail);
-            mv.setViewName("customfestival");
         } catch (Exception e) {
             e.printStackTrace();
+            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
         }
         return mv;
     }
+
     @RequestMapping(value = "/rankingfes", method = RequestMethod.POST)
-    public void rankingLand(HttpServletRequest request, HttpServletResponse response){
+    public void rankingLand(HttpServletRequest request, HttpServletResponse response) {
         try {
             StringBuilder sb = new StringBuilder();
-            String inputStr=request.getParameter("rankinf");
+            String inputStr = request.getParameter("rankinf");
             BufferedReader br = request.getReader();
-            System.out.println("ducvu: rankinf "+inputStr);
+            System.out.println("ducvu: rankinf " + inputStr);
             String str = null;
             while ((str = br.readLine()) != null) {
                 sb.append(str);
             }
-            String arr[]=sb.toString().split("\\|");
+            String arr[] = sb.toString().split("\\|");
             ServletOutputStream out = response.getOutputStream();
             response.setContentType("text/html;charset=UTF-8");
-            if(arr.length==2){
-                int idfes=Integer.valueOf(arr[0]);
-                Festival f=Festival.getFestivalById(idfes);
-                if(f!=null){
+            if (arr.length == 2) {
+                int idfes = Integer.valueOf(arr[0]);
+                Festival f = Festival.getFestivalById(idfes);
+                if (f != null) {
                     HttpSession session = request.getSession();
                     String username = (String) session.getAttribute("username");
-                    if(username!=null){
+                    if (username != null) {
                         User u = User.getUserByUserName(username);
-                        int rank=Integer.valueOf(arr[1]);
-                        Rankingfestival userRankingfes=
-                                new Rankingfestival(
-                                        new RankingfestivalId(f.getIdFestival(), u.getIdUser()), f, u,rank );
+                        int rank = Integer.valueOf(arr[1]);
+                        Rankingfestival userRankingfes
+                                = new Rankingfestival(
+                                        new RankingfestivalId(f.getIdFestival(), u.getIdUser()), f, u, rank);
                         userRankingfes.add();
-                        
-                        if(f.getRankingfestivals().contains(userRankingfes)){
+
+                        if (f.getRankingfestivals().contains(userRankingfes)) {
                             f.getRankingfestivals().remove(userRankingfes);
                             f.getRankingfestivals().add(userRankingfes);
-                        }else{
+                        } else {
                             f.getRankingfestivals().add(userRankingfes);
                         }
-                        
-                        out.print(f.getRank()+"|"+f.getRankingfestivals().size());
-                    }else{
+
+                        out.print(f.getRank() + "|" + f.getRankingfestivals().size());
+                    } else {
                         out.print("login");
                     }
-                }else{
+                } else {
                     System.out.println("landscape null");
                 }
-            }else{
+            } else {
                 out.print("error");
             }
-            
-            
+
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
