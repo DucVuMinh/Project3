@@ -355,6 +355,18 @@ public class Landscape implements java.io.Serializable, InterfaceEntity, Interfa
         session.close();
         return lDes;
     }
+    public static List getAllInstance () {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria cr = session.createCriteria(Landscape.class);
+        cr.setFetchMode("imagedetailLandscapes", FetchMode.EAGER)
+                .setFetchMode("usersFavorite", FetchMode.EAGER).setFetchMode("rankinglandscapes", FetchMode.EAGER)
+                .setFetchMode("destination", FetchMode.EAGER)
+                .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+        cr.add(Restrictions.eq("state", 1));
+        List lDes = cr.list();
+        session.close();
+        return lDes;
+    }
 
     @Override
     public String getJson() {

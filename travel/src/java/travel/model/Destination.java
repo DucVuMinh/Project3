@@ -1,16 +1,13 @@
 package travel.model;
 // Generated 16-Nov-2016 14:58:44 by Hibernate Tools 4.3.1
 
-import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.HibernateException;
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.CriteriaSpecification;
@@ -136,7 +133,42 @@ public class Destination implements java.io.Serializable, InterfaceEntity {
     public void setFestivals(Set festivals) {
         this.festivals = festivals;
     }
-
+    public ArrayList<Landscape> getLandscapeInstance(){
+        int size=this.landscapes.size();
+        Object arrl[]=this.landscapes.toArray();
+        ArrayList listlandinstance=new ArrayList();
+        for(int i=0;i<size;i++){
+            Landscape temp=(Landscape)arrl[i];
+            if(temp.getState()==1){
+                listlandinstance.add(temp);
+            }
+        }
+        return listlandinstance;
+    }
+    public ArrayList<Festival> getFestivalInstance(){
+        int size=this.festivals.size();
+        Object arrl[]=this.festivals.toArray();
+        ArrayList listFesinstance=new ArrayList();
+        for(int i=0;i<size;i++){
+            Festival temp=(Festival)arrl[i];
+            if(temp.getState()==1){
+                listFesinstance.add(temp);
+            }
+        }
+        return listFesinstance;
+    }
+    public ArrayList<Posts> getPostsInstance(){
+        int size=this.postses.size();
+        Object arrl[]=this.postses.toArray();
+        ArrayList listPosinstance=new ArrayList();
+        for(int i=0;i<size;i++){
+            Posts temp=(Posts)arrl[i];
+            if(temp.getState()==1){
+                listPosinstance.add(temp);
+            }
+        }
+        return listPosinstance;
+    }
     @Override
     public int hashCode() {
         int hash = 3;

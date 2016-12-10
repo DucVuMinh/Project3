@@ -51,8 +51,13 @@ public class DestinationController {
             List<ListFesTemp> listFes=new ArrayList<>();
             List<LisPostsTemp> listPost=new ArrayList<>();
             
+            Object arrl[]=d.getLandscapeInstance().toArray();
+            Object arrf[]=d.getFestivalInstance().toArray();
+            Object arrp[]=d.getPostsInstance().toArray();
+            
+
             int sizeLand=d.getLandscapes().size();
-            Object arrl[]=d.getLandscapes().toArray();
+            
             int loop;
             if(sizeLand%6==0){
                 loop=sizeLand/6;
@@ -71,7 +76,7 @@ public class DestinationController {
             listLand.add(ltemp);
             
             int sizeFes=d.getFestivals().size();
-            Object arrf[]=d.getFestivals().toArray();
+            
             if(sizeFes%6==0){
                 loop=sizeFes/6;
             }else{
@@ -91,7 +96,7 @@ public class DestinationController {
             
             int sizePos=d.getPostses().size();
             
-            Object arrp[]=d.getPostses().toArray();
+            
             if(sizePos%6==0){
                 loop=sizePos/6;
             }else{
