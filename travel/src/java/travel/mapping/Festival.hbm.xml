@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-Nov-2016 14:58:46 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="travel" name="travel.model.Festival" optimistic-lock="version" table="festival">
+    <id name="idFestival" type="java.lang.Integer">
+      <column name="idFestival"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="travel.model.Destination" fetch="select" name="destination">
+      <column name="idDestination" not-null="true"/>
+    </many-to-one>
+    <property name="title" type="string">
+      <column length="45" name="title" not-null="true"/>
+    </property>
+    <property name="discription" type="string">
+      <column length="65535" name="discription" not-null="true"/>
+    </property>
+    <property name="imageProfile" type="string">
+      <column length="100" name="imageProfile" not-null="true"/>
+    </property>
+    <property name="state" type="int">
+      <column name="state" not-null="true"/>
+    </property>
+    <set cascade="all" fetch="select" inverse="true" lazy="true" name="rankingfestivals" table="rankingfestival">
+      <key>
+        <column name="idFestival" not-null="true"/>
+      </key>
+      <one-to-many class="travel.model.Rankingfestival"/>
+    </set>
+    <set cascade="all" fetch="select" inverse="false" lazy="true" name="usersFavorite" table="favoritefestival">
+      <key>
+        <column name="idFestival" not-null="true"/>
+      </key>
+      <many-to-many entity-name="travel.model.User">
+        <column name="idUser" not-null="true"/>
+      </many-to-many>
+    </set>
+    <set cascade="all" fetch="select" inverse="true" lazy="true" name="imagedetailFestivals" table="imagedetail_festival">
+      <key>
+        <column name="idFestival"/>
+      </key>
+      <one-to-many class="travel.model.ImagedetailFestival"/>
+    </set>
+  </class>
+</hibernate-mapping>

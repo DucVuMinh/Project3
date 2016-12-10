@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-Nov-2016 14:58:46 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="travel" name="travel.model.Posts" optimistic-lock="version" table="posts">
+    <id name="idPosts" type="java.lang.Integer">
+      <column name="idPosts"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="travel.model.Destination" fetch="select" name="destination">
+      <column name="idDestination" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="travel.model.User" fetch="select" name="userPost">
+      <column name="idUser" not-null="true"/>
+    </many-to-one>
+    <property name="title" type="string">
+      <column length="100" name="title" not-null="true"/>
+    </property>
+    <property name="context" type="string">
+      <column length="65535" name="context" not-null="true"/>
+    </property>
+    <property name="state" type="int">
+      <column name="state" not-null="true"/>
+    </property>
+    <property name="datePost" type="timestamp">
+      <column length="19" name="datePost" not-null="true"/>
+    </property>
+    <set cascade="all" fetch="select" inverse="false" lazy="true" name="usersFarvorite" table="favoriteposts">
+      <key>
+        <column name="idPosts" not-null="true"/>
+      </key>
+      <many-to-many entity-name="travel.model.User">
+        <column name="idUser" not-null="true"/>
+      </many-to-many>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="rankingpostses" table="rankingposts">
+      <key>
+        <column name="idPosts" not-null="true"/>
+      </key>
+      <one-to-many class="travel.model.Rankingposts"/>
+    </set>
+    <set cascade="all" fetch="select" inverse="true" lazy="true" name="imagedetailPostses" table="imagedetail_posts">
+      <key>
+        <column name="idPosts"/>
+      </key>
+      <one-to-many class="travel.model.ImagedetailPosts"/>
+    </set>
+    <set cascade="all" fetch="select" inverse="true" lazy="true" name="comments" table="comment">
+      <key>
+        <column name="idPosts" not-null="true"/>
+      </key>
+      <one-to-many class="travel.model.Comment"/>
+    </set>
+  </class>
+</hibernate-mapping>

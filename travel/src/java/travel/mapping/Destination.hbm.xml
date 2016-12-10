@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-Nov-2016 14:58:46 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="travel" name="travel.model.Destination" optimistic-lock="version" table="destination">
+    <id name="idDestination" type="java.lang.Integer">
+      <column name="idDestination"/>
+      <generator class="identity"/>
+    </id>
+    <property name="title" type="string">
+      <column length="45" name="title" not-null="true"/>
+    </property>
+    <property name="nameArea" type="string">
+      <column length="45" name="nameArea" not-null="true"/>
+    </property>
+    <property name="discription" type="string">
+      <column length="65535" name="discription" not-null="true"/>
+    </property>
+    <property name="imageProfile" type="string">
+      <column length="100" name="imageProfile" not-null="true"/>
+    </property>
+    <property name="state" type="int">
+      <column name="state" not-null="true"/>
+    </property>
+    <set cascade="all" fetch="select" inverse="true" lazy="true" name="imagedetailDestinations" table="imagedetail_destination">
+      <key>
+        <column name="idDestination"/>
+      </key>
+      <one-to-many class="travel.model.ImagedetailDestination"/>
+    </set>
+    <set cascade="all" fetch="select" inverse="true" lazy="true" name="landscapes" table="landscape">
+      <key>
+        <column name="idDestination" not-null="true"/>
+      </key>
+      <one-to-many class="travel.model.Landscape"/>
+    </set>
+    <set cascade="all" fetch="select" inverse="true" lazy="true" name="postses" table="posts">
+      <key>
+        <column name="idDestination" not-null="true"/>
+      </key>
+      <one-to-many class="travel.model.Posts"/>
+    </set>
+    <set cascade="all" fetch="select" inverse="true" lazy="true" name="festivals" table="festival">
+      <key>
+        <column name="idDestination" not-null="true"/>
+      </key>
+      <one-to-many class="travel.model.Festival"/>
+    </set>
+  </class>
+</hibernate-mapping>

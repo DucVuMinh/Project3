@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="travel"/>
+  <table-filter match-name="imagedetail_festival"/>
+  <table-filter match-name="rankingposts"/>
+  <table-filter match-name="favoritefestival"/>
+  <table-filter match-name="imagedetail_landscape"/>
+  <table-filter match-name="rankingfestival"/>
+  <table-filter match-name="posts"/>
+  <table-filter match-name="festival"/>
+  <table-filter match-name="favoriteposts"/>
+  <table-filter match-name="comment"/>
+  <table-filter match-name="imagedetail_destination"/>
+  <table-filter match-name="landscape"/>
+  <table-filter match-name="user"/>
+  <table-filter match-name="destination"/>
+  <table-filter match-name="imagedetail_posts"/>
+  <table-filter match-name="rankinglandscape"/>
+  <table-filter match-name="favoritelandscape"/>
+</hibernate-reverse-engineering>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-Nov-2016 14:58:46 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="travel" name="travel.model.User" optimistic-lock="version" table="user">
+    <id name="idUser" type="java.lang.Integer">
+      <column name="idUser"/>
+      <generator class="identity"/>
+    </id>
+    <property name="fullname" type="string">
+      <column length="50" name="fullname" not-null="true"/>
+    </property>
+    <property name="username" type="string">
+      <column length="45" name="username" not-null="true" unique="true"/>
+    </property>
+    <property name="password" type="string">
+      <column length="45" name="password" not-null="true" unique="true"/>
+    </property>
+    <property name="email" type="string">
+      <column length="45" name="email" not-null="true" unique="true"/>
+    </property>
+    <property name="state" type="int">
+      <column name="state" not-null="true"/>
+    </property>
+    <property name="profile" type="string">
+      <column length="100" name="profile"/>
+    </property>
+    <property name="typeUser" type="int">
+      <column name="typeUser" not-null="true"/>
+    </property>
+    <set cascade="all" fetch="select" inverse="true" lazy="true" name="rankingfestivals" table="rankingfestival">
+      <key>
+        <column name="idUser" not-null="true"/>
+      </key>
+      <one-to-many class="travel.model.Rankingfestival"/>
+    </set>
+    <set cascade="all" fetch="select" inverse="true" lazy="true" name="postsFavorite" table="favoriteposts">
+      <key>
+        <column name="idUser" not-null="true"/>
+      </key>
+      <many-to-many entity-name="travel.model.Posts">
+        <column name="idPosts" not-null="true"/>
+      </many-to-many>
+    </set>
+    <set cascade="all" fetch="select" inverse="true" lazy="true" name="rankingpostses" table="rankingposts">
+      <key>
+        <column name="idUser" not-null="true"/>
+      </key>
+      <one-to-many class="travel.model.Rankingposts"/>
+    </set>
+    <set cascade="all" fetch="select" inverse="true" lazy="true" name="landscapeFavorite" table="favoritelandscape">
+      <key>
+        <column name="idUser" not-null="true"/>
+      </key>
+      <many-to-many entity-name="travel.model.Landscape">
+        <column name="idLandscape" not-null="true"/>
+      </many-to-many>
+    </set>
+    <set cascade="all" fetch="select" inverse="true" lazy="true" name="comments" table="comment">
+      <key>
+        <column name="idUser" not-null="true"/>
+      </key>
+      <one-to-many class="travel.model.Comment"/>
+    </set>
+    <set cascade="all" fetch="select" inverse="true" lazy="true" name="posts" table="posts">
+      <key>
+        <column name="idUser" not-null="true"/>
+      </key>
+      <one-to-many class="travel.model.Posts"/>
+    </set>
+    <set cascade="all" fetch="select" inverse="true" lazy="true" name="rankinglandscapes" table="rankinglandscape">
+      <key>
+        <column name="idUser" not-null="true"/>
+      </key>
+      <one-to-many class="travel.model.Rankinglandscape"/>
+    </set>
+    <set cascade="all" fetch="select" inverse="true" lazy="true" name="festivalFavorite" table="favoritefestival">
+      <key>
+        <column name="idUser" not-null="true"/>
+      </key>
+      <many-to-many entity-name="travel.model.Festival">
+        <column name="idFestival" not-null="true"/>
+      </many-to-many>
+    </set>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-Nov-2016 14:58:46 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="travel" name="travel.model.ImagedetailFestival" optimistic-lock="version" table="imagedetail_festival">
+    <id name="idImage" type="java.lang.Integer">
+      <column name="idImage"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="travel.model.Festival" fetch="select" name="festival">
+      <column name="idFestival"/>
+    </many-to-one>
+  </class>
+</hibernate-mapping>
