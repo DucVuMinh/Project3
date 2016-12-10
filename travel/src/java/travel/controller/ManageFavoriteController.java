@@ -30,7 +30,7 @@ import travel.model.User;
 @Controller
 public class ManageFavoriteController {
 
-    @RequestMapping(value = "/customposts", method = RequestMethod.GET)
+    @RequestMapping(value = "/custommanagefavorite", method = RequestMethod.GET)
     public ModelAndView destination(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView mv = new ModelAndView();
         mv.setView("custommanagefavorite");
