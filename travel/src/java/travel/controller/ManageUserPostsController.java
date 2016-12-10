@@ -60,7 +60,6 @@ public class ManageUserPostsController {
         ModelAndView mv = new ModelAndView();
         List lisDes = Destination.getLazyAllListDes();
         mm.put("lisDes", lisDes);
-        System.out.println("ducvu: " + lisDes.size());
         mv.setViewName("customuserposts");
         return mv;
     }
