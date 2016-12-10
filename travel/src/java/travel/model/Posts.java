@@ -362,6 +362,26 @@ public class Posts implements java.io.Serializable, InterfaceEntity, InterfacePa
         session.close();
         return lPosts;
     }
+public static List getAllInstance() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria cr = session.createCriteria(Posts.class);
+        List lPosts = null;
+        cr.setFetchMode("destination", FetchMode.EAGER)
+                .setFetchMode("usersFarvorite", FetchMode.EAGER)
+                .setFetchMode("rankingpostses", FetchMode.EAGER)
+                .setFetchMode("imagedetailPostses", FetchMode.EAGER)
+                .setFetchMode("comments", FetchMode.EAGER)
+                .setFetchMode("userPost", FetchMode.EAGER)
+                .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+        cr.add(Restrictions.eq("state", 1));
+        try {
+            lPosts = cr.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        }
+        session.close();
+        return lPosts;
+    }
 
     public void accept() {
         this.state = 1;
