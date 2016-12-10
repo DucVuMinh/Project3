@@ -5,8 +5,12 @@
  */
 package travel.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,6 +23,7 @@ import travel.controller.custom.FestivalTemp;
 import travel.controller.custom.Landtemp;
 import travel.controller.custom.PostsTemp;
 import travel.model.Festival;
+import travel.model.ImagedetailPosts;
 import travel.model.Landscape;
 import travel.model.Posts;
 import travel.model.User;
@@ -39,8 +44,8 @@ public class ManageFavoriteController {
         if (username != null) {
             User u = User.getUserByUserName(username);
             Object arrLFavor[] = u.getLandscapeFavorite().toArray();
-            Object arrFFavor[] = u.getLandscapeFavorite().toArray();
-            Object arrPFavor[] = u.getLandscapeFavorite().toArray();
+            Object arrFFavor[] = u.getFestivalFavorite().toArray();
+            Object arrPFavor[] = u.getPostsFavorite().toArray();
             ArrayList<Landtemp> listL = new ArrayList<>();
             ArrayList<FestivalTemp> listF = new ArrayList<>();
             ArrayList<PostsTemp> listP = new ArrayList<>();
@@ -48,22 +53,24 @@ public class ManageFavoriteController {
             for (int i = 0; i < arrLFavor.length; i++) {
                 Landscape temp = (Landscape) arrLFavor[i];
                 if (temp.getState() == 1) {
-                    listL.add(new Landtemp(temp));
+                    listL.add(new Landtemp(temp,1));
                 }
             }
             for (int i = 0; i < arrFFavor.length; i++) {
                 Festival temp = (Festival) arrFFavor[i];
                 if (temp.getState() == 1) {
-                    listF.add(new FestivalTemp(temp));
+                    listF.add(new FestivalTemp(temp,1));
                 }
             }
-            
+
             for (int i = 0; i < arrPFavor.length; i++) {
                 Posts temp = (Posts) arrPFavor[i];
                 if (temp.getState() == 1) {
-                    listP.add(new PostsTemp(temp));
+                    Posts ptemp = Posts.getPostsById(temp.getIdPosts());
+                    listP.add(new PostsTemp(ptemp,1));
                 }
             }
+            System.out.println("ducvu: size " + listL.size() + " " + listF.size() + listP.size());
             mm.put("listL", listL);
             mm.put("listF", listF);
             mm.put("listP", listP);
@@ -73,5 +80,44 @@ public class ManageFavoriteController {
 
         return mv;
     }
-    
+
+    @RequestMapping(value = "/deletefavor", method = RequestMethod.POST)
+    public void deleteFavor(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        ServletOutputStream out = response.getOutputStream();
+        System.out.println("ducvu: delete favor");
+        try {
+            String username = (String) session.getAttribute("username");
+            if (username != null) {
+                User u = User.getUserByUserName(username);
+                StringBuilder sb = new StringBuilder();
+                BufferedReader br = request.getReader();
+                String str = null;
+                while ((str = br.readLine()) != null) {
+                    sb.append(str);
+                }
+                String arr[] = sb.toString().split("_");
+                if (arr[0].compareTo("land") == 0) {
+                    u.getLandscapeFavorite().remove(Landscape.getLandscapeById(Integer.valueOf(arr[1])));
+                } else if (arr[0].compareTo("fes") == 0) {
+                    u.getFestivalFavorite().remove(Festival.getFestivalById(Integer.valueOf(arr[1])));
+                } else {
+                    u.getPostsFavorite().remove(Posts.getPostsById(Integer.valueOf(arr[1])));
+                }
+                u.update();
+
+                out.println("ok");
+            } else {
+                out.println("login");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            response.sendRedirect("requestlogin.htm");
+        } catch (Exception ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            response.sendRedirect("requestlogin.htm");
+        }
+    }
+
 }
