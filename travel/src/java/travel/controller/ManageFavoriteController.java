@@ -70,7 +70,6 @@ public class ManageFavoriteController {
                     listP.add(new PostsTemp(ptemp,1));
                 }
             }
-            System.out.println("ducvu: size " + listL.size() + " " + listF.size() + listP.size());
             mm.put("listL", listL);
             mm.put("listF", listF);
             mm.put("listP", listP);
@@ -86,7 +85,6 @@ public class ManageFavoriteController {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         ServletOutputStream out = response.getOutputStream();
-        System.out.println("ducvu: delete favor");
         try {
             String username = (String) session.getAttribute("username");
             if (username != null) {
@@ -98,10 +96,20 @@ public class ManageFavoriteController {
                     sb.append(str);
                 }
                 String arr[] = sb.toString().split("_");
+                System.out.println("ducvu: "+sb.toString());
                 if (arr[0].compareTo("land") == 0) {
-                    u.getLandscapeFavorite().remove(Landscape.getLandscapeById(Integer.valueOf(arr[1])));
+                    Landscape lt=Landscape.getLandscapeById(Integer.valueOf(arr[1]));
+                    System.out.println("ducvu: befor "+u.getLandscapeFavorite().size());
+                    
+                    lt.deleteFavorite(u);
+                    System.out.println("ducvu: after "+u.getLandscapeFavorite().size());
                 } else if (arr[0].compareTo("fes") == 0) {
-                    u.getFestivalFavorite().remove(Festival.getFestivalById(Integer.valueOf(arr[1])));
+                    Festival ft=Festival.getFestivalById(Integer.valueOf(arr[1]));
+                    u.getFestivalFavorite().remove(ft);
+                    ft.getUsersFavorite().remove(u);
+                    u.update();
+                    ft.update();
+                    
                 } else {
                     u.getPostsFavorite().remove(Posts.getPostsById(Integer.valueOf(arr[1])));
                 }

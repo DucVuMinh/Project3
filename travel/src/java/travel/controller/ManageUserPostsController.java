@@ -100,7 +100,6 @@ public class ManageUserPostsController {
     @RequestMapping(value = "/deleteimgposts", method = RequestMethod.POST)
     public void deletePostsImg(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
-        System.out.println("call delete img ");
         try {
             StringBuilder sb = new StringBuilder();
             BufferedReader br = request.getReader();

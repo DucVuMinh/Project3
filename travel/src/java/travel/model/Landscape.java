@@ -1,17 +1,15 @@
 package travel.model;
 // Generated 16-Nov-2016 14:58:44 by Hibernate Tools 4.3.1
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.CriteriaSpecification;
@@ -117,6 +115,7 @@ public class Landscape implements java.io.Serializable, InterfaceEntity, Interfa
     }
 
     public void setUsersFavorite(Set users) {
+
         this.usersFavorite = users;
     }
 
@@ -146,7 +145,7 @@ public class Landscape implements java.io.Serializable, InterfaceEntity, Interfa
         int id1 = this.idLandscape;
         int id2 = other.idLandscape;
 
-        return !(id1 != id2 && this.title.compareTo(other.title) != 0);
+        return (id1 == id2);
     }
 
     @Override
@@ -245,8 +244,8 @@ public class Landscape implements java.io.Serializable, InterfaceEntity, Interfa
                 .setFetchMode("usersFavorite", FetchMode.EAGER).setFetchMode("rankinglandscapes", FetchMode.EAGER)
                 .setFetchMode("destination", FetchMode.EAGER)
                 .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-        
-        cr.add(Restrictions.eq("title",title));
+
+        cr.add(Restrictions.eq("title", title));
         System.out.println(cr.toString());
         List listLand = cr.list();
         if (listLand != null && !listLand.isEmpty()) {
@@ -280,14 +279,25 @@ public class Landscape implements java.io.Serializable, InterfaceEntity, Interfa
     public void addToUserFavorite(User u) {
         if (!this.usersFavorite.contains(u)) {
             this.getUsersFavorite().add(u);
+            u.getLandscapeFavorite().add(this);
             this.update();
         }
     }
 
     @Override
     public void deleteFavorite(User u) {
-        this.usersFavorite.remove(u);
+        System.out.println(u.getLandscapeFavorite().size());
+        this.getUsersFavorite().remove(u);
+        u.getLandscapeFavorite().remove(this);
+        
+        System.out.println(this.getUsersFavorite().size()+" "+u.getLandscapeFavorite().size());
+        u.update();
         this.update();
+    }
+
+    public static void main(String args[]) {
+        Landscape l = Landscape.getLandscapeById(1);
+        l.deleteFavorite(User.getUserById(3));
     }
 
     @Override
@@ -355,7 +365,8 @@ public class Landscape implements java.io.Serializable, InterfaceEntity, Interfa
         session.close();
         return lDes;
     }
-    public static List getAllInstance () {
+
+    public static List getAllInstance() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Criteria cr = session.createCriteria(Landscape.class);
         cr.setFetchMode("imagedetailLandscapes", FetchMode.EAGER)
@@ -384,11 +395,4 @@ public class Landscape implements java.io.Serializable, InterfaceEntity, Interfa
         return json;
     }
 
-    public static void main(String args[]) {
-        
-        Landscape temp=Landscape.getLandscapeByTitle("Đền Bạch Mã");
-        List list=temp.search("Ha Noi");
-        System.out.println(list.size());
-        System.out.println(temp.getDiscription());
-    }
 }
