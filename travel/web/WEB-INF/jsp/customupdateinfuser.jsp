@@ -37,7 +37,7 @@
 
     <body id="#" data-spy="scroll" data-target=".navbar-fixed-top">
         <!-- Navigation -->
-        <c:import url="http://localhost:8080/travel/customheader.htm" />
+        <%@ include file = "customheader.jsp" %>
         <div class="container" style="padding-left:80px;padding-right:80px;padding-top:200px;padding-bottom:30px" >
 
             <ul class="nav nav-tabs" id="profile"style="margin-bottom:20px;color:#6f6f6e">

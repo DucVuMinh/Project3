@@ -36,7 +36,7 @@
 
     <body id="#" data-spy="scroll" data-target=".navbar-fixed-top" >
 
-        <c:import url="http://localhost:8080/travel/customheader.htm" />
+        <%@ include file = "customheader.jsp" %>
 
         <!-- Intro Header -->
 

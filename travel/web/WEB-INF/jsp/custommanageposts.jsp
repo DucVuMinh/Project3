@@ -44,7 +44,7 @@
 
     <body  data-spy="scroll" data-target=".navbar-fixed-top">
 
-        <c:import url="http://localhost:8080/travel/customheader.htm" />
+        <%@ include file = "customheader.jsp" %>
         
 
         <div class="container" style="padding-top:230px;padding-bottom:30px" >

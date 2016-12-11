@@ -39,7 +39,7 @@
     <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
         <!-- Navigation -->
-        <c:import url="http://localhost:8080/travel/customheader.htm" />
+        <%@ include file = "customheader.jsp" %>
 
         <div class="container" style="padding-top:200px;padding-bottom:30px" >
             <div class= "container-border">
