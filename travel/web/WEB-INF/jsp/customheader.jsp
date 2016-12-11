@@ -13,7 +13,7 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                         Menu <i class="fa fa-bars"></i>
                     </button>
-                    <a class="navbar-brand page-scroll" href="#page-top">
+                    <a class="navbar-brand page-scroll" href="custommain.htm">
                         <img src="img/default/logo1.jpg" style > 
                     </a>
                 </div>
@@ -26,7 +26,7 @@
                             <a href="#page-top"></a>
                         </li>
                         <li>
-                            <a href="#page-top">Trang chủ</a>
+                            <a href="custommain.htm">Trang chủ</a>
                         </li>
                         <li>
                             <a href="#contact">Địa Điểm</a>
@@ -43,9 +43,9 @@
                                     <img src="img/default/user.png" style="margin-top: 5px; margin-left: 15px;" class="img-circle" width="35" height="35">
                                 </a>
                                 <div class="dropdown-content">
-                                    <a href="">Sửa thông tin cá nhân</a>
-                                    <a href="">Mục yêu thích</a>
-                                    <a href="">Quản lý bài viết</a>
+                                    <a href="customupdateinfuser.htm">Sửa thông tin cá nhân</a>
+                                    <a href="custommanagefavorite.htm">Mục yêu thích</a>
+                                    <a href="custommanageposts.htm">Quản lý bài viết</a>
                                 </div>
                             </div>
                         </li>
@@ -62,6 +62,7 @@
                 <div class="form-login">
                     <button type="button" data-toggle="modal" data-target="#myModal1" class="button-modal">Đăng nhập</button>
                     <button type="button" data-toggle="modal" data-target="#myModal2" class="button-modal">Đăng ký</button>
+                    <button type="button" data-toggle="modal" data-target="#myModal2" class="button-modal">Đăng Xuất</button>
                 </div>
                 <!-- /.navbar-collapse -->
             </div>

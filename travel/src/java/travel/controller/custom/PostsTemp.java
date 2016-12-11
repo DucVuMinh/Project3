@@ -5,6 +5,7 @@
  */
 package travel.controller.custom;
 
+import java.util.Date;
 import travel.model.ImagedetailPosts;
 import travel.model.Posts;
 
@@ -19,6 +20,7 @@ public class PostsTemp {
     private String title;
     private String context;
     private String link;
+    private Date date;
     private float avgRank;
     private int numberUserRank;
     private int rankOfUser;
@@ -31,19 +33,20 @@ public class PostsTemp {
         this.id = id;
         this.title = title;
         this.context = context;
-        this.link = "http://localhost:8080/travel/customposts.htm?id=" + this.id;
+        this.link = "customposts.htm?id=" + this.id;
     }
 
     public PostsTemp(Posts p) {
         this.id = p.getIdPosts();
         this.title = p.getTitle();
         this.context = p.getContext();
-        this.link = "http://localhost:8080/travel/customposts.htm?id=" + this.id;
+        this.link = "customposts.htm?id=" + this.id;
+        this.date=p.getDatePost();
         int temp=0;
         if(p.getImagedetailPostses().size()>0){
             temp = ((ImagedetailPosts) p.getImagedetailPostses().toArray()[0]).getIdImage();
         }
-        this.profile = "http://localhost:8080/travel/img/posts/detail/" + temp + ".png";
+        this.profile = "img/posts/detail/" + temp + ".png";
         this.avgRank = p.getRank();
         this.numberUserRank = p.getRankingpostses().size();
 
@@ -53,12 +56,13 @@ public class PostsTemp {
         Posts tempp=Posts.getPostsById(p.getIdPosts());
         this.title = p.getTitle();
         this.context = p.getContext();
-        this.link = "http://localhost:8080/travel/customposts.htm?id=" + this.id;
+        this.link = "customposts.htm?id=" + this.id;
         int temp=0;
+        this.date=p.getDatePost();
         if(tempp.getImagedetailPostses().size()>0){
             temp = ((ImagedetailPosts) tempp.getImagedetailPostses().toArray()[0]).getIdImage();
         }
-        this.profile = "http://localhost:8080/travel/img/posts/detail/" + temp + ".png";
+        this.profile = "img/posts/detail/" + temp + ".png";
     }
 
 
@@ -125,5 +129,14 @@ public class PostsTemp {
     public void setRankOfUser(int rankOfUser) {
         this.rankOfUser = rankOfUser;
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    
 
 }

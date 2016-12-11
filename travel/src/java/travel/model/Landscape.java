@@ -286,11 +286,8 @@ public class Landscape implements java.io.Serializable, InterfaceEntity, Interfa
 
     @Override
     public void deleteFavorite(User u) {
-        System.out.println(u.getLandscapeFavorite().size());
         this.getUsersFavorite().remove(u);
         u.getLandscapeFavorite().remove(this);
-        
-        System.out.println(this.getUsersFavorite().size()+" "+u.getLandscapeFavorite().size());
         u.update();
         this.update();
     }

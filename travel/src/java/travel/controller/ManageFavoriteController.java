@@ -99,23 +99,19 @@ public class ManageFavoriteController {
                 System.out.println("ducvu: "+sb.toString());
                 if (arr[0].compareTo("land") == 0) {
                     Landscape lt=Landscape.getLandscapeById(Integer.valueOf(arr[1]));
-                    System.out.println("ducvu: befor "+u.getLandscapeFavorite().size());
                     
                     lt.deleteFavorite(u);
-                    System.out.println("ducvu: after "+u.getLandscapeFavorite().size());
                 } else if (arr[0].compareTo("fes") == 0) {
                     Festival ft=Festival.getFestivalById(Integer.valueOf(arr[1]));
-                    u.getFestivalFavorite().remove(ft);
-                    ft.getUsersFavorite().remove(u);
-                    u.update();
-                    ft.update();
+                    
+                    ft.deleteFavorite(u);
                     
                 } else {
-                    u.getPostsFavorite().remove(Posts.getPostsById(Integer.valueOf(arr[1])));
+                    Posts p=Posts.getPostsById(Integer.valueOf(arr[1]));
+                    p.deleteFavorite(u);
                 }
-                u.update();
 
-                out.println("ok");
+                out.println(1);
             } else {
                 out.println("login");
             }

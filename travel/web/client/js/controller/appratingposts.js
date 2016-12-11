@@ -46,7 +46,6 @@ starApp.controller('StarCtrl', function ($scope, $http, $location) {
         }
     };
     $scope.setRate = function (val1, val2, val3) {
-        alert('abc');
         $scope.ratings[0].current = val1.toFixed(1);
         $scope.ratings[1].current = val2;
         $scope.numberUserRank = val3;

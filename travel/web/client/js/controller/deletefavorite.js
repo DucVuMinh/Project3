@@ -15,9 +15,9 @@ clientLogin.controller("deletefavoritectr", function ($scope, $http, $location) 
             url: 'deletefavor.htm',
             data: str
         }).success(function (data, status, headers, config) {
-           
-            if (data == "ok") {
-                 alert(data);
+            alert("111"+ data);
+            if (data == 1) {
+                 alert(str);
                 var favor = document.getElementById(str);
                 favor.style.visibility = "hidden";
             }
@@ -34,8 +34,8 @@ clientLogin.controller("deletefavoritectr", function ($scope, $http, $location) 
             data: str 
         }).success(function (data, status, headers, config) {
             alert(data);
-            if (data == "ok") {
-                
+            if (data == 1) {
+                alert(str);
                 var favor = document.getElementById(str);
                 favor.style.visibility = "hidden";
             }
@@ -52,8 +52,8 @@ clientLogin.controller("deletefavoritectr", function ($scope, $http, $location) 
             data: str 
         }).success(function (data, status, headers, config) {
             alert(data);
-            if (data == "ok") {
-                
+            if (data == 1) {
+                alert(str);
                 var favor = document.getElementById(str);
                 favor.style.visibility = "hidden";
             }

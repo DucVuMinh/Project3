@@ -481,7 +481,7 @@ public class Destination implements java.io.Serializable, InterfaceEntity {
     }
 
     public static void main(String args[]) {
-        Destination d = getDesByTitle("Hà Nội");
+        Destination d = getDesByTitle("Sài Gòn");
         List l = d.search("Hà Nội");
         d.add();
         if (d == null) {

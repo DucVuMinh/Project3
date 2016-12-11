@@ -78,7 +78,7 @@
                                 </div>
                                 <span style="font-size:10px;color:#7d7d7d">
                                     <div class="content-post-hidden">${land.desciption}</div></span>
-                                <a href="${land.link}"><div class="seemore"> Xem thêm -></a></div>
+                                <a href="${land.link}"><div class="seemore"> Xem thêm -> </div></a>
                         </div>
                     </c:forEach>
 
@@ -95,7 +95,7 @@
                             </div>
                             <span style="font-size:10px;color:#7d7d7d">
                                 <div class="content-post-hidden">${fes.description}</div></span>
-                            <a href="${fes.link}"><div class="seemore"> Xem thêm -></a></div>
+                            <a href="${fes.link}"><div class="seemore"> Xem thêm -> </div></a>
                     </div>
                 </c:forEach>
 
@@ -109,12 +109,12 @@
                         <span class="title">${posts.title}</span>
                         <div class="line-first">
                             <div class="right">
-                                <button class="button-modal" ng-click="delfavorPost(${fes.id})">Xoá</button>
+                                <button class="button-modal" ng-click="delfavorPost(${posts.id})">Xoá</button>
                             </div>
                         </div>
                         <span style="font-size:10px;color:#7d7d7d">
                             <div class="content-post-hidden">${posts.context}</div></span>
-                        <a href="${posts.link}"><div class="seemore"> Xem thêm -></a></div>
+                        <a href="${posts.link}"><div class="seemore"> Xem thêm -> </div></a>
                 </div>
             </c:forEach>
 

@@ -171,7 +171,7 @@ public class Posts implements java.io.Serializable, InterfaceEntity, InterfacePa
         }
         int id1 = this.idPosts;
         int id2 = other.idPosts;
-        return !(id1 != id2 && this.title.compareTo(other.title) != 0);
+        return (id1==id2);
     }
 
     @Override
@@ -275,6 +275,7 @@ public class Posts implements java.io.Serializable, InterfaceEntity, InterfacePa
     public void addToUserFavorite(User u) {
         if (!this.usersFarvorite.contains(u)) {
             this.usersFarvorite.add(u);
+            u.getPostsFavorite().add(this);
             this.update();
         } else {
         }
@@ -282,8 +283,10 @@ public class Posts implements java.io.Serializable, InterfaceEntity, InterfacePa
 
     @Override
     public void deleteFavorite(User u) {
-        this.usersFarvorite.remove(u);
+        this.getUsersFarvorite().remove(u);
+        u.getPostsFavorite().remove(this);
         this.update();
+        u.update();
     }
 
     @Override
