@@ -8,10 +8,27 @@
 <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-        <script src="client/js/controller/ClientLogout.js"></script>
+        <script src="client/js/controller/ClientHeader.js"></script>
     </head>
+    <%
+        String username = (String) session.getAttribute("username");
+        boolean login;
+        boolean createAccount;
+        boolean logout;
+        String serverName = request.getServerName();
+        if (username != null) {
+
+            login = false;
+            createAccount = false;
+            logout = true;
+        } else {
+            login = true;
+            createAccount = true;
+            logout = false;
+        }
+    %>
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" style="background:#1d508d">
-        <div class="container">
+        <div class="container" ng-app="headerapp" ng-controller="headerctr" ng-init="int(<%=login%>,<%=logout%>,<%=createAccount%>)">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     Menu <i class="fa fa-bars"></i>
@@ -57,34 +74,18 @@
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse" >
                 <form class="navbar-form" role="search">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search" name="q" style="border-radius:8px;background:#fcfcfc">
+                        <input type="text" class="form-control" placeholder="Search" name="q" style="border-radius:8px;background:#fcfcfc" my-enter="search()" ng-model="datasearch" require>
                     </div>
                 </form>
             </div>
-            <%
-                String username = (String) session.getAttribute("username");
-                boolean login;
-                boolean createAccount;
-                boolean logout;
-                String serverName = request.getServerName();
-                if (username != null) {
 
-                    login =false;
-                    createAccount = false;
-                    logout = true;
-                } else {
-                    login = true;
-                    createAccount = true;
-                    logout = false;
-                }
-            %>
-            <div class="form-login" ng-app="headerapp" ng-controller="headerctr" ng-init="int(<%=login%>,<%=logout%>,<%=createAccount%>)">
+            <div class="form-login" >
                 <a ng-show="loginapp" href="customlogin.htm"><button type="button" data-toggle="modal" data-target="#myModal1" class="button-modal" >Đăng nhập</button></a>
                 <a ng-show="createaccountapp" href="customcreateaccount.htm"><button type="button" data-toggle="modal" data-target="#myModal2" class="button-modal" >Đăng ký</button></a>
-                <button ng-show="logoutapp" type="button" data-toggle="modal" data-target="#myModal2" class="button-modal" >Đăng Xuất</button>
-                
+                <button ng-show="logoutapp" ng-click="cusLogout()" type="button" data-toggle="modal" data-target="#myModal2" class="button-modal" >Đăng Xuất</button>
+
             </div>
-            
+
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->

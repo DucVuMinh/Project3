@@ -29,7 +29,7 @@ import travel.model.User;
 public class LoginController {
 
     @RequestMapping(value = "/customlogin", method = RequestMethod.GET)
-    public ModelAndView login(ModelMap mm,HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ModelAndView login(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("customlogin");
         HttpSession session = request.getSession();
@@ -79,6 +79,34 @@ public class LoginController {
             }
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @RequestMapping(value = "/customhandlinglogout", method = RequestMethod.POST)
+    public void customHandlingLogout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("text/html;charset=UTF-8");
+
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            ServletOutputStream out = null;
+            try {
+                session.removeAttribute("username");
+                out = response.getOutputStream();
+                out.println(1);
+                session.invalidate();
+            } catch (IOException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                response.sendRedirect("http://localhost:8080/travel/custommain.htm");
+            } finally {
+                try {
+                    out.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    response.sendRedirect("http://localhost:8080/travel/custommain.htm");
+                }
+            }
         }
 
     }

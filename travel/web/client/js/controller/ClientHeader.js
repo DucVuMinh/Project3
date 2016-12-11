@@ -15,21 +15,18 @@ clientLogin.controller("headerctr", function ($scope, $http, $location) {
     $scope.loginapp = "";
     $scope.logoutapp = "";
     $scope.createaccountapp = "";
+    $scope.datasearch="";
     $scope.cusLogout = function () {
-        var data = $.param({
-            fName: $scope.username,
-            lName: $scope.password
-        });
-        var strl = $scope.username + "|" + $scope.password;
+        var strl = "logout";
         $http({
             method: 'POST',
             url: 'http://localhost:8080/travel/customhandlinglogout.htm',
             data: strl
         }).success(function (data, status, headers, config) {
-            if (data === "username") {
+            if (data ==1) {
                 $scope.loginapp = true;
-                $scope.logoutapp = true;
-                $scope.createaccountapp = false;
+                $scope.logoutapp = false;
+                $scope.createaccountapp = true;
             }
         }).error(function (data, status, headers, config) {
             alert("Network error");
@@ -39,6 +36,24 @@ clientLogin.controller("headerctr", function ($scope, $http, $location) {
         $scope.loginapp = var1;
         $scope.logoutapp = var2;
         $scope.createaccountapp = var3;
+    };
+    $scope.search =function(){
+        var url="customresultsearch.htm?query="+$scope.datasearch;
+        window.location=url;
+    };
+    
+});
+clientLogin.directive('myEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.myEnter);
+                });
+
+                event.preventDefault();
+            }
+        });
     };
 });
 
