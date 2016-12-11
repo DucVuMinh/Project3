@@ -73,7 +73,7 @@
             </div>
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse" >
                 <form class="navbar-form" role="search">
-                    <div class="input-group">
+                <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search" name="q" style="border-radius:8px;background:#fcfcfc" my-enter="search()" ng-model="datasearch" require>
                     </div>
                 </form>
