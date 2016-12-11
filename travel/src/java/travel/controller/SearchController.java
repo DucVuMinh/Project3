@@ -5,6 +5,7 @@
  */
 package travel.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -29,13 +30,14 @@ import travel.model.Posts;
 public class SearchController {
 
     @RequestMapping(value = "/customresultsearch", method = RequestMethod.GET)
-    public ModelAndView login(ModelMap mm, HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView login(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         ModelAndView mv = new ModelAndView();
         String query = (String) (request.getParameter("query"));
-        query=query.replace("_", " ");
+        query = new String(query.getBytes("iso-8859-1"), "UTF-8");
+        query = query.replace("_", " ");
         Landscape l = new Landscape();
         List listLand = l.search(query);
-        
+
         Festival f = new Festival();
         List listFest = f.search(query);
 
@@ -43,24 +45,31 @@ public class SearchController {
         List listPost = p.search(query);
 
         int sizeL = listLand.size();
-        ArrayList listLandTemp=new ArrayList();
+        ArrayList listLandTemp = new ArrayList();
         for (int i = 0; i < sizeL; i++) {
             Landscape temp = (Landscape) listLand.get(i);
-            listLandTemp.add(new Landtemp(temp));
+            if (temp.getState() == 1) {
+                listLandTemp.add(new Landtemp(temp));
+            }
         }
-        ArrayList listFestTemp=new ArrayList();
+        ArrayList listFestTemp = new ArrayList();
         int siezF = listFest.size();
         for (int i = 0; i < siezF; i++) {
             Festival temp = (Festival) listFest.get(i);
-            listFestTemp.add(new FestivalTemp(temp));
+            if (temp.getState() == 1) {
+                listFestTemp.add(new FestivalTemp(temp));
+            }
         }
         ArrayList listTopPostsTemp = new ArrayList<PostsTemp>();
         for (int i = 0; i < listPost.size(); i++) {
+
             Posts temp = (Posts) listPost.get(i);
-            listTopPostsTemp.add(new PostsTemp(temp));
-            
+            if (temp.getState() == 1) {
+                listTopPostsTemp.add(new PostsTemp(temp));
+            }
+
         }
-        System.out.println("ducvu: "+listLandTemp.size());
+        System.out.println("ducvu: " + listLandTemp.size());
         mm.put("land", listLandTemp);
         mm.put("fes", listFestTemp);
         mm.put("posts", listTopPostsTemp);

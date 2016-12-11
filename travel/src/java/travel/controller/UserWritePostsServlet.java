@@ -63,8 +63,9 @@ public class UserWritePostsServlet extends HttpServlet {
         title = new String(title.getBytes("iso-8859-1"), "UTF-8");
         String context = request.getParameter("context");
         context = new String(context.getBytes("iso-8859-1"), "UTF-8");
-
+        System.out.println("ducvu: "+des);
         Destination d = Destination.getDesByTitle(des);
+        System.out.println("duc vu: "+d.getTitle()  );
         Posts p = new Posts(d, u, title, context, 0, new Date());
 
         int idpost = p.add();
@@ -83,7 +84,7 @@ public class UserWritePostsServlet extends HttpServlet {
                     ImagedetailPosts img = new ImagedetailPosts(p);
                     int idimg = img.add();
                     String absoluteDiskPath = getServletContext().getRealPath("img/posts/detail");
-                    File fimg = new File(absoluteDiskPath + "/"
+                    File fimg = new File(absoluteDiskPath + File.separator
                             + idimg + ".png");
                     out = new FileOutputStream(fimg);
                     filecontent = filePart.getInputStream();

@@ -34,6 +34,31 @@ import travel.model.User;
 @Controller
 public class ManageUserPostsController {
 
+    @RequestMapping(value = "/custommanageposts", method = RequestMethod.GET)
+    public ModelAndView showManagePosts(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = request.getSession();
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("custommanageposts");
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            User u = User.getUserByUserName(username);
+            Object arrp[] = u.getPosts().toArray();
+            ArrayList<PostsTemp> listp = new ArrayList();
+            for (int i = 0; i < arrp.length; i++) {
+                Posts ptemp = (Posts) arrp[i];
+                if (ptemp.getState() != -1) {
+                    listp.add(new PostsTemp(ptemp,1));
+                }
+            }
+            mm.put("listp", listp);
+            mm.put("user", u.getFullname());
+        } else {
+            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+        }
+
+        return mv;
+    }
+
     @RequestMapping(value = "/writeposts", method = RequestMethod.GET)
     public ModelAndView showWritePosts(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
@@ -52,17 +77,7 @@ public class ManageUserPostsController {
         return mv;
     }
 
-    @RequestMapping(value = "/customuserposts", method = RequestMethod.GET)
-    public ModelAndView showManagePosts(ModelMap mm, HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("username");
 
-        ModelAndView mv = new ModelAndView();
-        List lisDes = Destination.getLazyAllListDes();
-        mm.put("lisDes", lisDes);
-        mv.setViewName("customuserposts");
-        return mv;
-    }
 
     @RequestMapping(value = "/customeditposts", method = RequestMethod.GET)
     public ModelAndView showEditPosts(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -100,7 +115,6 @@ public class ManageUserPostsController {
     @RequestMapping(value = "/deleteimgposts", method = RequestMethod.POST)
     public void deletePostsImg(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
-        System.out.println("call delete img ");
         try {
             StringBuilder sb = new StringBuilder();
             BufferedReader br = request.getReader();

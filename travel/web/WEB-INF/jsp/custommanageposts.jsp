@@ -1,10 +1,11 @@
 <%-- 
-    Document   : writeposts
-    Created on : 30-Nov-2016, 15:41:32
-    Author     : DucVu
+    Document   : custommanageposts
+    Created on : Dec 11, 2016, 10:29:40 AM
+    Author     : ducvu
 --%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html ; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +16,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
+
         <title>S-travel</title>
 
         <!-- Bootstrap Core CSS -->
@@ -27,25 +29,57 @@
 
         <!-- Theme CSS -->
         <link href="client/css/grayscale.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="client/js/jquery-1.10.2.min.js"></script>   
+
+
     </head>
 
-    <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <body  data-spy="scroll" data-target=".navbar-fixed-top">
 
-        <!-- Navigation -->
         <%@ include file = "customheader.jsp" %>
+        
 
-        <div class="container" style="padding-top:200px;padding-bottom:30px" >
-            <div class= "container-border">
-                <div class="title"> Bạn không có quyền thực hiện chức năng này, hoặc dữ liêu không khả dụng </div>
+        <div class="container" style="padding-top:230px;padding-bottom:30px" >
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <button type="button" data-toggle="modal" data-target="#myModal1" class="button-modal"><a href="writeposts.htm">Chia sẻ trải nghiệm</a></button>
             </div>
-            
+            <ul class="nav nav-tabs" id="profile"style="margin-bottom:20px;color:#6f6f6e">
+
+                <li class="active"><a data-toggle="tab" href="#lposts" style="color:#1d508d">DANH LAM THẮNG CẢNH</a></li>
+
+            </ul>
+
+
+            <div class="tab-content">
+
+                <div id="lposts" class="tab-pane fade in active">
+                    <div id= "information-product"style="color:#898989; text-align:justify">
+                        <c:forEach var="p" items="${listp}">
+                            <div class="post">
+                                <img  src="${p.profile}" class="image"alt="tin tức" class="menu-picture">
+                                <span class="title">${p.title}</span>
+                                <div class="line-first">
+                                    <div class="left"><p>${user}<img src="img/default/add.png" alt="time"> ${p.date}</p></div><br>
+                                    <a href="customeditposts.htm?id=${p.id}"><div class="seemore"> Chỉnh sửa </div></a>
+                                </div>
+                                <span style="font-size:10px;color:#7d7d7d">
+                                    <div class="content-post-hidden">${p.context}</div></span>
+                                <a href="customposts.htm?id=${p.id}"><div class="seemore"> Xem thêm -> </div></a>
+                            </div>
+                        </c:forEach> 
+
+                    </div>
+
+                </div>
+            </div>
         </div>
 
         <hr >
@@ -65,17 +99,9 @@
 
         <!-- Theme JavaScript -->
         <script src="client/js/grayscale.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css" />
-        <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
 
     </body>
-    <script>
-        jQuery(function ($) {
-            $("#files").shieldUpload();
-        });
-    </script>
     <script type="text/javascript">
-
         var $item = $('.carousel .item');
         var $wHeight = $(window).height();
         $item.eq(0).addClass('active');
@@ -104,4 +130,3 @@
     </script>
 
 </html>
-

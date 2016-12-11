@@ -59,13 +59,15 @@ public class DestinationController {
                 Object arrf[] = d.getFestivalInstance().toArray();
                 Object arrp[] = d.getPostsInstance().toArray();
 
-                int sizeLand = d.getLandscapes().size();
+                int sizeLand = arrl.length;
 
-                int loop;
-                if (sizeLand % 6 == 0) {
-                    loop = sizeLand / 6;
-                } else {
-                    loop = sizeLand / 6 + 1;
+                int loop = 0;
+                if (sizeLand >= 6) {
+                    if (sizeLand % 6 == 0) {
+                        loop = sizeLand / 6;
+                    } else {
+                        loop = sizeLand / 6 + 1;
+                    }
                 }
                 for (int i = 0; i < loop - 1; i++) {
 
@@ -73,17 +75,25 @@ public class DestinationController {
                             (Landscape) arrl[i * 6 + 4], (Landscape) arrl[i * 6 + 5]));
                 }
                 ListLandTemp ltemp = new ListLandTemp();
-                for (int i = (loop - 1) * 6; i < sizeLand; i++) {
-                    ltemp.add((Landscape) arrl[i]);
+                if (loop > 0) {
+                    for (int i = (loop - 1) * 6; i < sizeLand; i++) {
+                        ltemp.add((Landscape) arrl[i]);
+                    }
+                } else {
+                    for (int i = 0; i < sizeLand; i++) {
+                        ltemp.add((Landscape) arrl[i]);
+                    }
                 }
                 listLand.add(ltemp);
 
-                int sizeFes = d.getFestivals().size();
-
-                if (sizeFes % 6 == 0) {
-                    loop = sizeFes / 6;
-                } else {
-                    loop = sizeFes / 6 + 1;
+                int sizeFes = arrf.length;
+                loop = 0;
+                if (sizeFes >= 6) {
+                    if (sizeFes % 6 == 0) {
+                        loop = sizeFes / 6;
+                    } else {
+                        loop = sizeFes / 6 + 1;
+                    }
                 }
                 for (int i = 0; i < loop - 1; i++) {
 
@@ -91,17 +101,25 @@ public class DestinationController {
                             (Festival) arrf[i * 6 + 4], (Festival) arrf[i * 6 + 5]));
                 }
                 ListFesTemp ftemp = new ListFesTemp();
-                for (int i = (loop - 1) * 6; i < sizeFes; i++) {
-                    ftemp.add((Festival) arrf[i]);
+                if (loop > 0) {
+                    for (int i = (loop - 1) * 6; i < sizeFes; i++) {
+                        ftemp.add((Festival) arrf[i]);
+                    }
+                } else {
+                    for (int i = 0; i < sizeFes; i++) {
+                        ftemp.add((Festival) arrf[i]);
+                    }
                 }
                 listFes.add(ftemp);
 
-                int sizePos = d.getPostses().size();
-
-                if (sizePos % 6 == 0) {
-                    loop = sizePos / 6;
-                } else {
-                    loop = sizePos / 6 + 1;
+                int sizePos = arrp.length;
+                loop = 0;
+                if (sizePos >= 6) {
+                    if (sizePos % 6 == 0) {
+                        loop = sizePos / 6;
+                    } else {
+                        loop = sizePos / 6 + 1;
+                    }
                 }
                 for (int i = 0; i < loop - 1; i++) {
 
@@ -109,8 +127,14 @@ public class DestinationController {
                             (Posts) arrp[i * 6 + 4], (Posts) arrp[i * 6 + 5]));
                 }
                 LisPostsTemp ptemp = new LisPostsTemp();
-                for (int i = (loop - 1) * 6; i < sizePos; i++) {
-                    ptemp.add((Posts) arrp[i]);
+                if (loop > 0) {
+                    for (int i = (loop - 1) * 6; i < sizePos; i++) {
+                        ptemp.add((Posts) arrp[i]);
+                    }
+                } else {
+                    for (int i = 0; i < sizePos; i++) {
+                        ptemp.add((Posts) arrp[i]);
+                    }
                 }
                 listPost.add(ptemp);
 

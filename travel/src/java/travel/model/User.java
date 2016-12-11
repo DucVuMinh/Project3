@@ -223,12 +223,9 @@ public class User implements java.io.Serializable, InterfaceEntity {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
         final User other = (User) obj;
         int id2 = other.idUser;
-        return !(id1 != id2 && this.username.compareTo(other.username) != 0 && this.email.compareTo(other.email) != 0);
+        return (id1 == id2||this.username.compareTo(other.getUsername())==0);
     }
 
     @Override

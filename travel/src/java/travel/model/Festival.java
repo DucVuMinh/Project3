@@ -142,7 +142,7 @@ public class Festival implements java.io.Serializable, InterfaceEntity, Interfac
         final Festival other = (Festival) obj;
         int id1 = this.idFestival;
         int id2 = other.idFestival;
-        return !(id1 != id2 && this.title.compareTo(other.title) != 0);
+        return (id1==id2);
     }
 
     @Override
@@ -238,14 +238,17 @@ public class Festival implements java.io.Serializable, InterfaceEntity, Interfac
     public void addToUserFavorite(User u) {
         if (!this.usersFavorite.contains(u)) {
             this.getUsersFavorite().add(u);
+            u.getFestivalFavorite().add(this);
             this.update();
         }
     }
 
     @Override
     public void deleteFavorite(User u) {
-        this.usersFavorite.remove(u);
+        this.getUsersFavorite().remove(u);
+        u.getFestivalFavorite().remove(this);
         this.update();
+        u.update();
     }
 
     @Override

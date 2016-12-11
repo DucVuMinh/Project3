@@ -18,10 +18,10 @@
         <meta name="author" content="">
         <title>S-travel</title>
         <!-- Bootstrap Core CSS -->
-        <link href="client/client/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="client/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <!-- Custom Fonts -->
-        <link href="client/client/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="client/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
         <!-- Theme CSS -->
@@ -33,7 +33,7 @@
     <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 
         <!-- Navigation -->
-        <c:import url="http://localhost:8080/travel/customheader.htm" />
+        <%@ include file = "customheader.jsp" %>
 
         <!-- Intro Header -->
         <header class="intro">
@@ -175,10 +175,10 @@
         <c:import url="http://localhost:8080/travel/customfooter.htm" />
 
         <!-- jQuery -->
-        <script src="client/client/vendor/jquery/jquery.js"></script>
+        <script src="client/vendor/jquery/jquery.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
-        <script src="client/client/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="client/vendor/bootstrap/js/bootstrap.min.js"></script>
 
         <!-- Plugin JavaScript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>

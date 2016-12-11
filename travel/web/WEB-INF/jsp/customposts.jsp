@@ -36,7 +36,7 @@
 
     <body id="#" data-spy="scroll" data-target=".navbar-fixed-top" >
 
-        <c:import url="http://localhost:8080/travel/customheader.htm" />
+        <%@ include file = "customheader.jsp" %>
 
         <!-- Intro Header -->
 
@@ -69,8 +69,8 @@
 
                             <div class="tab-content">
 
-                                <div id="menu1" class="tab-pane fade">
-                                    <div ng-app="starApp" ng-controller="StarCtrl" ng-init="setRate(${infpos.avgRank},${infpos.rankOfUser},${infpos.numberUserRank})"> 
+                                <div id="menu1" class="tab-pane fade" ng-app="starApp" ng-controller="StarCtrl" ng-init="setRate(${infpos.avgRank},${infpos.rankOfUser},${infpos.numberUserRank})">
+                                    <div id="rankele" > 
                                         <div class=col-md-12>
 
                                             <div>
@@ -136,7 +136,9 @@
     </body>
     <script type="text/javascript">
         angular.element(document).ready(function () {
+            angular.bootstrap(document.getElementById("menu1"), ['starApp']);
             angular.bootstrap(document.getElementById("writepost"), ['commentposts']);
+            
         });
         var $item = $('.carousel .item');
         var $wHeight = $(window).height();

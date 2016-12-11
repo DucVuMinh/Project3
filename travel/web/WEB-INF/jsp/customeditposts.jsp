@@ -39,7 +39,7 @@
     </head>
 
     <body id="#" data-spy="scroll" data-target=".navbar-fixed-top" >
-        <c:import url="http://localhost:8080/travel/customheader.htm" />
+        <%@ include file = "customheader.jsp" %>
 
         <!-- Intro Header -->
         <div>
@@ -48,7 +48,7 @@
                 <div class="content">
                     <div class="line-first">
                         <div class="slide-holder">
-                            <div class="slide-container" ng-app="deleteimgposts" ng-controller="deleteimgpostsctr">
+                            <div id="listimgpost" class="slide-container" ng-app="deleteimgposts" ng-controller="deleteimgpostsctr">
                                 <c:forEach var="imgitem" items="${imgDetail}">
                                     <div class="slide-image" ng-show="true" id="${imgitem.idimg}"><img src="${imgitem.link}" class="img1" >
                                         <div class="delete">
@@ -104,6 +104,10 @@
         
     </body>
     <script type="text/javascript">
+        angular.element(document).ready(function () {
+            angular.bootstrap(document.getElementById("listimgpost"), ['deleteimgposts']);
+            
+        });
                                                 jQuery(function ($) {
                                                     $("#files").shieldUpload();
                                                 });

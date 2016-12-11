@@ -6,7 +6,11 @@
 package travel.controller;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletOutputStream;
@@ -28,9 +32,19 @@ import travel.model.User;
 public class ManageUserInfController {
 
     @RequestMapping(value = "/customupdateinfuser", method = RequestMethod.GET)
-    public ModelAndView login(ModelMap mm) {
+    public ModelAndView login(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("customupdateinfuser");
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            User u = User.getUserByUserName(username);
+            String profile="img/users/profile/"+u.getIdUser()+".png";
+            mm.put("profile", profile);
+            mm.put("user", u);
+        } else {
+            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+        }
         return mv;
     }
 
@@ -49,13 +63,21 @@ public class ManageUserInfController {
             if (arr.length == 2) {
                 HttpSession session = request.getSession();
                 String username = (String) session.getAttribute("username");
-                if(username!=null){
-                    User u=User.getUserByUserName(username);
+                if (username != null) {
+                    User u = User.getUserByUserName(username);
                     u.setFullname(arr[0]);
                     u.setPassword(arr[1]);
                     u.update();
-                    System.out.println("ducvu: "+u.getFullname() +" "+u.getPassword());
                     request.removeAttribute("username");
+                    String absoluteDiskPath = session.getServletContext().getRealPath("img/users/temp");
+                    String absoluteDiskPathNew = session.getServletContext().getRealPath("img/users/profile");
+                    File newProfile = new File(absoluteDiskPath + File.separator+u.getIdUser() + ".png");
+                    File oldProfile = new File(absoluteDiskPathNew +File.separator +u.getIdUser() + ".png");
+                    System.out.println("ducvu: file path "+newProfile.getPath());
+                    if(newProfile.exists()){
+                        System.out.println("ducvu: copy file to new"+oldProfile.getPath());
+                        Files.copy(newProfile.toPath(), oldProfile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    }
                     out.print("http://localhost:8080/travel/customlogin.htm");
                 }
             } else {

@@ -7,6 +7,7 @@ package travel.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import static java.lang.System.out;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletOutputStream;
@@ -28,9 +29,14 @@ import travel.model.User;
 public class LoginController {
 
     @RequestMapping(value = "/customlogin", method = RequestMethod.GET)
-    public ModelAndView login(ModelMap mm) {
+    public ModelAndView login(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("customlogin");
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            response.sendRedirect("http://localhost:8080/travel/custommain.htm");
+        }
         return mv;
     }
 
@@ -45,33 +51,64 @@ public class LoginController {
     public void customHandlingLogin(HttpServletRequest request, HttpServletResponse response) {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            StringBuilder sb = new StringBuilder();
-            BufferedReader br = request.getReader();
-            String str = null;
-            while ((str = br.readLine()) != null) {
-                sb.append(str);
-            }
-            String arr[]=sb.toString().split("\\|");
-            ServletOutputStream out = response.getOutputStream();
-            if(arr.length==2){
-                int check=User.login(arr[0], arr[1]);
-                if(check==-1){
-                    out.print("username");
-                }else if(check==-2){
-                    out.print("password");
-                }else{
-                    HttpSession session = request.getSession();
-                    session.setAttribute("username",arr[0] );
-                    out.print("http://localhost:8080/travel/custommain.htm");
+            HttpSession session = request.getSession();
+            String username = (String) session.getAttribute("username");
+            if (username == null) {
+                StringBuilder sb = new StringBuilder();
+                BufferedReader br = request.getReader();
+                String str = null;
+                while ((str = br.readLine()) != null) {
+                    sb.append(str);
                 }
-            }else{
-                
+                String arr[] = sb.toString().split("\\|");
+                ServletOutputStream out = response.getOutputStream();
+                if (arr.length == 2) {
+                    int check = User.login(arr[0], arr[1]);
+                    if (check == -1) {
+                        out.print("username");
+                    } else if (check == -2) {
+                        out.print("password");
+                    } else {
+                        session.setAttribute("username", arr[0]);
+                        out.print("http://localhost:8080/travel/custommain.htm");
+                    }
+                } else {
+                }
+            } else {
+                out.print("http://localhost:8080/travel/custommain.htm");
             }
-            
-            
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+    }
+
+    @RequestMapping(value = "/customhandlinglogout", method = RequestMethod.POST)
+    public void customHandlingLogout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("text/html;charset=UTF-8");
+
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            ServletOutputStream out = null;
+            try {
+                session.removeAttribute("username");
+                out = response.getOutputStream();
+                out.println(1);
+                session.invalidate();
+            } catch (IOException ex) {
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                response.sendRedirect("http://localhost:8080/travel/custommain.htm");
+            } finally {
+                try {
+                    out.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                    response.sendRedirect("http://localhost:8080/travel/custommain.htm");
+                }
+            }
+        }
+
     }
 
 }
