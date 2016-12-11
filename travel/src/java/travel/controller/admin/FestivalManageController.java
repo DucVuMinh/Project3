@@ -20,9 +20,10 @@ import travel.model.Festival;
  * @author vanduc
  */
 @Controller
+@RequestMapping(value = "/admin")
 public class FestivalManageController {
     
-    @RequestMapping(value = "/admin/festivalManage", method = RequestMethod.GET)
+    @RequestMapping(value = "/festivalManage", method = RequestMethod.GET)
     public ModelAndView viewFestivalManage(ModelMap mm) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("admin/festivalManage");
@@ -31,7 +32,7 @@ public class FestivalManageController {
         return mv;
     }
     
-    @RequestMapping(value = "/admin/deleteFestival", method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteFestival", method = RequestMethod.GET)
     public String deleteFestival(@RequestParam("idFestival") int idFestival, final RedirectAttributes redirectAttributes){
         Festival fes = Festival.getFestivalById(idFestival);
         try {

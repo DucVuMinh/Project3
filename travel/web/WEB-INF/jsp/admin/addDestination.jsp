@@ -36,7 +36,13 @@
 
         <style>
             input[type="file"] {
-                display: block;
+                display: none;
+            }
+            .custom-file-upload {
+                border: 1px solid #ccc;
+                display: table;
+                padding: 6px 12px;
+                cursor: pointer;
             }
             .imageThumb {
                 max-height: 75px;
@@ -146,7 +152,9 @@
 
                                 <div class="x_content">
                                     <br/>
-                                    <form id="form-addlocation" data-parsley-validate class="form-horizontal form-label-left" action="addDestination.htm">
+                                    <form id="form-addlocation" data-parsley-validate class="form-horizontal form-label-left"
+                                          action="addDestination.htm" method="GET" onsubmit="return validateForm()">
+                                        <!--Ten dia diem-->
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name-location">
                                                 Tên địa điểm <span class="required">*</span>
@@ -155,59 +163,71 @@
                                                 <input type="text" name="name-destination" id="name-destination" required="required" class="form-control col-md-7 col-xs-12">
                                             </div>
                                         </div>
+                                        
+                                        <!--Ten mien-->
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name-domain">Tên miền <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <div class="btn-group" data-toggle="buttons">
                                                     <label class="btn btn-default">
-                                                        <input type="radio" name="name-domain" required="required" value="bac"> Miền Bắc
+                                                        <input type="radio" name="name-domain" required="required" value="Miền Bắc"> Miền Bắc
                                                     </label>
                                                     <label class="btn btn-default">
-                                                        <input type="radio" name="name-domain" value="trung"> Miền Trung
+                                                        <input type="radio" name="name-domain" value="Miền Trung"> Miền Trung
                                                     </label>
                                                     <label class="btn btn-default">
-                                                        <input type="radio" name="name-domain" value="nam"> Miền Nam
+                                                        <input type="radio" name="name-domain" value="Miền Nam"> Miền Nam
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                        <!--Gioi thieu-->
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">
                                                 Giới thiệu <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <textarea class="resizable_textarea form-control" placeholder="Giới thiệu ngắn gọn về địa điểm.............." required="required"></textarea>
+                                                <textarea class="resizable_textarea form-control" placeholder="Giới thiệu ngắn gọn về địa điểm.............." name="desciption" required="required"></textarea>
                                             </div>
                                         </div>
+                                        
+                                        <!--Anh dai dien-->
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                                Banner <span class="required">*</span>
+                                                Ảnh đại diện <span class="required">*</span>
                                             </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <div class="imageupload panel panel-default">
+                                            <div class="col-md-6 col-sm-6 col-xs-12 ">
+                                                <div class="imageupload panel panel-primary">
                                                     <div class="panel-heading clearfix">
-                                                        <h3 class="panel-title pull-left">Upload Image</h3>
+                                                        <h3 class="panel-title pull-left">Upload image</h3>
                                                     </div>
                                                     <div class="file-tab panel-body">
                                                         <label class="btn btn-default btn-file">
                                                             <span>Browse</span>
-                                                            <input type="file" name="image-file">
+                                                            <input type="file" name="profile" required>
                                                         </label>
                                                         <button type="button" class="btn btn-default">Remove</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        
+                                        <!--Anh chi tiet-->
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                Ảnh chi tiết <span class="required">*</span>
+                                            </label>
+                                            <label  for="files" class="custom-file-upload">
+                                                <i class="fa fa-cloud-upload"></i> Choose Image
 
-
-                                        <div class="field" align="left">
-                                            <h3>Upload your images</h3>
+                                            </label>
                                             <input type="file" id="files" name="files[]" multiple />
+                                            <div class="col-md-8 col-sm-6 col-xs-12 col-md-offset-3 " id="detail_img"></div>
                                         </div>
-
-
-
+                                        
+                                        
                                         <div class="ln_solid"></div>
                                         <div class="form-group">
                                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -248,6 +268,14 @@
         <!-- Upload Image Banner -->
         <script type="text/javascript" src="../admin/js/bootstrap-imageupload.js"></script>
 
+        <!--Validate form  -->
+        <script>
+            function validateForm() {
+                return false;
+            }
+        </script>
+
+        <!-- Upload Image Banner -->
         <script type="text/javascript">
             var $imageupload = $('.imageupload');
 
@@ -260,7 +288,8 @@
                 maxFileSizeKb: 4048
             });
         </script>
-        <!-- /Upload Image Banner -->
+
+
         <!-- Autosize -->
         <script>
             $(document).ready(function () {
@@ -279,21 +308,14 @@
                             var fileReader = new FileReader();
                             fileReader.onload = (function (e) {
                                 var file = e.target;
-                                $("<span class=\"pip\">" +
+                                $("#detail_img").append($("<span class=\"pip\">" +
                                         "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
-                                        "<br/><span class=\"remove\">Remove image</span>" +
-                                        "</span>").insertAfter("#files");
+                                        "<br/><span class=\"remove\">Remove</span>" +
+                                        "</span>"))
                                 $(".remove").click(function () {
                                     $(this).parent(".pip").remove();
                                 });
-
-                                // Old code here
-                                /*$("<img></img>", {
-                                 class: "imageThumb",
-                                 src: e.target.result,
-                                 title: file.name + " | Click to remove"
-                                 }).insertAfter("#files").click(function(){$(this).remove();});*/
-
+                                
                             });
                             fileReader.readAsDataURL(f);
                         }
@@ -303,6 +325,5 @@
                 }
             });
         </script>
-        <!-- /Autosize -->
     </body>
 </html>

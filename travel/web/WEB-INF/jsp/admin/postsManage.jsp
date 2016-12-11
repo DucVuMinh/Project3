@@ -133,12 +133,12 @@
                                                         <c:choose>
                                                             <c:when test="${p.state == 1}" >
                                                                 <td><c:out value="Đã duyệt" /></td>
-                                                                <td><a href="detailPosts.htm?idPost=${p.idPosts}">Xem</a></td>
-                                                                <td><a href="#" onclick="deletePost('${p.title}', ${p.idPosts})">Xóa</a></td>
+                                                                <td><a class="btn btn-primary btn-xs" href="detailPosts.htm?idPost=${p.idPosts}"><i class="fa fa-folder"></i>Xem</a></td>
+                                                                <td><a class="btn btn-danger btn-xs" href="#" onclick="deletePost('${p.title}', ${p.idPosts})"><i class="fa fa-trash-o"></i>Xóa</a></td>
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <td><c:out value="Chờ duyệt" /></td>
-                                                                <td><a href="detailPostsNeedApprove.htm?idPost=${p.idPosts}">Xem</a></td>
+                                                                <td><a class="btn btn-primary btn-xs" href="detailPostsNeedApprove.htm?idPost=${p.idPosts}"><i class="fa fa-folder"></i>Xem</a></td>
                                                                 <td></td>
                                                             </c:otherwise>
                                                         </c:choose>
@@ -187,7 +187,7 @@
                                                                 <td><c:out value="${p.destination.getTitle()}" /></td>
                                                                 <td><c:out value="${p.datePost}" /></td>
                                                                 <td><c:out value="Chờ duyệt" /></td>
-                                                                <td><a href="detailPostsNeedApprove.htm?idPost=${p.idPosts}">Xem</a></td>
+                                                                <td><a class="btn btn-primary btn-xs" href="detailPostsNeedApprove.htm?idPost=${p.idPosts}"><i class="fa fa-folder"></i>Xem</a></td>
                                                             </tr>
                                                             <% i++; %>
                                                         </c:forEach>

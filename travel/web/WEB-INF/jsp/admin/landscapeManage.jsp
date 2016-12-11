@@ -151,9 +151,9 @@
                                                                 <img style="width: 110px; height: 70px;" src="../img/landscape/profile/<c:out value="${p.idLandscape}"/>.png" />
                                                             </td>
                                                             <td><c:out value="${p.discription}" /></td>         
-                                                            <td><a href="detailLandscape.htm?idLandscape=${p.idLandscape}">Xem</a></td>
-                                                            <td><a href="#">Sửa</a></td>
-                                                            <td><a href="#" onclick="deleteLandscape('${p.title}', ${p.idLandscape})">Xóa</a></td>
+                                                            <td><a class="btn btn-primary btn-xs" href="detailLandscape.htm?idLandscape=${p.idLandscape}"><i class="fa fa-folder"></i>Xem</a></td>
+                                                            <td><a class="btn btn-info btn-xs" href="#"><i class="fa fa-pencil"></i>Sửa</a></td>
+                                                            <td><a class="btn btn-danger btn-xs" href="#" onclick="deleteLandscape('${p.title}', ${p.idLandscape})"><i class="fa fa-trash-o"></i>Xóa</a></td>
                                                         </tr>
                                                         <% i++;%>
                                                     </c:if>

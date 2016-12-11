@@ -25,9 +25,10 @@ import travel.model.Rankingposts;
  */
 @Controller
 @EnableWebMvc  //Use RedirectAttributes
+@RequestMapping(value = "/admin")
 public class PostsManageController {
 
-    @RequestMapping(value = "/admin/postsManage", method = RequestMethod.GET)
+    @RequestMapping(value = "/postsManage", method = RequestMethod.GET)
     public ModelAndView viewPostAdmin(ModelMap mm) {
         ModelAndView view = new ModelAndView();
         view.setViewName("admin/postsManage");
@@ -50,7 +51,7 @@ public class PostsManageController {
         return view;
     }
 
-    @RequestMapping(value = "/admin/detailPosts", method = RequestMethod.GET)
+    @RequestMapping(value = "/detailPosts", method = RequestMethod.GET)
     public ModelAndView viewDetailPostAdmin(@RequestParam("idPost") int idPost, ModelMap mm) {
         ModelAndView view = new ModelAndView();
         view.setViewName("admin/detailPosts");
@@ -102,7 +103,7 @@ public class PostsManageController {
         return view;
     }
 
-    @RequestMapping(value = "/admin/detailPostsNeedApprove", method = RequestMethod.GET)
+    @RequestMapping(value = "/detailPostsNeedApprove", method = RequestMethod.GET)
     public ModelAndView viewDetailPostNeedApprove(@RequestParam("idPost") int idPost, ModelMap mm) {
         ModelAndView view = new ModelAndView();
         view.setViewName("admin/detailPostNeedApprove");
@@ -111,7 +112,7 @@ public class PostsManageController {
         return view;
     }
     
-    @RequestMapping(value = "/admin/approvePosts", method = RequestMethod.GET)
+    @RequestMapping(value = "/approvePosts", method = RequestMethod.GET)
     public String viewApprovePost(@RequestParam("idPost") int idPost, ModelMap mm, final RedirectAttributes redirectAttributes){
         Posts p = Posts.getPostsById(idPost);
         try {
@@ -124,7 +125,7 @@ public class PostsManageController {
         return "redirect:/admin/detailPosts.htm?idPost="+idPost;
     }
     
-    @RequestMapping(value = "/admin/deletePosts", method = RequestMethod.GET)
+    @RequestMapping(value = "/deletePosts", method = RequestMethod.GET)
     public String deletePost(@RequestParam("idPost") int idPost, final RedirectAttributes redirectAttributes){
         Posts p = Posts.getPostsById(idPost);
         try {
