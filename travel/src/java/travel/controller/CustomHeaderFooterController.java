@@ -7,6 +7,9 @@ package travel.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +25,26 @@ import travel.model.Destination;
 @Controller 
 public class CustomHeaderFooterController {
     @RequestMapping(value = "/customheader", method = RequestMethod.GET)
-    public ModelAndView header(ModelMap mm) {
+    public ModelAndView header(ModelMap mm, HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");
+        String login;
+        String createAccount;
+        String logout;
+        System.out.println("ducvu: "+username);
+        if(username!=null){
+            
+            login="hidden";
+            createAccount="hidden";
+            logout="visible";
+        }else{
+            login="visible";
+            createAccount="visible";
+            logout="hidden";
+        }
+        mm.put("login", login);
+        mm.put("createAccount", createAccount);
+        mm.put("logout", logout);
         ModelAndView mv = new ModelAndView();
         mv.setViewName("customheader");
         return mv;

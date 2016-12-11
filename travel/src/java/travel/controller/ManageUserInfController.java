@@ -28,9 +28,17 @@ import travel.model.User;
 public class ManageUserInfController {
 
     @RequestMapping(value = "/customupdateinfuser", method = RequestMethod.GET)
-    public ModelAndView login(ModelMap mm) {
+    public ModelAndView login(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("customupdateinfuser");
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            User u=User.getUserByUserName(username);
+            mm.put("user", u);
+        } else {
+            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+        }
         return mv;
     }
 
@@ -49,12 +57,12 @@ public class ManageUserInfController {
             if (arr.length == 2) {
                 HttpSession session = request.getSession();
                 String username = (String) session.getAttribute("username");
-                if(username!=null){
-                    User u=User.getUserByUserName(username);
+                if (username != null) {
+                    User u = User.getUserByUserName(username);
                     u.setFullname(arr[0]);
                     u.setPassword(arr[1]);
                     u.update();
-                    System.out.println("ducvu: "+u.getFullname() +" "+u.getPassword());
+                    System.out.println("ducvu: " + u.getFullname() + " " + u.getPassword());
                     request.removeAttribute("username");
                     out.print("http://localhost:8080/travel/customlogin.htm");
                 }

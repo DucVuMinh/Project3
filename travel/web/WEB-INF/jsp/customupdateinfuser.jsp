@@ -69,7 +69,7 @@
                                 <form  ng-submit="sendRequest()">
                                     <div class="form-group">
                                         <label>Full name: </label>
-                                        <input type="text" class="form-control" id="fullname" placeholder="Enter full name" required="true" ng-model="fullname">
+                                        <input type="text" class="form-control" id="fullname" placeholder="Enter full name" required="true" ng-model="fullname" value="${u.fullname}">
                                     </div>
                                     <div class="form-group">
                                         <label for="pwd">Password:</label>
