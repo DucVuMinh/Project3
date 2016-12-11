@@ -20,9 +20,10 @@ import travel.model.Landscape;
  * @author vanduc
  */
 @Controller
+@RequestMapping(value = "/admin")
 public class LandscapeManageController {
 
-    @RequestMapping(value = "/admin/landscapeManage", method = RequestMethod.GET)
+    @RequestMapping(value = "/landscapeManage", method = RequestMethod.GET)
     public ModelAndView viewLandscapeManage(ModelMap mm) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("admin/landscapeManage");
@@ -31,7 +32,7 @@ public class LandscapeManageController {
         return mv;
     }
     
-    @RequestMapping(value = "/admin/deleteLandscape", method = RequestMethod.GET)
+    @RequestMapping(value = "/deleteLandscape", method = RequestMethod.GET)
     public String deleteLandscape(@RequestParam("idLandscape") int idLandscape, final RedirectAttributes redirectAttributes){
         Landscape land = Landscape.getLandscapeById(idLandscape);
         try {

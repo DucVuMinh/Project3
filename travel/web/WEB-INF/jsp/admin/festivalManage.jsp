@@ -141,19 +141,19 @@
                                                 <% int i = 1;%>
                                                 <c:forEach items = "${listFes}" var = "p">
                                                     <c:if test="${p.state == 1}">
-                                                    <tr>
-                                                        <td><c:out value="<%=i%>" /></td>
-                                                        <td><c:out value="${p.title}" /></td>
-                                                        <td><c:out value="${p.destination.title}" /></td>
-                                                        <td>
-                                                            <img style="width: 110px; height: 70px;" src="../img/festival/profile/<c:out value="${p.idLandscape}"/>.png" />
-                                                        </td>
-                                                        <td><c:out value="${p.discription}" /></td>         
-                                                        <td><a href="detailFestival.htm?idFestival=${p.idFestival}">Xem</a></td>
-                                                        <td><a href="#">Sửa</a></td>
-                                                        <td><a href="#" onclick="deleteFestival('${p.title}', ${p.idFestival})">Xóa</a></td>
-                                                    </tr>
-                                                    <% i++;%>
+                                                        <tr>
+                                                            <td><c:out value="<%=i%>" /></td>
+                                                            <td><c:out value="${p.title}" /></td>
+                                                            <td><c:out value="${p.destination.title}" /></td>
+                                                            <td>
+                                                                <img style="width: 110px; height: 70px;" src="../img/festival/profile/<c:out value="${p.idLandscape}"/>.png" />
+                                                            </td>
+                                                            <td><c:out value="${p.discription}" /></td>         
+                                                            <td><a class="btn btn-primary btn-xs" href="detailFestival.htm?idFestival=${p.idFestival}"><i class="fa fa-folder"></i>Xem</a></td>
+                                                            <td><a class="btn btn-info btn-xs" href="#"><i class="fa fa-pencil"></i>Sửa</a></td>
+                                                            <td><a class="btn btn-danger btn-xs" href="#" onclick="deleteFestival('${p.title}', ${p.idFestival})"><i class="fa fa-trash-o"></i>Xóa</a></td>
+                                                        </tr>
+                                                        <% i++;%>
                                                     </c:if>
                                                 </c:forEach>
                                             </tbody>
@@ -202,12 +202,12 @@
 
 
         <script>
-            function deleteFestival(title, id) {
-                var comfirmBox = confirm("Bạn muốn xóa lễ hội  " + title + " ?");
-                    if (comfirmBox == true) {
-                        window.location.href = "/travel/admin/deleteFestival.htm?idFestival=" + id;
-                    }
-            }
+                                                                function deleteFestival(title, id) {
+                                                                    var comfirmBox = confirm("Bạn muốn xóa lễ hội  " + title + " ?");
+                                                                    if (comfirmBox == true) {
+                                                                        window.location.href = "/travel/admin/deleteFestival.htm?idFestival=" + id;
+                                                                    }
+                                                                }
         </script>
 
         <!-- Datatables -->
