@@ -268,7 +268,7 @@ public class Festival implements java.io.Serializable, InterfaceEntity, Interfac
 
     @Override
     public List getTop(int numberTop) {
-        String sql = "SELECT R.festival  FROM Rankingfestival R GROUP BY R.festival ORDER BY avg(R.rank) DESC";
+        String sql = "SELECT R.festival  FROM Rankingfestival R WHERE R.festival.state=1 GROUP BY R.festival ORDER BY avg(R.rank) DESC";
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(sql);
         List results = query.list();

@@ -315,7 +315,7 @@ public class Landscape implements java.io.Serializable, InterfaceEntity, Interfa
     @Override
     public List getTop(int numberTop) {
         String sql
-                = "SELECT R.landscape  FROM Rankinglandscape R GROUP BY R.landscape ORDER BY avg(R.rank) DESC";
+                = "SELECT R.landscape  FROM Rankinglandscape R WHERE R.landscape.state=1 GROUP BY R.landscape ORDER BY avg(R.rank) DESC";
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query query = session.createQuery(sql);
         List results = query.list();
