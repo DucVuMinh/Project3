@@ -69,8 +69,8 @@
 
                             <div class="tab-content">
 
-                                <div id="menu1" class="tab-pane fade">
-                                    <div ng-app="starApp" ng-controller="StarCtrl" ng-init="setRate(${infpos.avgRank},${infpos.rankOfUser},${infpos.numberUserRank})"> 
+                                <div id="menu1" class="tab-pane fade" ng-app="starApp" ng-controller="StarCtrl" ng-init="setRate(${infpos.avgRank},${infpos.rankOfUser},${infpos.numberUserRank})">
+                                    <div id="rankele" > 
                                         <div class=col-md-12>
 
                                             <div>
@@ -136,7 +136,9 @@
     </body>
     <script type="text/javascript">
         angular.element(document).ready(function () {
+            angular.bootstrap(document.getElementById("menu1"), ['starApp']);
             angular.bootstrap(document.getElementById("writepost"), ['commentposts']);
+            
         });
         var $item = $('.carousel .item');
         var $wHeight = $(window).height();

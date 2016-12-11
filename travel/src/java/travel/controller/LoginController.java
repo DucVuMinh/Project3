@@ -7,6 +7,7 @@ package travel.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import static java.lang.System.out;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletOutputStream;
@@ -28,9 +29,14 @@ import travel.model.User;
 public class LoginController {
 
     @RequestMapping(value = "/customlogin", method = RequestMethod.GET)
-    public ModelAndView login(ModelMap mm) {
+    public ModelAndView login(ModelMap mm,HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("customlogin");
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");
+        if (username != null) {
+            response.sendRedirect("http://localhost:8080/travel/custommain.htm");
+        }
         return mv;
     }
 
@@ -69,7 +75,7 @@ public class LoginController {
                 } else {
                 }
             } else {
-                response.sendRedirect("http://localhost:8080/travel/custommain.htm");
+                out.print("http://localhost:8080/travel/custommain.htm");
             }
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);

@@ -8,16 +8,13 @@
 var clientLogin = angular.module("deletefavorite", []);
 clientLogin.controller("deletefavoritectr", function ($scope, $http, $location) {
     $scope.delfavorLand = function (idfavor) {
-        alert("delete favor "+String(idfavor));
         var str="land_"+idfavor;
         $http({
             method: 'POST',
             url: 'deletefavor.htm',
             data: str
         }).success(function (data, status, headers, config) {
-            alert("111"+ data);
             if (data == 1) {
-                 alert(str);
                 var favor = document.getElementById(str);
                 favor.style.visibility = "hidden";
             }
@@ -33,9 +30,7 @@ clientLogin.controller("deletefavoritectr", function ($scope, $http, $location) 
             url: 'deletefavor.htm',
             data: str 
         }).success(function (data, status, headers, config) {
-            alert(data);
             if (data == 1) {
-                alert(str);
                 var favor = document.getElementById(str);
                 favor.style.visibility = "hidden";
             }

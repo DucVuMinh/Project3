@@ -74,7 +74,7 @@
 
                             <div class="tab-content">
                                 <div id="menu1" class="tab-pane fade">
-                                    <div ng-app="starApp" ng-controller="StarCtrl" ng-init="setRate(${inffes.avgRank},${inffes.rankOfUser},${inffes.numberUserRank})"> 
+                                    <div id="rankingele" ng-app="starApp" ng-controller="StarCtrl" ng-init="setRate(${inffes.avgRank},${inffes.rankOfUser},${inffes.numberUserRank})"> 
                                         <div class=col-md-12>
 
                                             <div>
@@ -125,6 +125,10 @@
 
     </body>
     <script type="text/javascript">
+        angular.element(document).ready(function () {
+            angular.bootstrap(document.getElementById("rankingele"), ['starApp']);
+            
+        });
         var $item = $('.carousel .item');
         var $wHeight = $(window).height();
         $item.eq(0).addClass('active');

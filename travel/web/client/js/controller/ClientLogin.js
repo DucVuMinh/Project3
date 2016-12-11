@@ -19,7 +19,7 @@ clientLogin.controller("clientLoginCtrl", function ($scope, $http, $location) {
         var strl = $scope.username + "|" + $scope.password;
         $http({
             method: 'POST',
-            url: 'http://localhost:8080/travel/customhandlinglogin.htm',
+            url: 'customhandlinglogin.htm',
             data: strl
         }).success(function (data, status, headers, config) {
             if (data === "username") {
@@ -29,6 +29,7 @@ clientLogin.controller("clientLoginCtrl", function ($scope, $http, $location) {
             	$scope.disFalse=true;
                 $scope.loginFalse = "Wrong password";
             } else {
+                
                 window.location=data;
             }
         }).error(function (data, status, headers, config) {

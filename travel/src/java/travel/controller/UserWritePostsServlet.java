@@ -84,7 +84,7 @@ public class UserWritePostsServlet extends HttpServlet {
                     ImagedetailPosts img = new ImagedetailPosts(p);
                     int idimg = img.add();
                     String absoluteDiskPath = getServletContext().getRealPath("img/posts/detail");
-                    File fimg = new File(absoluteDiskPath + "/"
+                    File fimg = new File(absoluteDiskPath + File.separator
                             + idimg + ".png");
                     out = new FileOutputStream(fimg);
                     filecontent = filePart.getInputStream();

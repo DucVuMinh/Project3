@@ -43,7 +43,7 @@
 
     </head>
 
-    <body id="#" data-spy="scroll" data-target=".navbar-fixed-top" ng-app="deletefavorite" ng-controller="deletefavoritectr">
+    <body id="bodyfavor" data-spy="scroll" data-target=".navbar-fixed-top">
 
         <!-- Navigation -->
         <%@ include file = "customheader.jsp" %>
@@ -65,13 +65,13 @@
             </ul>
 
 
-            <div class="tab-content">
+            <div class="tab-content" id="contentfavor" ng-app="deletefavorite" ng-controller="deletefavoritectr">
                 <div id="land" class="tab-pane fade in active">
 
                     <div id= "information-product"style="color:#898989; text-align:justify">
                         <c:forEach var="land" items="${listL}">
                             <div class="post" id="land_${land.id}">
-                                <img  src="${land.profile}" class="image" alt="tin tức" class="menu-picture">
+                                <img  src="${land.profile}" class="image" alt="/img/landscape/profile/0.png" class="menu-picture">
                                 <span class="title">${land.title}</span>
                                 <div class="line-first">
                                     <div class="right"><button class="button-modal" ng-click="delfavorLand(${land.id})">Xoá</button></div>
@@ -79,16 +79,16 @@
                                 <span style="font-size:10px;color:#7d7d7d">
                                     <div class="content-post-hidden">${land.desciption}</div></span>
                                 <a href="${land.link}"><div class="seemore"> Xem thêm -> </div></a>
-                        </div>
-                    </c:forEach>
+                            </div>
+                        </c:forEach>
 
+                    </div>
                 </div>
-            </div>
-            <div id="fes" class="tab-pane fade">
-                <div id= "information-product"style="color:#898989; text-align:justify">
+                <div id="fes" class="tab-pane fade">
+                    <div id= "information-product"style="color:#898989; text-align:justify">
                     <c:forEach var="fes" items="${listF}">
                         <div class="post" id="fes_${fes.id}">
-                            <img  src="${fes.profile}" class="image" alt="error" class="menu-picture">
+                            <img  src="${fes.profile}" class="image" alt="img/festival/profile/0.png" class="menu-picture">
                             <span class="title">${fes.title}</span>
                             <div class="line-first">
                                 <div class="right"><button class="button-modal" ng-click="delfavorFes(${fes.id})">Xoá</button></div>
@@ -96,16 +96,16 @@
                             <span style="font-size:10px;color:#7d7d7d">
                                 <div class="content-post-hidden">${fes.description}</div></span>
                             <a href="${fes.link}"><div class="seemore"> Xem thêm -> </div></a>
-                    </div>
-                </c:forEach>
+                        </div>
+                    </c:forEach>
 
-            </div>
-        </div>
-        <div id="posts" class="tab-pane fade">
-            <div id= "information-product"style="color:#898989; text-align:justify">
-                <c:forEach var="posts" items="${listP}">
+                </div>
+                </div>
+                <div id="posts" class="tab-pane fade">
+                    <div id= "information-product"style="color:#898989; text-align:justify">
+                        <c:forEach var="posts" items="${listP}">
                     <div class="post" id="posts_${posts.id}">
-                        <img  src="${posts.profile}" class="image"alt="tin tức" class="menu-picture">
+                        <img  src="${posts.profile}" class="image" alt="img/posts/detail/0.png" class="menu-picture">
                         <span class="title">${posts.title}</span>
                         <div class="line-first">
                             <div class="right">
@@ -115,15 +115,14 @@
                         <span style="font-size:10px;color:#7d7d7d">
                             <div class="content-post-hidden">${posts.context}</div></span>
                         <a href="${posts.link}"><div class="seemore"> Xem thêm -> </div></a>
+                    </div>
+                </c:forEach>
+
+                    </div>
                 </div>
-            </c:forEach>
-
+            </div>
         </div>
-
-    </div>
-</div>
-</div>
-<hr >
+        <hr >
 
 <c:import url="http://localhost:8080/travel/customfooter.htm" />
 
@@ -142,6 +141,10 @@
 <!-- Theme JavaScript -->
 <script src="client/js/grayscale.min.js"></script>
 <script type="text/javascript">
+    angular.element(document).ready(function () {
+            angular.bootstrap(document.getElementById("contentfavor"), ['deletefavorite']);
+            
+        });
                                 var $item = $('.carousel .item');
                                 var $wHeight = $(window).height();
                                 $item.eq(0).addClass('active');
@@ -168,7 +171,7 @@
                                     pause: "false"
                                 });
 </script>
-</body>
+    </body>
 
 
 </html>

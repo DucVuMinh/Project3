@@ -58,7 +58,7 @@ public class CustomUpdateProfile extends HttpServlet {
         if (fileName != null && fileName.length() > 3) {
             try {
                 String absoluteDiskPath = getServletContext().getRealPath("img/users/temp");
-                File fimg = new File(absoluteDiskPath + "/"
+                File fimg = new File(absoluteDiskPath + File.separator
                         + u.getIdUser() + ".png");
                 out = new FileOutputStream(fimg);
                 filecontent = filePart.getInputStream();

@@ -11,6 +11,9 @@ app.controller('setuserinfctr', function ($scope, $http) {
     $scope.checkPasswordFormat = false;
     $scope.checkpassword = false;
     $scope.matchPass = false;
+    $scope.initFullName=function(name){
+        $scope.fullname=name;
+    }
     $scope.checkpasswordfn = function () {
         var patt1 = /\d\w/;
         var patt2 = /\w\d/;

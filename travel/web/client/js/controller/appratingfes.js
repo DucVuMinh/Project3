@@ -33,14 +33,10 @@ starApp.controller('StarCtrl', function ($scope, $http, $location) {
                 if (data === "login") {
                     alert("Log in to rank");
                 } else if (data === "error") {
-                    alert("Reload page");
+                    alert("Please Reload page");
                 } else {
-                    alert(data);
                     var arrRespone = data.split("|");
-                    alert(arrRespone[0]);
                     $scope.ratings[0].current = arrRespone[0];
-                    alert("arrRespone[0]");
-                    alert($scope.ratings[0].current );
                     $scope.numberUserRank = arrRespone[1];
                 }
             }).error(function (data, status, headers, config) {
