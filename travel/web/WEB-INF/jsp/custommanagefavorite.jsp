@@ -38,11 +38,12 @@
         <![endif]-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
         <script src="client/js/controller/deletefavorite.js"></script>
 
     </head>
 
-    <body id="#" data-spy="scroll" data-target=".navbar-fixed-top">
+    <body id="#" data-spy="scroll" data-target=".navbar-fixed-top" ng-app="deletefavorite" ng-controller="deletefavoritectr">
 
         <!-- Navigation -->
         <c:import url="http://localhost:8080/travel/customheader.htm" />
@@ -51,9 +52,9 @@
 
         <!-- Contact Section -->
 
-        <div class="container" style="padding-top:200px;padding-bottom:30px" ng-app="deletefavorite" ng-controller="deletefavoritectr">
+        <div class="container" style="padding-top:200px;padding-bottom:30px"  >
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-                <button type="button" data-toggle="modal" data-target="#myModal1" class="button-modal"><a href="file:///C:/Users/Administrator/Desktop/demo/chiasetrainghiem.html">Chia sẻ trải nghiệm</a></button>
+                <button type="button" data-toggle="modal" data-target="#myModal1" class="button-modal"><a href="writeposts.htm">Chia sẻ trải nghiệm</a></button>
             </div>
             <ul class="nav nav-tabs" id="profile"style="margin-bottom:20px;color:#6f6f6e">
 
@@ -73,7 +74,7 @@
                                 <img  src="${land.profile}" class="image" alt="tin tức" class="menu-picture">
                                 <span class="title">${land.title}</span>
                                 <div class="line-first">
-                                    <div class="right"><button class="button-modal" ng-click="deletefavor(land_${land.id})">Xoá</button></div>
+                                    <div class="right"><button class="button-modal" ng-click="delfavorLand(${land.id})">Xoá</button></div>
                                 </div>
                                 <span style="font-size:10px;color:#7d7d7d">
                                     <div class="content-post-hidden">${land.desciption}</div></span>
@@ -90,7 +91,7 @@
                             <img  src="${fes.profile}" class="image" alt="error" class="menu-picture">
                             <span class="title">${fes.title}</span>
                             <div class="line-first">
-                                <div class="right"><button class="button-modal" ng-click="deletefavor(fes_${land.id})">Xoá</button></div>
+                                <div class="right"><button class="button-modal" ng-click="delfavorFes(${fes.id})">Xoá</button></div>
                             </div>
                             <span style="font-size:10px;color:#7d7d7d">
                                 <div class="content-post-hidden">${fes.description}</div></span>
@@ -107,7 +108,9 @@
                         <img  src="${posts.profile}" class="image"alt="tin tức" class="menu-picture">
                         <span class="title">${posts.title}</span>
                         <div class="line-first">
-                            <div class="right"><button class="button-modal" ng-click="deletefavor(posts_${land.id})">Xoá</button></div>
+                            <div class="right">
+                                <button class="button-modal" ng-click="delfavorPost(${fes.id})">Xoá</button>
+                            </div>
                         </div>
                         <span style="font-size:10px;color:#7d7d7d">
                             <div class="content-post-hidden">${posts.context}</div></span>
