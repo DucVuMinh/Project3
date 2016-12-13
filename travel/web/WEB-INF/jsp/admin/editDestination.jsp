@@ -1,6 +1,6 @@
 <%-- 
-    Document   : addDestination
-    Created on : Dec 10, 2016, 12:28:37 AM
+    Document   : editDestination
+    Created on : Dec 12, 2016, 12:52:13 AM
     Author     : vanduc
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Admin | Thêm địa điểm</title>
+        <title>Admin | Sửa thông tin địa điểm</title>
         <meta charset="utf-8">
         <!-- Bootstrap -->
         <link href="../admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -30,44 +30,11 @@
 
         <!-- Custom Theme Style -->
         <link href="../admin/css/custom.min.css" rel="stylesheet">
+        <link href="../admin/css/css.css" rel="stylesheet">
+        <link href="../admin/css/bootstrap-select.css" rel="stylesheet">
 
         <!-- Upload Image Banner -->
         <link rel="stylesheet" type="text/css" href="../admin/css/bootstrap-imageupload.css">
-
-        <style>
-            input[type="file"] {
-                display: none;
-            }
-            .custom-file-upload {
-                border: 1px solid #ccc;
-                display: table;
-                padding: 6px 12px;
-                cursor: pointer;
-            }
-            .imageThumb {
-                max-height: 130px;
-                border: 2px solid;
-                padding: 1px;
-                cursor: pointer;
-            }
-            .pip {
-                display: inline-block;
-                margin: 10px 10px 0 0;
-            }
-            .remove {
-                display: block;
-                /*background: #444;*/
-                /*border: 1px solid black;*/
-                font-size: 14px;
-                color: red;
-                text-align: center;
-                cursor: pointer;
-            }
-            .remove:hover {
-                background: white;
-                color: black;
-            }
-        </style>
 
     </head>
     <body class="nav-md">
@@ -129,15 +96,16 @@
                 <div class="right_col" role="main">
                     <div class="">
                         <!--Flash Message-->
-                        <c:if test="${not empty error}">
+                        <c:if test="${not empty param.success && param.success == 'false'}">
                             <div class="alert alert-danger" style="margin-top: 50px;">
-                                <div id="warning_cnt"><c:out value="${error}" /></div>
+                                <div>Tên địa điểm đã tồn tại!</div>
                             </div>
                         </c:if>
                         <!--/Flash Message-->
+                        
                         <div class="page_title">
                             <div class="title_left">
-                                <h3>Thêm địa điểm</h3>
+                                <h3>Sửa thông tin địa điểm</h3>
                             </div>
 
                         </div>
@@ -149,7 +117,7 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Form thêm địa điểm</h2>
+                                    <h2>Form sửa thông tin địa điểm</h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a href=""></a></li>
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
@@ -157,30 +125,19 @@
                                     </ul>
                                     <div class="clearfix"></div>
                                 </div>
+
                                 <div class="x_content">
                                     <br/>
-                                    <form id="form-addlocation" data-parsley-validate class="form-horizontal form-label-left "
-                                          action="addDestination.htm" method="POST" onsubmit="return validateForm()" enctype="multipart/form-data">
-                                        <!--Ten dia diem-->
+                                    <form id="form-addlocation" data-parsley-validate class="form-horizontal form-label-left"
+                                          action="editDestination.htm?idDestination=${des.idDestination}" method="POST" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_destination">
                                                 Tên địa điểm <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <c:choose>
-                                                    <c:when test="${param.name_destination == null}">
-                                                        <input type="text" name="name_destination"
-                                                               required="required" class="form-control col-md-7 col-xs-12"/>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <input type="text" name="name_destination"
-                                                               required="required" class="form-control col-md-7 col-xs-12" value="<c:out value="${param.name_destination}" />">
-                                                    </c:otherwise>
-                                                </c:choose>
+                                                <input type="text" name="name_destination" required class="form-control col-md-7 col-xs-12" value="${des.title}">
                                             </div>
                                         </div>
-
-                                        <!--Ten mien-->
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_domain">Tên miền <span class="required">*</span>
                                             </label>
@@ -188,69 +145,50 @@
                                                 <div class="btn-group" data-toggle="buttons">
                                                     <c:forTokens items="Miền Bắc,Miền Trung,Miền Nam" delims="," var="name">
                                                         <c:choose>
-                                                            <c:when test="${param.name_domain eq name}">
+                                                            <c:when test="${des.nameArea eq name}">
                                                                 <label class="btn btn-default active">
                                                                     <input type="radio" name="name_domain" checked="true" value="${name}">${name}
                                                                 </label>
                                                             </c:when>
                                                             <c:otherwise>
                                                                 <label class="btn btn-default">
-                                                                    <input type="radio" name="name_domain" required value="${name}" >${name}
+                                                                    <input type="radio" name="name_domain" value="${name}" required>${name}
                                                                 </label>
                                                             </c:otherwise>
                                                         </c:choose>
                                                     </c:forTokens>
-
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <!--Gioi thieu-->
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">
                                                 Giới thiệu <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <textarea class="resizable_textarea form-control" placeholder="Giới thiệu ngắn gọn về địa điểm.............." name="desciption" 
-                                                          required><% if (request.getParameterMap().containsKey("desciption")) {%><%=request.getParameter("desciption")%> <% }%></textarea>
+                                                <textarea class="resizable_textarea form-control" placeholder="Giới thiệu ngắn gọn về địa điểm.............." name="desciption"
+                                                          required >${des.discription}</textarea>
                                             </div>
                                         </div>
-
-                                        <!--Anh dai dien-->
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">
                                                 Ảnh đại diện <span class="required">*</span>
                                             </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12 ">
-                                                <div class="imageupload panel panel-primary">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <div class="imageupload panel panel-default">
                                                     <div class="panel-heading clearfix">
-                                                        <h3 class="panel-title pull-left">Upload image</h3>
+                                                        <h3 class="panel-title pull-left">Upload Image</h3>
                                                     </div>
                                                     <div class="file-tab panel-body">
-                                                        <label class="btn btn-default btn-file">
-                                                            <span>Browse</span>
-                                                            <input type="file" name="profile" required/>
+                                                        <img src="../img/destination/profile/${des.idDestination}.png" alt="Image preview" class="thumbnail" style="max-width: 250px; max-height: 250px;">
+                                                        <label class="btn btn-default btn-file" />
+                                                        <span>Change</span>
+                                                        <input type="file" name="image-file">
                                                         </label>
                                                         <button type="button" class="btn btn-default">Remove</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <!--Anh chi tiet-->
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                                Ảnh chi tiết <span class="required">*</span>
-                                            </label>
-                                            <label  for="img_detail" class="custom-file-upload">
-                                                <i class="fa fa-cloud-upload"></i> Choose Image
-
-                                            </label>
-                                            <input type="file" id="img_detail" name="img_detail" multiple required/>
-                                            <div class="col-md-8 col-sm-6 col-xs-12 col-md-offset-3 " id="bound_img"></div>
-                                        </div>
-
-
                                         <div class="ln_solid"></div>
                                         <div class="form-group">
                                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -258,10 +196,33 @@
                                                 <input type="submit" class="btn btn-success" value="Lưu"/>
                                             </div>
                                         </div>
-                                        
                                     </form>
                                 </div>
                             </div>
+
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2>Hình ảnh địa điểm</h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+                                        <li><a href=""></a></li>
+                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="x_content">
+                                    <c:forEach items="${des.imagedetailDestinations}" var="p">
+                                        <figure class="show-image">
+                                        <img src="../img/destination/detail/${p.idImage}.png" class="img_detail thumbnail zoom">
+                                        <figcaption class="figure-caption">
+                                            <a href="" class="delete-image"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                        </figcaption>
+                                    </figure>
+                                    </c:forEach>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -289,17 +250,10 @@
 
         <!-- Custom Theme Scripts -->
         <script src="../admin/js/custom.min.js"></script>
+        <script type="text/javascript" src="../admin/js/bootstrap-select.js"></script>
         <!-- Upload Image Banner -->
-        <script type="text/javascript" src="../admin/js/bootstrap-imageupload.js"></script>
+        <script type="text/javascript" src="../admin/js/bootstrap-imageedit.js"></script>
 
-        <!--Validate form  -->
-        <script>
-                                              function validateForm() {
-                                                  return true;
-                                              }
-        </script>
-
-        <!-- Upload Image Banner -->
         <script type="text/javascript">
             var $imageupload = $('.imageupload');
 
@@ -312,43 +266,13 @@
                 maxFileSizeKb: 4048
             });
         </script>
-
-
+        <!-- /Upload Image Banner -->
         <!-- Autosize -->
         <script>
             $(document).ready(function () {
                 autosize($('.resizable_textarea'));
             });
         </script>
-
-        <script>
-            $(document).ready(function () {
-                if (window.File && window.FileList && window.FileReader) {
-                    $("#img_detail").on("change", function (e) {
-                        var files = e.target.files,
-                                filesLength = files.length;
-                        for (var i = 0; i < filesLength; i++) {
-                            var f = files[i]
-                            var fileReader = new FileReader();
-                            fileReader.onload = (function (e) {
-                                var file = e.target;
-                                $("#bound_img").append($("<span class=\"pip\">" +
-                                        "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
-//                                        "<br/><span class=\"remove\">Remove</span>" +
-                                        "<br/><span class=\"remove\"><i class=\"fa fa-trash-o\"></i>Delete</span>" +
-                                        "</span>"))
-                                $(".remove").click(function () {
-                                    $(this).parent(".pip").remove();
-                                });
-
-                            });
-                            fileReader.readAsDataURL(f);
-                        }
-                    });
-                } else {
-                    alert("Your browser doesn't support to File API")
-                }
-            });
-        </script>
+        <!-- /Autosize -->
     </body>
 </html>
