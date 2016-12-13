@@ -28,6 +28,9 @@
     <property name="typeUser" type="int">
       <column name="typeUser" not-null="true"/>
     </property>
+    <property name="facebookId" type="string">
+      <column name="facebookId" not-null="true"/>
+    </property>
     <set cascade="all" fetch="select" inverse="true" lazy="true" name="rankingfestivals" table="rankingfestival">
       <key>
         <column name="idUser" not-null="true"/>

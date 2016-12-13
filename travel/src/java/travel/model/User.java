@@ -1,6 +1,7 @@
 package travel.model;
 // Generated 16-Nov-2016 14:58:44 by Hibernate Tools 4.3.1
 
+import com.google.gson.annotations.SerializedName;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -21,6 +22,7 @@ import org.hibernate.criterion.Restrictions;
 public class User implements java.io.Serializable, InterfaceEntity {
 
     private Integer idUser;
+    @SerializedName(value = "name")
     private String fullname;
     private String username;
     private String password;
@@ -28,6 +30,8 @@ public class User implements java.io.Serializable, InterfaceEntity {
     private int state;
     private String profile;
     private int typeUser;
+    @SerializedName(value = "id")
+    private String facebookId;
     private Set rankingfestivals = new HashSet(0);
     private Set postsFavorite = new HashSet(0);
     private Set rankingpostses = new HashSet(0);
@@ -48,6 +52,14 @@ public class User implements java.io.Serializable, InterfaceEntity {
         this.state = state;
         this.typeUser = typeUser;
     }
+    
+    public User(String name, int state, int typeUser, String facebookId) {
+        this.fullname = name;
+        this.username = name;
+        this.state = state;
+        this.typeUser = typeUser;
+        this.facebookId = facebookId;
+    }
 
     public User(String fullname, String username, String password, String email, int state, String profile, int typeUser, Set rankingfestivals, Set postses, Set rankingpostses, Set landscapes, Set comments, Set postses_1, Set rankinglandscapes, Set festivals) {
         this.fullname = fullname;
@@ -57,6 +69,23 @@ public class User implements java.io.Serializable, InterfaceEntity {
         this.state = state;
         this.profile = profile;
         this.typeUser = typeUser;
+        this.rankingfestivals = rankingfestivals;
+        this.postsFavorite = postses;
+        this.rankingpostses = rankingpostses;
+        this.landscapeFavorite = landscapes;
+        this.comments = comments;
+        this.posts = postses_1;
+        this.rankinglandscapes = rankinglandscapes;
+        this.festivalFavorite = festivals;
+    }
+    
+    public User(String name, int state, String profile, int typeUser, String facebookId, Set rankingfestivals, Set postses, Set rankingpostses, Set landscapes, Set comments, Set postses_1, Set rankinglandscapes, Set festivals) {
+        this.fullname = name;
+        this.username = name;
+        this.state = state;
+        this.profile = profile;
+        this.typeUser = typeUser;
+        this.facebookId = facebookId;
         this.rankingfestivals = rankingfestivals;
         this.postsFavorite = postses;
         this.rankingpostses = rankingpostses;
@@ -131,6 +160,14 @@ public class User implements java.io.Serializable, InterfaceEntity {
         this.typeUser = typeUser;
     }
 
+    public String getFacebookId() {
+        return facebookId;
+    }
+
+    public void setFacebookId(String facebookId) {
+        this.facebookId = facebookId;
+    }
+    
     public Set getRankingfestivals() {
         return this.rankingfestivals;
     }
@@ -206,6 +243,7 @@ public class User implements java.io.Serializable, InterfaceEntity {
         hash = 37 * hash + this.state;
         hash = 37 * hash + Objects.hashCode(this.profile);
         hash = 37 * hash + this.typeUser;
+        hash = 37 * hash + Objects.hashCode(this.facebookId);
         hash = 37 * hash + Objects.hashCode(this.rankingfestivals);
         hash = 37 * hash + Objects.hashCode(this.postsFavorite);
         hash = 37 * hash + Objects.hashCode(this.rankingpostses);
@@ -233,7 +271,7 @@ public class User implements java.io.Serializable, InterfaceEntity {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
         Integer id = -2;
-        if (this.fullname != null && this.username != null && this.password != null && this.email != null) {
+        if (this.fullname != null && this.username != null) {
             User t = getUserByUserName(this.username);
             User t2 = getUserByEmail(this.email);
             if (t == null && t2 == null) {
@@ -399,6 +437,22 @@ public class User implements java.io.Serializable, InterfaceEntity {
             } else {
                 return -2;
             }
+        }
+    }
+    
+    public static User checkLoginFb(String facebookId){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria cr = session.createCriteria(User.class);
+        cr.add(Restrictions.eq("facebookId", facebookId));
+
+        List user = cr.list();
+        if (user != null && !user.isEmpty()) {
+            User temp = (User) user.get(0);
+            session.close();
+            return temp;
+        } else {
+            session.close();
+            return null;
         }
     }
 

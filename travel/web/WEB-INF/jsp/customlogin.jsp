@@ -4,6 +4,7 @@
     Author     : DucVu
 --%>
 
+<%@page import="travel.controller.APIWrapper"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,7 +70,10 @@
                             </div>
                             <button type="submit" class="btn btn-default" >Đăng nhập</button>
                             <span ng-show="disFalse">{{loginFalse}}</span>
-
+                            <button type="button" class="btn btn-primary" style="width: 49%;" onclick="loginFB()">
+                                <i class="fa fa-facebook-official" aria-hidden="true" style="margin-right: 5px;"></i>
+                                Đăng nhập với Facebook
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -78,5 +82,9 @@
         </div>
     </body>
     <script src="client/js/controller/ClientLogin.js"></script>
-
+    <script>
+        function loginFB() {
+            window.location.href = "<%= APIWrapper.getDialogLink()%>";
+        }
+    </script>
 </html>

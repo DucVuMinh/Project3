@@ -18,7 +18,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.portlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import travel.model.User;
 
 /**
@@ -83,6 +85,33 @@ public class LoginController {
 
     }
 
+    @RequestMapping(value = "/customLoginFb", method = RequestMethod.GET)
+    public String customLoginFb(@RequestParam("code") String code, ModelMap mm,
+            HttpServletRequest request, HttpServletResponse response, 
+            final RedirectAttributes redirectAttributes){
+        response.setContentType("text/html;charset=UTF-8");
+        try {
+            APIWrapper wrapper = new APIWrapper();
+            String accessToken = wrapper.getAccessToken(code);
+            wrapper.setAccessToken(accessToken);
+          
+            User user = wrapper.getUserFB();
+            boolean userExist = User.checkLoginFb(user.getFacebookId()) != null;
+            if(!userExist){
+                redirectAttributes.addFlashAttribute("name",user.getFullname());
+                redirectAttributes.addFlashAttribute("facebookid",user.getFacebookId());
+                return "redirect:/creatAccountFb.htm";
+            }
+            
+            HttpSession session = request.getSession();
+            session.setAttribute("username", user.getUsername() );
+            return "redirect:/custommain.htm";
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/custommain.htm";
+    }
+    
     @RequestMapping(value = "/customhandlinglogout", method = RequestMethod.POST)
     public void customHandlingLogout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=UTF-8");

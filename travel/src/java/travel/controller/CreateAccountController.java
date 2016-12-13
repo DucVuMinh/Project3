@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.portlet.ModelAndView;
@@ -70,5 +71,15 @@ public class CreateAccountController {
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    @RequestMapping(value = "/creatAccountFb", method = RequestMethod.GET)
+    public String createAccountFb(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("name") String name,
+            @ModelAttribute("facebookid") String facebookid) throws IOException{
+        User u = new User(name , 1, 1, facebookid);
+        u.add();
+        HttpSession session = request.getSession();
+        session.setAttribute("username", name );
+        return "redirect:/custommain.htm";
     }
 }
