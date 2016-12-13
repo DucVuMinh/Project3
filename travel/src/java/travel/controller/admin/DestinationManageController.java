@@ -82,7 +82,7 @@ public class DestinationManageController {
     public String viewEditDestination(ModelMap mm, HttpServletRequest request, final RedirectAttributes redirectAttributes) {
         int idDestination = Integer.parseInt(request.getParameter("idDestination"));
         Destination des = Destination.getDesById(idDestination);
-        
+
         mm.put("des", des);
         return "admin/editDestination";
     }
@@ -93,6 +93,7 @@ public class DestinationManageController {
         String name = request.getParameter("name_destination");
         String domain = request.getParameter("name_domain");
         String desciption = request.getParameter("desciption");
+        Part profilePart = request.getPart("profile");
         int idDestination = Integer.parseInt(request.getParameter("idDestination"));
 
         List<Destination> listDes = Destination.getAllListDes();
@@ -103,29 +104,30 @@ public class DestinationManageController {
         }
 
         if (check == true) {
-            
+
             Destination des = Destination.getDesById(idDestination);
             des.setTitle(name);
             des.setNameArea(domain);
             des.setDiscription(desciption);
-            
-            Collection<Part> fileParts = request.getParts();
-            Object arrParts[] = fileParts.toArray();
-            for (int i = 3; i < arrParts.length; i++) {
-                Part filePart = (Part) arrParts[i];
-                String fileName = getFileName(filePart);
 
-                OutputStream out = null;
-                InputStream filecontent = null;
+            if (profilePart.getSize() > 0) {
+                Collection<Part> fileParts = request.getParts();
+                Object arrParts[] = fileParts.toArray();
+                for (int i = 3; i < arrParts.length; i++) {
+                    Part filePart = (Part) arrParts[i];
+                    String fileName = getFileName(filePart);
 
-                try {
-                    String absolutePathProfile = context.getRealPath("img/destination/profile");
-                    String absolutePathDetail = context.getRealPath("img/destination/detail");
+                    OutputStream out = null;
+                    InputStream filecontent = null;
 
-                    if (i == 3) {
-                        out = new FileOutputStream(new File(absolutePathProfile + File.separator
-                                + des.getIdDestination() + ".png"));
-                    } else {
+                    try {
+                        String absolutePathProfile = context.getRealPath("img/destination/profile");
+                        String absolutePathDetail = context.getRealPath("img/destination/detail");
+
+                        if (i == 3) {
+                            out = new FileOutputStream(new File(absolutePathProfile + File.separator
+                                    + des.getIdDestination() + ".png"));
+                        } else {
 //                        ImagedetailDestination detail = new ImagedetailDestination(des);
 //                        int idImage = detail.add();
 //                        if (idImage != -2) {
@@ -133,32 +135,33 @@ public class DestinationManageController {
 //                                    + idImage + ".png"));
 //                        }
 
-                    }
-                    filecontent = filePart.getInputStream();
+                        }
+                        filecontent = filePart.getInputStream();
 
-                    int read = 0;
-                    final byte[] bytes = new byte[1024];
+                        int read = 0;
+                        final byte[] bytes = new byte[1024];
 
-                    while ((read = filecontent.read(bytes)) != -1) {
-                        out.write(bytes, 0, read);
-                    }
+                        while ((read = filecontent.read(bytes)) != -1) {
+                            out.write(bytes, 0, read);
+                        }
 
-                } catch (FileNotFoundException fne) {
-                    LOGGER.log(Level.SEVERE, "Problems during file upload. Error: {0}",
-                            new Object[]{fne.getMessage()});
-                } finally {
-                    if (out != null) {
-                        out.close();
-                    }
-                    if (filecontent != null) {
-                        filecontent.close();
+                    } catch (FileNotFoundException fne) {
+                        LOGGER.log(Level.SEVERE, "Problems during file upload. Error: {0}",
+                                new Object[]{fne.getMessage()});
+                    } finally {
+                        if (out != null) {
+                            out.close();
+                        }
+                        if (filecontent != null) {
+                            filecontent.close();
+                        }
                     }
                 }
             }
-            
-//            des.update();
-            return "redirect:detailDestination.htm?idDestination="+idDestination+"&success=true";
-        }else{
+
+            des.update();
+            return "redirect:detailDestination.htm?idDestination=" + idDestination + "&success=true";
+        } else {
             return "redirect:editDestination.htm?idDestination=" + idDestination + "&success=false";
         }
 

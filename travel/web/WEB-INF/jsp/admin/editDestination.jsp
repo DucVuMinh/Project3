@@ -182,7 +182,7 @@
                                                         <img src="../img/destination/profile/${des.idDestination}.png" alt="Image preview" class="thumbnail" style="max-width: 250px; max-height: 250px;">
                                                         <label class="btn btn-default btn-file" />
                                                         <span>Change</span>
-                                                        <input type="file" name="image-file">
+                                                        <input type="file" name="profile"/>
                                                         </label>
                                                         <button type="button" class="btn btn-default">Remove</button>
                                                     </div>
