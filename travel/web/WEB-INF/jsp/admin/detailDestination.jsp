@@ -95,6 +95,13 @@
                 <!-- Page Content -->
                 <div class="right_col" role="main">
                     <div class="">
+                        <!--Flash Message-->
+                        <c:if test="${not empty param.success && param.success == 'true'}">
+                            <div class="alert alert-success" style="margin-top: 50px;">
+                                <div>Sửa địa điểm thành công!</div>
+                            </div>
+                        </c:if>
+                        <!--/Flash Message-->
                         <div class="page-title">
                             <div class="title_left">
                                 <h1 style="margin-left: 50px">${detailDes.getTitle()}</h1>
@@ -103,7 +110,10 @@
                             <div class="title-right">
                                 <div class="col-md-1 col-sm-1 col-xs-12 form-group pull-right top_search">
                                     <div class="input-group">
-                                        <button type="button" name="addLocation" class="btn btn-round btn-warning" onclick="window.location = 'editLocation.html';"><i class="fa fa-edit" aria-hidden="true"></i>   Sửa</button>
+                                        <button type="button" name="editLocation" class="btn btn-round btn-warning"
+                                                onclick="window.location = 'editDestination.htm?idDestination=${param.idDestination}';">
+                                            <i class="fa fa-edit" aria-hidden="true"></i>   Sửa
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +155,7 @@
                                         <br/>
                                         <div class="group-content row">
                                             <div class="title-content col-md-3 col-sm-3 col-xs-12">
-                                                <p>Banner</p>
+                                                <p>Ảnh chi tiết</p>
                                             </div>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <img class="banner" src="../img/destination/profile/${detailDes.getIdDestination()}.png"/>
@@ -164,7 +174,7 @@
                                         </ul>
                                         <div class="clearfix"></div>
                                     </div>
-                                    
+
                                     <div class="x_content">
                                         <c:forEach items="${detailDes.getImagedetailDestinations()}" var="i">
                                             <image src="../img/destination/detail/${i.getIdImage()}.png" class="img_detail thumbnail zoom"/>

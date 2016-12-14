@@ -3,6 +3,7 @@
     Created on : Dec 7, 2016, 12:25:09 AM
     Author     : vanduc
 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -87,10 +88,13 @@
                 <div class="right_col" role="main">
                     <div class="">
                         <!--Flash Message-->
-                        <c:if test="${not empty message}">
+                        <c:if test="${not empty success}">
                             <div class="alert alert-success" style="margin-top: 50px;">
-                                <div id="warning_cnt">${message}</div>
+                                <div id="warning_cnt">${success}</div>
                             </div>
+                            <script>
+                                console.log("nguyen van duc");
+                            </script>
                         </c:if>
                         <!--/Flash Message-->
                         <div class="page-title">
@@ -150,9 +154,9 @@
                                                             <td>
                                                                 <img style="width: 110px; height: 70px;" src="../img/destination/profile/<c:out value="${p.idDestination}"/>.png" />
                                                             </td>
-                                                            <td><c:out value="${p.discription}" /></td>         
+                                                            <td>${fn:substring(p.discription, 0, 180)}........</td>         
                                                             <td><a class="btn btn-primary btn-xs" href="detailDestination.htm?idDestination=${p.idDestination}"><i class="fa fa-folder"></i>Xem</a></td>
-                                                            <td><a class="btn btn-info btn-xs" href="#"><i class="fa fa-pencil"></i>Sửa</a></td>
+                                                            <td><a class="btn btn-info btn-xs" href="editDestination.htm?idDestination=${p.idDestination}"><i class="fa fa-pencil"></i>Sửa</a></td>
                                                             <td><a class="btn btn-danger btn-xs" href="#" onclick="deleteDestination('${p.title}', ${p.idDestination})"><i class="fa fa-trash-o"></i>Xóa</a></td>
                                                         </tr>
                                                         <% i++;%>

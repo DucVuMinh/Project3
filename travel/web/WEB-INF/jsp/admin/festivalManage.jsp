@@ -3,6 +3,7 @@
     Created on : Dec 10, 2016, 11:30:09 PM
     Author     : vanduc
 --%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -148,7 +149,7 @@
                                                             <td>
                                                                 <img style="width: 110px; height: 70px;" src="../img/festival/profile/<c:out value="${p.idLandscape}"/>.png" />
                                                             </td>
-                                                            <td><c:out value="${p.discription}" /></td>         
+                                                            <td>${fn:substring(p.discription, 0, 180)}........</td>         
                                                             <td><a class="btn btn-primary btn-xs" href="detailFestival.htm?idFestival=${p.idFestival}"><i class="fa fa-folder"></i>Xem</a></td>
                                                             <td><a class="btn btn-info btn-xs" href="#"><i class="fa fa-pencil"></i>Sửa</a></td>
                                                             <td><a class="btn btn-danger btn-xs" href="#" onclick="deleteFestival('${p.title}', ${p.idFestival})"><i class="fa fa-trash-o"></i>Xóa</a></td>
