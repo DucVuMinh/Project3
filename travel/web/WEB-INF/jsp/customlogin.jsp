@@ -47,8 +47,8 @@
             <div class="modal-content">
                 <div class="modal-header1">
 
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><center>Đăng nhập</center></h4>
+                    <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                    <h4 class="modal-title" style="margin-top: 20px;"><center>Đăng nhập</center></h4>
 
                     <div class="modal-body"  ng-app="clientLogin" ng-controller="clientLoginCtrl">
                         <form ng-submit="cusLogin()">
@@ -68,12 +68,14 @@
                             <div class="checkbox">
                                 <label><input type="checkbox"> Remember me</label>
                             </div>
-                            <button type="submit" class="btn btn-default" >Đăng nhập</button>
-                            <span ng-show="disFalse">{{loginFalse}}</span>
+                            <hr/>
+                            <button type="submit" class="btn btn-info" >Đăng nhập</button>
+                            <span class="or-login">hoặc</span>
                             <button type="button" class="btn btn-primary" style="width: 49%;" onclick="loginFB()">
                                 <i class="fa fa-facebook-official" aria-hidden="true" style="margin-right: 5px;"></i>
                                 Đăng nhập với Facebook
                             </button>
+                            <span ng-show="disFalse">{{loginFalse}}</span>
                         </form>
                     </div>
                 </div>

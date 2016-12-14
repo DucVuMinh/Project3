@@ -634,8 +634,8 @@ div.contact-info>h6{
    
     .modal-content{
    
-      background: url(https://1.bp.blogspot.com/-6B5OUHrQ-S8/VnOtUrwDtWI/AAAAAAAAH1E/Thh96nxI6_k/s1600/ao-dai-trang%2B%252814%2529.jpg) no-repeat center center fixed; 
-      
+      /*background: url(https://1.bp.blogspot.com/-6B5OUHrQ-S8/VnOtUrwDtWI/AAAAAAAAH1E/Thh96nxI6_k/s1600/ao-dai-trang%2B%252814%2529.jpg) no-repeat center center fixed;*/ 
+      height: 350px;
     }
 
     /*------------------*/
@@ -1204,11 +1204,12 @@ display: block;
  margin-left: auto;
   margin-right: auto;
   padding:0 20px ;
-  color: #fff;
+  /*color: #fff;*/
+  height: 350px;
 }
 @media (min-width: 768px){
 .modal-dialog {
-    width: 644px;
+    width: 634px;
     margin: 30px auto;
 }}
 /*--------------------slide trượt hình ảnh----------------------------*/
@@ -1342,4 +1343,12 @@ textarea.form-control {
 }
 .kk-star-ratings .kksr-star {
     background-position: 5px 0px;
+}
+
+
+/*-------- Login -----------*/
+.or-login{
+    margin: 0 10px;
+    font-size: 13px;
+    color: #34948b;
 }

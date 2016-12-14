@@ -1,10 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `travel` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `travel`;
--- MySQL dump 10.13  Distrib 5.5.52, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: travel
+-- Host: localhost    Database: travel
 -- ------------------------------------------------------
--- Server version	5.5.52-0ubuntu0.14.04.1
+-- Server version	5.7.16-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -449,15 +447,16 @@ CREATE TABLE `user` (
   `idUser` int(11) NOT NULL AUTO_INCREMENT,
   `fullname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `username` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
+  `email` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
   `state` int(1) NOT NULL,
   `profile` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `typeUser` int(1) NOT NULL,
+  `facebookid` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`idUser`),
-  UNIQUE KEY `email_UNIQUE` (`email`),
-  UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  UNIQUE KEY `username_UNIQUE` (`username`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -466,7 +465,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Hoàng Thế Hà','hoangha','12345','hoangtheha.95@gmail.com',1,NULL,1),(2,'Vũ Minh Đức','ducvu','123456','duc@gmail.com',1,NULL,1),(3,'Nguyễn Thị Phương Hằng','hangnt','123456','hang@gmail.com',1,'',1),(4,'Nguyễn Văn Đức','ducnv','123456','ducnv@gmail.com',1,NULL,1),(5,'Trần Thị Hồng Giang','giangtth','123456','giang@gmail.com',1,NULL,1);
+INSERT INTO `user` VALUES (1,'Hoàng Thế Hà','hoangha','12345','hoangtheha.95@gmail.com',1,NULL,1,NULL),(2,'Vũ Minh Đức','ducvu','123456','duc@gmail.com',1,NULL,1,NULL),(3,'Nguyễn Thị Phương Hằng','hangnt','123456','hang@gmail.com',1,'',1,NULL),(4,'Nguyễn Văn Đức','ducnv','123456','ducnv@gmail.com',1,NULL,1,NULL),(5,'Trần Thị Hồng Giang','giangtth','123456','giang@gmail.com',1,NULL,1,NULL),(6,'Sông Hồng','Sông Hồng',NULL,NULL,1,NULL,1,'224737751299024');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -479,4 +478,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-12-09 23:53:50
+-- Dump completed on 2016-12-14 15:28:38
