@@ -32,14 +32,18 @@ import travel.model.User;
 public class ManageUserInfController {
 
     @RequestMapping(value = "/customupdateinfuser", method = RequestMethod.GET)
-    public ModelAndView login(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public ModelAndView updateinf(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("customupdateinfuser");
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+        httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+        httpResponse.setHeader("Pragma", "no-cache"); // HTTP 1.0
+        httpResponse.setDateHeader("Expires", 0); // Proxies.
         if (username != null) {
             User u = User.getUserByUserName(username);
-            String profile="img/users/profile/"+u.getIdUser()+".png";
+            String profile = "img/users/profile/" + u.getIdUser() + ".png";
             mm.put("profile", profile);
             mm.put("user", u);
         } else {
@@ -54,6 +58,10 @@ public class ManageUserInfController {
         try {
             StringBuilder sb = new StringBuilder();
             BufferedReader br = request.getReader();
+            HttpServletResponse httpResponse = (HttpServletResponse) response;
+            httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+            httpResponse.setHeader("Pragma", "no-cache"); // HTTP 1.0
+            httpResponse.setDateHeader("Expires", 0); // Proxies.
             String str = null;
             while ((str = br.readLine()) != null) {
                 sb.append(str);
@@ -71,11 +79,11 @@ public class ManageUserInfController {
                     request.removeAttribute("username");
                     String absoluteDiskPath = session.getServletContext().getRealPath("img/users/temp");
                     String absoluteDiskPathNew = session.getServletContext().getRealPath("img/users/profile");
-                    File newProfile = new File(absoluteDiskPath + File.separator+u.getIdUser() + ".png");
-                    File oldProfile = new File(absoluteDiskPathNew +File.separator +u.getIdUser() + ".png");
-                    System.out.println("ducvu: file path "+newProfile.getPath());
-                    if(newProfile.exists()){
-                        System.out.println("ducvu: copy file to new"+oldProfile.getPath());
+                    File newProfile = new File(absoluteDiskPath + File.separator + u.getIdUser() + ".png");
+                    File oldProfile = new File(absoluteDiskPathNew + File.separator + u.getIdUser() + ".png");
+                    System.out.println("ducvu: file path " + newProfile.getPath());
+                    if (newProfile.exists()) {
+                        System.out.println("ducvu: copy file to new" + oldProfile.getPath());
                         Files.copy(newProfile.toPath(), oldProfile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                     }
                     out.print("http://localhost:8080/travel/customlogin.htm");

@@ -53,19 +53,22 @@ public class UserWritePostsServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
         User u = User.getUserByUserName(username);
         response.setContentType("text/html;charset=UTF-8");
         String des = request.getParameter("seldes");
-        des = new String(des.getBytes("iso-8859-1"), "UTF-8");
+        //String des2 = new String(des.getBytes("iso-8859-1"), "utf-8");
         String title = request.getParameter("title");
-        title = new String(title.getBytes("iso-8859-1"), "UTF-8");
+        //title = new String(title.getBytes("iso-8859-1"), "utf-8");
         String context = request.getParameter("context");
-        context = new String(context.getBytes("iso-8859-1"), "UTF-8");
-        System.out.println("ducvu: "+des);
+        //context = new String(context.getBytes("iso-8859-1"), "utf-8");
+        //System.out.println("ducvu: " + des);
+        //System.out.println("ducvu :" + title);
         Destination d = Destination.getDesByTitle(des);
-        System.out.println("duc vu: "+d.getTitle()  );
+
+        System.out.println("duc vu: " + d.getTitle());
         Posts p = new Posts(d, u, title, context, 0, new Date());
 
         int idpost = p.add();

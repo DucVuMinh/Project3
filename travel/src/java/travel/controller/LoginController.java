@@ -96,11 +96,14 @@ public class LoginController {
             wrapper.setAccessToken(accessToken);
           
             User user = wrapper.getUserFB();
-            boolean userExist = User.checkLoginFb(user.getFacebookId()) != null;
+            User fbExit=User.checkLoginFb(user.getFacebookId()) ;
+            boolean userExist =(fbExit != null);
             if(!userExist){
                 redirectAttributes.addFlashAttribute("name",user.getFullname());
                 redirectAttributes.addFlashAttribute("facebookid",user.getFacebookId());
                 return "redirect:/creatAccountFb.htm";
+            }else{
+                user=fbExit;
             }
             
             HttpSession session = request.getSession();

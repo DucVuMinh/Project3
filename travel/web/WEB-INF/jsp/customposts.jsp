@@ -69,7 +69,7 @@
 
                             <div class="tab-content">
 
-                                <div id="menu1" class="tab-pane fade" ng-app="starApp" ng-controller="StarCtrl" ng-init="setRate(${infpos.avgRank},${infpos.rankOfUser},${infpos.numberUserRank})">
+                                <div id="menu1" class="tab-pane fade popup" ng-app="starApp" ng-controller="StarCtrl" ng-init="setRate(${infpos.avgRank},${infpos.rankOfUser},${infpos.numberUserRank})">
                                     <div id="rankele" > 
                                         <div class=col-md-12>
 
@@ -81,7 +81,10 @@
                                                      is-click="ratings[0].isClick"></div>
                                                 <h2>Đánh giá {{ratings[0].current}} từ {{numberUserRank}} thành viên</h2>
                                             </div>
-                                            <div>
+                                            <div id="customranking" class="popup">
+                                                <span class="popuptext" id="loginrating">Đăng nhập để thực hiện chức năng này</span>
+                                                <span class="popuptext" id="errorpage">lỗi trang, hãy reload lại trang web</span>
+                                                <span class="popuptext" id="waitadmin">bài viết đang chờ admin phê duyệt</span>
                                                 <h2>{{ratings[1].current}} /
                                                     {{ratings[1].max}}</h2>
                                                 <div star-rating rating-value="ratings[1].current" max="ratings[1].max" readonly= "ratings[1].readonly" 
@@ -91,10 +94,12 @@
                                     </div>
 
                                 </div>
-                                <div id="writepost" class="tab-pane fade in active" ng-app="commentposts" ng-controller="commentpostsctr">
+                                <div id="writepost" class="tab-pane fade in active popup" ng-app="commentposts" ng-controller="commentpostsctr">
                                     Viết bình luận:
+                                    <span class="popuptext" id="waitadmincomment">bài viết đang chờ admin phê duyệt</span>
+                                    <span class="popuptext" id="logincomment">đăng nhập để thực hiện chức năng</span>
                                     <form  ng-submit="sendComment()">
-                                        <textarea name="message" rows="5" cols="100" style="border:1px solid #ddd" class="form-control" ng-model="content"></textarea>
+                                        <textarea name="message" rows="5" cols="100" style="border:1px solid #ddd" class="form-control" ng-model="content" required></textarea>
                                         <br>
                                         <input type="submit" class="btn btn-default" style="background:#1d508d">
                                     </form>
@@ -138,7 +143,7 @@
         angular.element(document).ready(function () {
             angular.bootstrap(document.getElementById("menu1"), ['starApp']);
             angular.bootstrap(document.getElementById("writepost"), ['commentposts']);
-            
+
         });
         var $item = $('.carousel .item');
         var $wHeight = $(window).height();
@@ -209,6 +214,63 @@
             });
         });
     </script>
+    <style>
+        /* Popup container - can be anything you want */
+        .popup {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
 
+        /* The actual popup */
+        .popup .popuptext {
+            visibility: hidden;
+            width: 160px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -80px;
+        }
+
+        /* Popup arrow */
+        .popup .popuptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        /* Toggle this class - hide and show the popup */
+        .popup .show {
+            visibility: visible;
+            -webkit-animation: fadeIn 1s;
+            animation: fadeIn 1s;
+        }
+
+        /* Add animation (fade in the popup) */
+        @-webkit-keyframes fadeIn {
+            from {opacity: 0;} 
+            to {opacity: 1;}
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity:1 ;}
+        }
+    </style>
 </html>
 

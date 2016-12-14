@@ -88,7 +88,7 @@
                                         </font>
 
                                     </div>
-                                    <button type="submit" class="btn ">Đăng ký</button>
+                                    <button type="submit" class="btn ">Lưu thay đổi</button>
                                 </form>
                             </div>
                         </div>
@@ -152,7 +152,6 @@
                     success: function (msg) {
                         var pro = document.getElementById("proimg");
                         pro.setAttribute("src", msg);
-                        alert(msg);
                     }
                 }).submit();
             });

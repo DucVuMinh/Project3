@@ -32,8 +32,9 @@ public class SearchController {
     @RequestMapping(value = "/customresultsearch", method = RequestMethod.GET)
     public ModelAndView login(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         ModelAndView mv = new ModelAndView();
+        request.setCharacterEncoding("UTF-8");
         String query = (String) (request.getParameter("query"));
-        query = new String(query.getBytes("iso-8859-1"), "UTF-8");
+        //query = new String(query.getBytes("iso-8859-1"), "UTF-8");
         query = query.replace("_", " ");
         Landscape l = new Landscape();
         List listLand = l.search(query);
@@ -69,7 +70,7 @@ public class SearchController {
             }
 
         }
-        System.out.println("ducvu: " + listLandTemp.size());
+        //System.out.println("ducvu: " + listTopPostsTemp.size());
         mm.put("land", listLandTemp);
         mm.put("fes", listFestTemp);
         mm.put("posts", listTopPostsTemp);

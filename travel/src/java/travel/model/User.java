@@ -55,7 +55,7 @@ public class User implements java.io.Serializable, InterfaceEntity {
     
     public User(String name, int state, int typeUser, String facebookId) {
         this.fullname = name;
-        this.username = name;
+        this.username = facebookId;
         this.state = state;
         this.typeUser = typeUser;
         this.facebookId = facebookId;

@@ -26,11 +26,20 @@ starApp.controller('StarCtrl', function ($scope, $http, $location) {
                 data: rank
             }).success(function (data, status, headers, config) {
                 if (data === "login") {
-                    alert("Log in to rank");
-                    $scope.ratings[1].current=5;
+                    var popup = document.getElementById('loginrating');
+                    popup.classList.toggle('show');
+                    $scope.ratings[1].current = 5;
                 } else if (data === "error") {
-                    alert("Please Reload page");
-                } else {
+                    $scope.ratings[1].current = 5;
+                    var popup = document.getElementById('errorpage');
+                    popup.classList.toggle('show');
+                    
+                }else if(data === "waitadmin"){
+                    $scope.ratings[1].current = 5;
+                    var popup = document.getElementById('waitadmin');
+                    popup.classList.toggle('show');
+                }
+                else {
                     var arrRespone = data.split("|");
                     $scope.ratings[0].current = arrRespone[0];
                     $scope.numberUserRank = arrRespone[1];
@@ -44,7 +53,7 @@ starApp.controller('StarCtrl', function ($scope, $http, $location) {
         $scope.ratings[0].current = val1.toFixed(1);
         $scope.ratings[1].current = val2;
         $scope.numberUserRank = val3;
-        
+
 
     };
     $scope.sendRate = function () {

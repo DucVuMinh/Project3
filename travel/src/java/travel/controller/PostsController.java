@@ -105,6 +105,7 @@ public class PostsController {
             String arr[] = sb.toString().split("\\|");
             ServletOutputStream out = response.getOutputStream();
             response.setContentType("text/html;charset=UTF-8");
+            
             if (arr.length == 2) {
                 int idpost = Integer.valueOf(arr[0]);
                 Posts p = Posts.getPostsById(idpost);
@@ -132,7 +133,7 @@ public class PostsController {
                         out.print("login");
                     }
                 } else {
-                    out.print("error");
+                    out.print("waitadmin");
                 }
             } else {
                 out.print("error");
@@ -154,6 +155,7 @@ public class PostsController {
             HttpSession session = request.getSession();
             String username = (String) session.getAttribute("username");
             if (username != null) {
+                
                 while ((str = br.readLine()) != null) {
                     sb.append(str);
                 }
@@ -163,13 +165,17 @@ public class PostsController {
                     int idposts = Integer.valueOf(arr[0]);
                     Posts p = Posts.getPostsById(idposts);
                     if (p != null) {
+                        if(p.getState()==1){
                         Comment comment = new Comment(p, u, new Date(), 1, arr[1]);
                         comment.add();
-                        out.print(u.getUsername() + "|" + arr[1]);
+                        out.print(u.getFullname()+ "|" + arr[1]);
+                        }else{
+                            out.print("waitadmin");
+                        }
                     }
 
                 } else {
-
+                    out.print("error");
                 }
             } else {
                 out.print("login");

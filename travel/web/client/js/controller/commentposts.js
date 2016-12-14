@@ -3,44 +3,48 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-var comment=angular.module('commentposts',[]);
-comment.controller('commentpostsctr',function($scope, $http,$location){
+var comment = angular.module('commentposts', []);
+comment.controller('commentpostsctr', function ($scope, $http, $location) {
     $scope.content;
-    $scope.sendComment=function(){
-        alert('begin');
+    $scope.sendComment = function () {
         var idposts = $location.absUrl().split('?')[1].split('=')[1];
-        var strl=idposts+'|'+$scope.content;
-        alert(strl);
+        var strl = idposts + '|' + $scope.content;
         $http({
             method: 'POST',
             url: 'http://localhost:8080/travel/customhandlingcomment.htm',
             data: strl
         }).success(function (data, status, headers, config) {
-            alert(data);
             if (data === "login") {
-                alert('login to comment');
-            }else {
+                var popup = document.getElementById('logincomment');
+                popup.classList.toggle('show');
+                $scope.content = "";
+            } else if (data === "waitadmin") {
+                var popup = document.getElementById('waitadmincomment');
+                popup.classList.toggle('show');
+                $scope.content = "";
+            } else {
                 $scope.insertComment(data);
-                $scope.content="";
+                $scope.content = "";
             }
         }).error(function (data, status, headers, config) {
             alert("Network error");
+            $scope.content = "";
         });
     };
-    $scope.insertComment=function(data){
-        var nodeComment=document.getElementById("comment-of-post");
-        var arr=data.split("|");
+    $scope.insertComment = function (data) {
+        var nodeComment = document.getElementById("comment-of-post");
+        var arr = data.split("|");
         var noderow = document.createElement("div");
-        noderow.setAttribute("class","row");
+        noderow.setAttribute("class", "row");
         var nodecolumn = document.createElement("div");
-        nodecolumn.setAttribute("class","col-lg-11");
-        
-        var nodeusername=document.createElement("div");
+        nodecolumn.setAttribute("class", "col-lg-11");
+
+        var nodeusername = document.createElement("div");
         var username = document.createTextNode(arr[0]);
         nodeusername.appendChild(username);
         nodeusername.setAttribute("class", "username");
-        
-        var nodeContent=document.createElement("div");
+
+        var nodeContent = document.createElement("div");
         var content = document.createTextNode(arr[1]);
         nodeContent.appendChild(content);
         nodeContent.setAttribute("class", "content-comment");
@@ -51,6 +55,6 @@ comment.controller('commentpostsctr',function($scope, $http,$location){
     };
 });
 
-angular.element(document).ready(function() {
-   angular.bootstrap(document.getElementById("writepost"), ['commentposts']);
+angular.element(document).ready(function () {
+    angular.bootstrap(document.getElementById("writepost"), ['commentposts']);
 });

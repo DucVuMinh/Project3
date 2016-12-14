@@ -58,14 +58,17 @@ public class CustomUpdateProfile extends HttpServlet {
         if (fileName != null && fileName.length() > 3) {
             try {
                 String absoluteDiskPath = getServletContext().getRealPath("img/users/temp");
+                System.out.println("id user "+u.getIdUser());
                 File fimg = new File(absoluteDiskPath + File.separator
                         + u.getIdUser() + ".png");
+                System.out.println("ducvu: step 1");
                 out = new FileOutputStream(fimg);
+                System.out.println("ducvu: step 2");
                 filecontent = filePart.getInputStream();
-
+                System.out.println("ducvu: step 2");
                 int read = 0;
                 final byte[] bytes = new byte[1024];
-
+                System.out.println("ducvu: step 3");
                 while ((read = filecontent.read(bytes)) != -1) {
                     out.write(bytes, 0, read);
                 }
@@ -73,6 +76,8 @@ public class CustomUpdateProfile extends HttpServlet {
                         new Object[]{fileName, ""});
                 outre.println("img/users/temp/"+ u.getIdUser() + ".png");
             } catch (FileNotFoundException fne) {
+                fne.printStackTrace();
+                        
                 PrintWriter writer = response.getWriter();
                 writer.println("You either did not specify a file to upload or are "
                         + "trying to upload a file to a protected or nonexistent "

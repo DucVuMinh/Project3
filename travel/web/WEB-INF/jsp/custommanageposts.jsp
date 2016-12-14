@@ -53,7 +53,7 @@
             </div>
             <ul class="nav nav-tabs" id="profile"style="margin-bottom:20px;color:#6f6f6e">
 
-                <li class="active"><a data-toggle="tab" href="#lposts" style="color:#1d508d">DANH LAM THẮNG CẢNH</a></li>
+                <li class="active"><a data-toggle="tab" href="#lposts" style="color:#1d508d">Bài viết đã đăng</a></li>
 
             </ul>
 

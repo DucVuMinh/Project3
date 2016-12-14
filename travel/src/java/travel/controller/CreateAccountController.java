@@ -79,7 +79,7 @@ public class CreateAccountController {
         User u = new User(name , 1, 1, facebookid);
         u.add();
         HttpSession session = request.getSession();
-        session.setAttribute("username", name );
+        session.setAttribute("username", facebookid );
         return "redirect:/custommain.htm";
     }
 }
