@@ -240,6 +240,7 @@ public class Festival implements java.io.Serializable, InterfaceEntity, Interfac
             this.getUsersFavorite().add(u);
             u.getFestivalFavorite().add(this);
             this.update();
+            u.update();
         }
     }
 

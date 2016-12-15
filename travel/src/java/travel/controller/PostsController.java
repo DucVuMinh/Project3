@@ -54,20 +54,30 @@ public class PostsController {
                     }
                 }
                 HttpSession session = request.getSession();
+                HttpServletResponse httpResponse = (HttpServletResponse) response;
+                httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+                httpResponse.setHeader("Pragma", "no-cache"); // HTTP 1.0
+                httpResponse.setDateHeader("Expires", 0); // Proxies.
                 String username = (String) session.getAttribute("username");
                 PostsTemp ptemp;
                 if (username != null) {
                     User u = User.getUserByUserName(username);
+                    System.out.println("ducvu: user " + username);
+                    System.out.println("ducvu: user " + u.getFullname());
+                    System.out.println("ducvu: posts " + p.getIdPosts());
                     Rankinglandscape userRank = Rankinglandscape.
                             getRankingLandscapeById(new RankinglandscapeId(p.getIdPosts(), u.getIdUser()));
                     if (userRank != null) {
+                        System.out.println("ducvu: rank khac null");
                         ptemp = new PostsTemp(p);
                         ptemp.setRankOfUser(userRank.getRank());
                     } else {
+                        System.out.println("ducvu: chua danh gia");
                         ptemp = new PostsTemp(p);
                         ptemp.setRankOfUser(5);
                     }
                 } else {
+                    System.out.println("user chua dang nhap");
                     ptemp = new PostsTemp(p);
                     ptemp.setRankOfUser(5);
                 }
@@ -169,7 +179,7 @@ public class PostsController {
                         if (p.getState() == 1) {
                             Comment comment = new Comment(p, u, new Date(), 1, arr[1]);
                             comment.add();
-                            out.print(u.getFullname() + "|" + arr[1]+"|"+u.getIdUser());
+                            out.print(u.getFullname() + "|" + arr[1] + "|" + u.getIdUser());
                         } else {
                             out.print("waitadmin");
                         }
@@ -204,7 +214,7 @@ public class PostsController {
                     sb.append(str);
                 }
                 System.out.println("ducvu: " + sb.toString());
-                String arr[]=sb.toString().split("=");
+                String arr[] = sb.toString().split("=");
                 int idPosts = Integer.valueOf(arr[1]);
                 Posts p = Posts.getPostsById(idPosts);
                 User u = User.getUserByUserName(username);

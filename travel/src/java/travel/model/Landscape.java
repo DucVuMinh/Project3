@@ -281,6 +281,7 @@ public class Landscape implements java.io.Serializable, InterfaceEntity, Interfa
             this.getUsersFavorite().add(u);
             u.getLandscapeFavorite().add(this);
             this.update();
+            u.update();
         }
     }
 

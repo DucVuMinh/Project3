@@ -42,6 +42,10 @@ public class ManageFavoriteController {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
         if (username != null) {
+            HttpServletResponse httpResponse = (HttpServletResponse) response;
+            httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+            httpResponse.setHeader("Pragma", "no-cache"); // HTTP 1.0
+            httpResponse.setDateHeader("Expires", 0); // Proxies.
             User u = User.getUserByUserName(username);
             Object arrLFavor[] = u.getLandscapeFavorite().toArray();
             Object arrFFavor[] = u.getFestivalFavorite().toArray();
@@ -53,13 +57,13 @@ public class ManageFavoriteController {
             for (int i = 0; i < arrLFavor.length; i++) {
                 Landscape temp = (Landscape) arrLFavor[i];
                 if (temp.getState() == 1) {
-                    listL.add(new Landtemp(temp,1));
+                    listL.add(new Landtemp(temp, 1));
                 }
             }
             for (int i = 0; i < arrFFavor.length; i++) {
                 Festival temp = (Festival) arrFFavor[i];
                 if (temp.getState() == 1) {
-                    listF.add(new FestivalTemp(temp,1));
+                    listF.add(new FestivalTemp(temp, 1));
                 }
             }
 
@@ -67,7 +71,7 @@ public class ManageFavoriteController {
                 Posts temp = (Posts) arrPFavor[i];
                 if (temp.getState() == 1) {
                     Posts ptemp = Posts.getPostsById(temp.getIdPosts());
-                    listP.add(new PostsTemp(ptemp,1));
+                    listP.add(new PostsTemp(ptemp, 1));
                 }
             }
             mm.put("listL", listL);
@@ -96,18 +100,18 @@ public class ManageFavoriteController {
                     sb.append(str);
                 }
                 String arr[] = sb.toString().split("_");
-                System.out.println("ducvu: "+sb.toString());
+                System.out.println("ducvu: " + sb.toString());
                 if (arr[0].compareTo("land") == 0) {
-                    Landscape lt=Landscape.getLandscapeById(Integer.valueOf(arr[1]));
-                    
+                    Landscape lt = Landscape.getLandscapeById(Integer.valueOf(arr[1]));
+
                     lt.deleteFavorite(u);
                 } else if (arr[0].compareTo("fes") == 0) {
-                    Festival ft=Festival.getFestivalById(Integer.valueOf(arr[1]));
-                    
+                    Festival ft = Festival.getFestivalById(Integer.valueOf(arr[1]));
+
                     ft.deleteFavorite(u);
-                    
+
                 } else {
-                    Posts p=Posts.getPostsById(Integer.valueOf(arr[1]));
+                    Posts p = Posts.getPostsById(Integer.valueOf(arr[1]));
                     p.deleteFavorite(u);
                 }
 

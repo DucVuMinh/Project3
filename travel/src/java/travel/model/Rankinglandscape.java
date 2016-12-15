@@ -181,5 +181,12 @@ public class Rankinglandscape implements java.io.Serializable, InterfaceEntity {
 
         return json;
     }
-
+//    public static void main(String args[]){
+//        RankinglandscapeId r1=new RankinglandscapeId(7, 2);
+//        RankinglandscapeId r2=new RankinglandscapeId(7, 2);
+//        System.out.println("so sanh "+ r1.equals(r2));
+//        Rankinglandscape r=Rankinglandscape.getRankingLandscapeById(new RankinglandscapeId(1, 5));
+//        
+//        System.out.println("ducvu: "+r.getRank());
+//    }
 }

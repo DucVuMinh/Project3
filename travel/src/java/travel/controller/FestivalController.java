@@ -25,6 +25,7 @@ import travel.model.Festival;
 import travel.model.ImagedetailFestival;
 import travel.model.ImagedetailLandscape;
 import travel.model.Landscape;
+import travel.model.Posts;
 import travel.model.Rankingfestival;
 import travel.model.RankingfestivalId;
 import travel.model.Rankinglandscape;
@@ -129,6 +130,49 @@ public class FestivalController {
 
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @RequestMapping(value = "/addfesfavor", method = RequestMethod.POST)
+    public void handlingAddFavor(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        ServletOutputStream out = response.getOutputStream();
+        try {
+            StringBuilder sb = new StringBuilder();
+            BufferedReader br = request.getReader();
+            String str = null;
+            HttpSession session = request.getSession();
+            String username = (String) session.getAttribute("username");
+            if (username != null) {
+
+                while ((str = br.readLine()) != null) {
+                    sb.append(str);
+                }
+                System.out.println("ducvu: " + sb.toString());
+                String arr[]=sb.toString().split("=");
+                int idPosts = Integer.valueOf(arr[1]);
+                Festival f = Festival.getFestivalById(idPosts);
+                User u = User.getUserByUserName(username);
+                if (f.getState() == 1) {
+                    if (f.getUsersFavorite().contains(u)) {
+                        out.print("added");
+                    } else {
+                        f.addToUserFavorite(u);
+                        out.print("done");
+                    }
+                } else {
+                    out.print("waitadmin");
+                }
+            } else {
+                out.print("login");
+            }
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
         }
     }
 }

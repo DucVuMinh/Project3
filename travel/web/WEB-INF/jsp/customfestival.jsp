@@ -33,10 +33,10 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script language="javascript" src="client/js/custom.js"></script>
         <link rel="stylesheet" href="client/css/stylerating.css">
-
+        <link rel="stylesheet" href="client/css/popup.css">
         <script src="https://code.angularjs.org/1.3.0-rc.2/angular.js"></script>
         <script src="client/js/controller/appratingfes.js"></script>
-
+        <script src="client/js/controller/addfesfavor.js"></script>
     </head>
 
     <body id="#" data-spy="scroll" data-target=".navbar-fixed-top" >
@@ -49,7 +49,14 @@
             <div class="content">
                 <div class="line-first">
 
-
+                    <div id="addfavorele" class="right popup">
+                        <span class="popuptext" id="loginfavor">Đăng nhập để thực hiện chức năng này</span>
+                        <span class="popuptext" id="errorpagefavor">lỗi trang, hãy reload lại trang web</span>
+                        <span class="popuptext" id="waitadminfavor">bài viết đang chờ admin phê duyệt</span>
+                        <span class="popuptext" id="addedfavor">bài viết đã có trong mục yêu thích</span>
+                        <span class="popuptext" id="doneaddfavor">đã thêm bài viết vào mục yêu thích</span>
+                        <button id="btaddfavor" class="button-modal" ng-click="addFavor()">Lưu bài viết</button>
+                    </div>
                     <div class="title">${inffes.title}</div>
                     <div class="content-post">
                         ${inffes.description}

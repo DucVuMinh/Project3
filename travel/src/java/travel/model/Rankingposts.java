@@ -181,4 +181,8 @@ public class Rankingposts implements java.io.Serializable, InterfaceEntity {
 
         return json;
     }
+//    public static void main(String args[]){
+//        Rankingposts r=Rankingposts.getRankingPostById(new RankingpostsId(1, 1));
+//        System.out.println(r.getRank());
+//    }
 }

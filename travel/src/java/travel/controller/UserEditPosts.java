@@ -54,11 +54,12 @@ public class UserEditPosts extends HttpServlet {
         String username = (String) session.getAttribute("username");
 
         if (username != null) {
+            request.setCharacterEncoding("UTF-8");
             User u = User.getUserByUserName(username);
             String context = request.getParameter("context");
-            context = new String(context.getBytes("iso-8859-1"), "UTF-8");
+            //context = new String(context.getBytes("iso-8859-1"), "UTF-8");
             String title = request.getParameter("title");
-            title = new String(title.getBytes("iso-8859-1"), "UTF-8");
+            //title = new String(title.getBytes("iso-8859-1"), "UTF-8");
             Collection<Part> fileParts = request.getParts();
             Object arrParts[] = fileParts.toArray();
             int length = arrParts.length;

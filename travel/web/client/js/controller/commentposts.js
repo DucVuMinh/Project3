@@ -36,20 +36,21 @@ comment.controller('commentpostsctr', function ($scope, $http, $location) {
         var arr = data.split("|");
         var noderow = document.createElement("div");
         noderow.setAttribute("class", "row");
-        var nodecolumn1=docment.createElement("div");
+        var nodecolumn1=document.createElement("div");
         nodecolumn1.setAttribute("class", "col-lg-1");
-        var profile=document.createElement("div");
-        var linkprofile="img/users/profile/"+arr[2]+".png";
+        var link=document.createElement("a");
+        var profile=document.createElement("img");
+        var linkprofile="http://localhost:8080/travel/img/users/profile/"+arr[2]+".png";
         profile.setAttribute("src", linkprofile);
         profile.setAttribute("class", "img2");
-        nodecolumn1.appendChild(profile);
+        link.appendChild(profile);
+        nodecolumn1.appendChild(link);
         var nodecolumn = document.createElement("div");
         nodecolumn.setAttribute("class", "col-lg-11");
         var nodeusername = document.createElement("div");
         var username = document.createTextNode(arr[0]);
         nodeusername.appendChild(username);
         nodeusername.setAttribute("class", "username");
-
         var nodeContent = document.createElement("div");
         var content = document.createTextNode(arr[1]);
         nodeContent.appendChild(content);

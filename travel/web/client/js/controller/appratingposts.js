@@ -41,8 +41,9 @@ starApp.controller('StarCtrl', function ($scope, $http, $location) {
                 }
                 else {
                     var arrRespone = data.split("|");
-                    $scope.ratings[0].current = arrRespone[0];
+                    $scope.ratings[0].current = arrRespone[0].substring(0,3);
                     $scope.numberUserRank = arrRespone[1];
+                    
                 }
             }).error(function (data, status, headers, config) {
                 alert("Network error");
