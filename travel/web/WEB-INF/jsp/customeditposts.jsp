@@ -107,7 +107,7 @@
                                         <i class="fa fa-cloud-upload"></i> Choose Image
 
                                     </label>
-                                    <input type="file" id="img_detail" name="img_detail" multiple="multiple" required/>
+                                    <input type="file" id="img_detail" name="img_detail" multiple="multiple"/>
                                     <div class="col-md-8 col-sm-6 col-xs-12 col-md-offset-3 " id="bound_img"></div>
                                 </div>
                                 <div class="ln_solid"></div>

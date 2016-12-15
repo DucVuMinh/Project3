@@ -57,7 +57,8 @@ public class UserEditPosts extends HttpServlet {
         if (username != null) {
             request.setCharacterEncoding("UTF-8");
             User u = User.getUserByUserName(username);
-            String context = request.getParameter("context");
+            String context = request.getParameter("content");
+            System.out.println("ducvu: context"+context);
             //context = new String(context.getBytes("iso-8859-1"), "UTF-8");
             String title = request.getParameter("title");
             //title = new String(title.getBytes("iso-8859-1"), "UTF-8");
