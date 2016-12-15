@@ -277,8 +277,7 @@ public class Posts implements java.io.Serializable, InterfaceEntity, InterfacePa
             this.usersFarvorite.add(u);
             u.getPostsFavorite().add(this);
             this.update();
-        } else {
-        }
+        } 
     }
 
     @Override

@@ -28,8 +28,9 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script language="javascript" src="client/js/custom.js"></script>
         <link rel="stylesheet" href="client/css/stylerating.css">
-
+        <link rel="stylesheet" href="client/css/popup.css">
         <script src="https://code.angularjs.org/1.3.0-rc.2/angular.js"></script>
+        <script src="client/js/controller/addpostfavorite.js"></script>
         <script src="client/js/controller/appratingposts.js"></script>
         <script src="client/js/controller/commentposts.js"></script>
     </head>
@@ -44,6 +45,17 @@
         <section id="about" class="container content-section text-center"  style="padding-top:190px;padding-bottom:30px">
             <div class="content">
                 <div class="line-first">
+                    <div class="left"><p> ${infpos.userWrite}<img src="img/default/add.png" alt="time"> ${infpos.date.toString()}</p></div>
+
+                    <span class="yasr-total-average-container" id="yasr-total-average-text_1054"></span>
+                    <div id="addfavorele" class="right popup">
+                        <span class="popuptext" id="loginfavor">Đăng nhập để thực hiện chức năng này</span>
+                        <span class="popuptext" id="errorpagefavor">lỗi trang, hãy reload lại trang web</span>
+                        <span class="popuptext" id="waitadminfavor">bài viết đang chờ admin phê duyệt</span>
+                        <span class="popuptext" id="addedfavor">bài viết đã có trong mục yêu thích</span>
+                        <span class="popuptext" id="doneaddfavor">đã thêm bài viết vào mục yêu thích</span>
+                        <button id="btaddfavor" class="button-modal" ng-click="addFavor()">Lưu bài viết</button>
+                    </div>
                     <div class="title">${infpos.title}</div>
                     <div class="content-post">
                         ${infpos.context}
@@ -66,13 +78,10 @@
                                 <li class="active"><a data-toggle="tab" href="#writepost"  style="color:#1d508f">Viết bình luận</a></li>
                                 <li><a data-toggle="tab" href="#menu1" style="color:#1d508d">Đánh giá</a></li>
                             </ul>
-
                             <div class="tab-content">
-
                                 <div id="menu1" class="tab-pane fade popup" ng-app="starApp" ng-controller="StarCtrl" ng-init="setRate(${infpos.avgRank},${infpos.rankOfUser},${infpos.numberUserRank})">
                                     <div id="rankele" > 
                                         <div class=col-md-12>
-
                                             <div>
                                                 <h2>{{ratings[0].current}} /
                                                     {{ratings[0].max}}</h2>
@@ -92,7 +101,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                                 <div id="writepost" class="tab-pane fade in active popup" ng-app="commentposts" ng-controller="commentpostsctr">
                                     Viết bình luận:
@@ -111,6 +119,7 @@
                                 </div>
                                 <c:forEach var="itemcomment" items="${comment}">
                                     <div class="row">
+                                        <div class="col-lg-1"><a href="#"><img src="img/users/profile/${itemcomment.user.idUser}.png" class="img2"></a></div>
                                         <div class="col-lg-11">
                                             <div class="username"> ${itemcomment.user.fullname}</div>
                                             <div class="content-comment">${itemcomment.context} </div>
@@ -123,12 +132,10 @@
                 </div>
             </div>
         </section>
-
         <!-- Contact Section -->
         <c:import url="http://localhost:8080/travel/customfooter.htm" />
         <!-- jQuery -->
         <script src="client/vendor/jquery/jquery.js"></script>
-
         <!-- Bootstrap Core JavaScript -->
         <script src="client/vendor/bootstrap/js/bootstrap.min.js"></script>
         <!-- Plugin JavaScript -->
@@ -137,13 +144,11 @@
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
         <!-- Theme JavaScript -->
         <script src="client/js/grayscale.min.js"></script>
-
     </body>
     <script type="text/javascript">
         angular.element(document).ready(function () {
             angular.bootstrap(document.getElementById("menu1"), ['starApp']);
             angular.bootstrap(document.getElementById("writepost"), ['commentposts']);
-
         });
         var $item = $('.carousel .item');
         var $wHeight = $(window).height();
@@ -214,63 +219,6 @@
             });
         });
     </script>
-    <style>
-        /* Popup container - can be anything you want */
-        .popup {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
 
-        /* The actual popup */
-        .popup .popuptext {
-            visibility: hidden;
-            width: 160px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 8px 0;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -80px;
-        }
-
-        /* Popup arrow */
-        .popup .popuptext::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -5px;
-            border-width: 5px;
-            border-style: solid;
-            border-color: #555 transparent transparent transparent;
-        }
-
-        /* Toggle this class - hide and show the popup */
-        .popup .show {
-            visibility: visible;
-            -webkit-animation: fadeIn 1s;
-            animation: fadeIn 1s;
-        }
-
-        /* Add animation (fade in the popup) */
-        @-webkit-keyframes fadeIn {
-            from {opacity: 0;} 
-            to {opacity: 1;}
-        }
-
-        @keyframes fadeIn {
-            from {opacity: 0;}
-            to {opacity:1 ;}
-        }
-    </style>
 </html>
 

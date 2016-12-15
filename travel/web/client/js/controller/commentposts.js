@@ -36,9 +36,15 @@ comment.controller('commentpostsctr', function ($scope, $http, $location) {
         var arr = data.split("|");
         var noderow = document.createElement("div");
         noderow.setAttribute("class", "row");
+        var nodecolumn1=docment.createElement("div");
+        nodecolumn1.setAttribute("class", "col-lg-1");
+        var profile=document.createElement("div");
+        var linkprofile="img/users/profile/"+arr[2]+".png";
+        profile.setAttribute("src", linkprofile);
+        profile.setAttribute("class", "img2");
+        nodecolumn1.appendChild(profile);
         var nodecolumn = document.createElement("div");
         nodecolumn.setAttribute("class", "col-lg-11");
-
         var nodeusername = document.createElement("div");
         var username = document.createTextNode(arr[0]);
         nodeusername.appendChild(username);
@@ -50,6 +56,7 @@ comment.controller('commentpostsctr', function ($scope, $http, $location) {
         nodeContent.setAttribute("class", "content-comment");
         nodecolumn.appendChild(nodeusername);
         nodecolumn.appendChild(nodeContent);
+        noderow.appendChild(nodecolumn1);
         noderow.appendChild(nodecolumn);
         nodeComment.appendChild(noderow);
     };

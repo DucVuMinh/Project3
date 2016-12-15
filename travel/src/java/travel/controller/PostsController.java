@@ -43,8 +43,8 @@ public class PostsController {
         try {
             String idl = (String) (request.getParameter("id"));
             Posts p = Posts.getPostsById(Integer.valueOf(idl));
-            System.out.println("ducvu: state" +p.getState());
-            if (p.getState() == 1||p.getState() == 0) {
+            //System.out.println("ducvu: state" +p.getState());
+            if (p.getState() == 1 || p.getState() == 0) {
                 ArrayList listImgDetail = new ArrayList<String>();
                 ArrayList commentSet = new ArrayList<>();
                 if (p.getImagedetailPostses() != null) {
@@ -93,7 +93,7 @@ public class PostsController {
     }
 
     @RequestMapping(value = "/rankingpost", method = RequestMethod.POST)
-    public void rankingPosts(HttpServletRequest request, HttpServletResponse response) {
+    public void rankingPosts(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             StringBuilder sb = new StringBuilder();
             String inputStr = request.getParameter("rankinf");
@@ -105,11 +105,11 @@ public class PostsController {
             String arr[] = sb.toString().split("\\|");
             ServletOutputStream out = response.getOutputStream();
             response.setContentType("text/html;charset=UTF-8");
-            
+
             if (arr.length == 2) {
                 int idpost = Integer.valueOf(arr[0]);
                 Posts p = Posts.getPostsById(idpost);
-                if (p != null&&p.getState()==1) {
+                if (p != null && p.getState() == 1) {
                     System.out.println("ducvu: " + p.getIdPosts());
                     HttpSession session = request.getSession();
                     String username = (String) session.getAttribute("username");
@@ -140,6 +140,7 @@ public class PostsController {
             }
 
         } catch (IOException ex) {
+            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -155,7 +156,7 @@ public class PostsController {
             HttpSession session = request.getSession();
             String username = (String) session.getAttribute("username");
             if (username != null) {
-                
+
                 while ((str = br.readLine()) != null) {
                     sb.append(str);
                 }
@@ -165,11 +166,11 @@ public class PostsController {
                     int idposts = Integer.valueOf(arr[0]);
                     Posts p = Posts.getPostsById(idposts);
                     if (p != null) {
-                        if(p.getState()==1){
-                        Comment comment = new Comment(p, u, new Date(), 1, arr[1]);
-                        comment.add();
-                        out.print(u.getFullname()+ "|" + arr[1]);
-                        }else{
+                        if (p.getState() == 1) {
+                            Comment comment = new Comment(p, u, new Date(), 1, arr[1]);
+                            comment.add();
+                            out.print(u.getFullname() + "|" + arr[1]+"|"+u.getIdUser());
+                        } else {
                             out.print("waitadmin");
                         }
                     }
@@ -182,7 +183,52 @@ public class PostsController {
             }
 
         } catch (IOException ex) {
+            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @RequestMapping(value = "/addfavor", method = RequestMethod.POST)
+    public void handlingAddFavor(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        ServletOutputStream out = response.getOutputStream();
+        try {
+            StringBuilder sb = new StringBuilder();
+            BufferedReader br = request.getReader();
+            String str = null;
+            HttpSession session = request.getSession();
+            String username = (String) session.getAttribute("username");
+            if (username != null) {
+
+                while ((str = br.readLine()) != null) {
+                    sb.append(str);
+                }
+                System.out.println("ducvu: " + sb.toString());
+                String arr[]=sb.toString().split("=");
+                int idPosts = Integer.valueOf(arr[1]);
+                Posts p = Posts.getPostsById(idPosts);
+                User u = User.getUserByUserName(username);
+                if (p.getState() == 1) {
+                    if (p.getUsersFarvorite().contains(u)) {
+                        out.print("added");
+                    } else {
+                        p.addToUserFavorite(u);
+                        out.print("done");
+                    }
+                } else {
+                    out.print("waitadmin");
+                }
+            } else {
+                out.print("login");
+            }
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
         }
     }
 }

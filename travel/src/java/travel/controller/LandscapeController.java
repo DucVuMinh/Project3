@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.portlet.ModelAndView;
 import travel.model.ImagedetailLandscape;
 import travel.model.Landscape;
+import travel.model.Posts;
 import travel.model.Rankinglandscape;
 import travel.model.RankinglandscapeId;
 import travel.model.User;
@@ -129,6 +130,49 @@ public class LandscapeController {
 
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @RequestMapping(value = "/addlandfavor", method = RequestMethod.POST)
+    public void handlingAddFavor(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        ServletOutputStream out = response.getOutputStream();
+        try {
+            StringBuilder sb = new StringBuilder();
+            BufferedReader br = request.getReader();
+            String str = null;
+            HttpSession session = request.getSession();
+            String username = (String) session.getAttribute("username");
+            if (username != null) {
+
+                while ((str = br.readLine()) != null) {
+                    sb.append(str);
+                }
+                //System.out.println("ducvu: " + sb.toString());
+                String arr[]=sb.toString().split("=");
+                int idLand = Integer.valueOf(arr[1]);
+                Landscape l = Landscape.getLandscapeById(idLand);
+                User u = User.getUserByUserName(username);
+                if (l.getState() == 1) {
+                    if (l.getUsersFavorite().contains(u)) {
+                        out.print("added");
+                    } else {
+                        l.addToUserFavorite(u);
+                        out.print("done");
+                    }
+                } else {
+                    out.print("waitadmin");
+                }
+            } else {
+                out.print("login");
+            }
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
         }
     }
 

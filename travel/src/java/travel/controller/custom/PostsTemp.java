@@ -21,6 +21,7 @@ public class PostsTemp {
     private String context;
     private String link;
     private Date date;
+    private String userWrite;
     private float avgRank;
     private int numberUserRank;
     private int rankOfUser;
@@ -49,6 +50,8 @@ public class PostsTemp {
         this.profile = "img/posts/detail/" + temp + ".png";
         this.avgRank = p.getRank();
         this.numberUserRank = p.getRankingpostses().size();
+        this.userWrite=p.getUserPost().getFullname();
+   
 
     }
     public PostsTemp(Posts p,int typeuser) {
@@ -136,6 +139,14 @@ public class PostsTemp {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getUserWrite() {
+        return userWrite;
+    }
+
+    public void setUserWrite(String userWrite) {
+        this.userWrite = userWrite;
     }
     
 

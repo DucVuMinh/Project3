@@ -28,7 +28,7 @@
       </key>
       <one-to-many class="travel.model.ImagedetailLandscape"/>
     </set>
-    <set cascade="all" fetch="select" inverse="false" lazy="true" name="usersFavorite" table="favoritelandscape">
+    <set  fetch="select" inverse="false" lazy="true" name="usersFavorite" table="favoritelandscape">
       <key>
         <column name="idLandscape" not-null="true"/>
       </key>

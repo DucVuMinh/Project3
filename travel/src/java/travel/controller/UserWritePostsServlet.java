@@ -68,7 +68,7 @@ public class UserWritePostsServlet extends HttpServlet {
         //System.out.println("ducvu :" + title);
         Destination d = Destination.getDesByTitle(des);
 
-        System.out.println("duc vu: " + d.getTitle());
+        //System.out.println("duc vu: " + d.getTitle());
         Posts p = new Posts(d, u, title, context, 0, new Date());
 
         int idpost = p.add();

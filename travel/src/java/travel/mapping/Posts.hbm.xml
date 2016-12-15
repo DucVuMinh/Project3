@@ -25,7 +25,7 @@
     <property name="datePost" type="timestamp">
       <column length="19" name="datePost" not-null="true"/>
     </property>
-    <set cascade="all" fetch="select" inverse="false" lazy="true" name="usersFarvorite" table="favoriteposts">
+    <set  fetch="select" inverse="false" lazy="true" name="usersFarvorite" table="favoriteposts">
       <key>
         <column name="idPosts" not-null="true"/>
       </key>

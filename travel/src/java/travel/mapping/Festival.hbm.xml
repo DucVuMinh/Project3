@@ -28,7 +28,7 @@
       </key>
       <one-to-many class="travel.model.Rankingfestival"/>
     </set>
-    <set cascade="all" fetch="select" inverse="false" lazy="true" name="usersFavorite" table="favoritefestival">
+    <set  fetch="select" inverse="false" lazy="true" name="usersFavorite" table="favoritefestival">
       <key>
         <column name="idFestival" not-null="true"/>
       </key>

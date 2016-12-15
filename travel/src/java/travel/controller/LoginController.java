@@ -102,12 +102,10 @@ public class LoginController {
                 redirectAttributes.addFlashAttribute("name",user.getFullname());
                 redirectAttributes.addFlashAttribute("facebookid",user.getFacebookId());
                 return "redirect:/creatAccountFb.htm";
-            }else{
-                user=fbExit;
             }
             
             HttpSession session = request.getSession();
-            session.setAttribute("username", user.getUsername() );
+            session.setAttribute("username", user.getFacebookId() );
             return "redirect:/custommain.htm";
         } catch (Exception e) {
             e.printStackTrace();
