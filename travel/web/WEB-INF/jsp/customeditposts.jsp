@@ -1,10 +1,10 @@
 <%-- 
-    Document   : customeditposts
-    Created on : Dec 7, 2016, 3:46:13 PM
-    Author     : ducvu
+    Document   : writeposts
+    Created on : 30-Nov-2016, 15:41:32
+    Author     : DucVu
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html ; charset=UTF-8"  pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,7 +19,6 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="client/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <!-- Custom Fonts -->
         <link href="client/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
@@ -27,158 +26,226 @@
 
         <!-- Theme CSS -->
         <link href="client/css/grayscale.css" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="client/js/jquery-1.10.2.min.js"></script>    
+        <link rel="stylesheet" type="text/css" href="admin/css/bootstrap-imageupload.css">
+        <script src="admin/js/custom.min.js"></script>
+        <script type="text/javascript" src="admin/js/bootstrap-imageupload.js"></script>
+        <script type="text/javascript" src="client/js/jquery-1.10.2.min.js"></script>
+        <script src="admin/vendors/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="admin/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- Autosize -->
+        <script src="admin/vendors/autosize/dist/autosize.min.js"></script>
+        <!-- Dropzone.js -->
+        <script src="admin/vendors/dropzone/dist/min/dropzone.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
         <script src="client/js/controller/deleteimgposts.js"></script>
+        <link href="client/css/custom.min.css" rel="stylesheet">
+        <link href="admin/css/css.css" rel="stylesheet">
+        <link href="../admin/css/bootstrap-select.css" rel="stylesheet">
     </head>
 
-    <body id="#" data-spy="scroll" data-target=".navbar-fixed-top" >
+    <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+        <!-- Navigation -->
         <%@ include file = "customheader.jsp" %>
 
-        <!-- Intro Header -->
-        <div>
-            <!-- About Section -->
-            <section id="about" class="container content-section text-center"  style="padding-left:80px;padding-right:80px;padding-top:190px;padding-bottom:30px">
-                <div class="content">
-                    <div class="line-first">
-                        <div class="slide-holder">
-                            <div id="listimgpost" class="slide-container" ng-app="deleteimgposts" ng-controller="deleteimgpostsctr">
-                                <c:forEach var="imgitem" items="${imgDetail}">
-                                    <div class="slide-image" ng-show="true" id="${imgitem.idimg}"><img src="${imgitem.link}" class="img1" >
-                                        <div class="delete">
-                                            <button ng-click="deleteimg(${imgitem.idimg})"><i class="fa fa-times" aria-hidden="true"></i></button> 
-                                        </div>
+        <div class="container" style="padding-top:200px;padding-bottom:30px" >
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <div class= "container-border">
+                                <div class="title"> Chia sẻ những trải nghiệm của bạn</div>
+                            </div>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a href=""></a></li>
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <br/>
+                            <form id="form-addlocation" data-parsley-validate class="form-horizontal form-label-left "
+                                  action="usereditposts" method="POST" onsubmit="return validateForm()" enctype="multipart/form-data">
+                                <!--Ten dia diem-->
+                                <input type="hidden" name="idposts" value="${infpos.id}" />
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_destination">
+                                        Tiêu đề bài viết: <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" name="title"
+                                               required="required" value="${infpos.title}" class="form-control col-md-7 col-xs-12"/>
                                     </div>
+                                </div>
+                                
+                                <!--Ten mien-->
+
+
+                                <!--Gioi thieu-->
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                        Giới thiệu <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <textarea class="resizable_textarea form-control"  placeholder="Giới thiệu ngắn gọn về địa điểm.............." name="content" 
+                                                  required>${infpos.context}</textarea>
+                                    </div>
+                                </div>
+
+                                <!--Anh chi tiet-->
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                        Ảnh chi tiết <span class="required">*</span>
+                                    </label>
+                                    <label  for="img_detail" class="custom-file-upload">
+                                        <i class="fa fa-cloud-upload"></i> Choose Image
+
+                                    </label>
+                                    <input type="file" id="img_detail" name="img_detail" multiple="multiple" required/>
+                                    <div class="col-md-8 col-sm-6 col-xs-12 col-md-offset-3 " id="bound_img"></div>
+                                </div>
+                                <div class="ln_solid"></div>
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                        <input type="reset" class="btn btn-primary" value="Hủy"/>
+                                        <input type="submit" class="btn btn-success" value="Lưu"/>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Hình ảnh địa điểm</h2>
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li><a href=""></a></li>
+                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                    <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="x_content" id="listimgpost" ng-app="deleteimgposts" ng-controller="deleteimgpostsctr">
+                                <c:forEach var="imgitem" items="${imgDetail}">
+                                    <figure class="show-image" id="${imgitem.idimg}">
+                                        <img src="${imgitem.link}" class="img_detail thumbnail zoom">
+                                        <figcaption class="figure-caption">
+                                            <a ng-click="deleteimg(${imgitem.idimg})" class="delete-image"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                        </figcaption>
+                                    </figure>
                                 </c:forEach>
                             </div>
                         </div>
-                        <form  method="POST" enctype="multipart/form-data" action="usereditposts">
-                            <div class="form-group">
-                                <div class="col-md-6 title"> 
-                                    <input type="hidden" name="idposts" value="${infpos.id}" />
-                                    Select image
-                                    <input type="file" id="files" name="files" multiple="multiple"/><br>
-                                    Title:
-                                    <input type="title" class="form-control" name="title" id="title" placeholder="Enter title" value="${infpos.title}" required >
-                                </div><br/>
-                                <div class="col-md-10 title">Viết chia sẻ:
-                                    <textarea class="form-control" rows="7" cols="105" name="context" id="context" placeholder="Enter your shares..." required>${infpos.context}</textarea>
-                                    <br/>
-
-                                    <p style="text-align: right; margin-top: 20px;">
-                                    </p><br/>
-
-                                    <button type="submit" class="btn btn-default" style="background:#1d508d">Submit</button>
-                                </div>
-                            </div>
-                        </form>
-
                     </div>
                 </div>
-
-            </section>
+            </div>
         </div>
+
+        <hr >
         <c:import url="http://localhost:8080/travel/customfooter.htm" />
+
         <!-- jQuery -->
         <script src="client/vendor/jquery/jquery.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
         <script src="client/vendor/bootstrap/js/bootstrap.min.js"></script>
-
-        <!-- Plugin JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-
-        <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
-
         <!-- Theme JavaScript -->
         <script src="client/js/grayscale.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css" />
-        <script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
-        
+
     </body>
-    <script type="text/javascript">
+    <script>
         angular.element(document).ready(function () {
             angular.bootstrap(document.getElementById("listimgpost"), ['deleteimgposts']);
             
         });
-                                                jQuery(function ($) {
-                                                    $("#files").shieldUpload();
-                                                });
-                                                var $item = $('.carousel .item');
-                                                var $wHeight = $(window).height();
-                                                $item.eq(0).addClass('active');
-                                                $item.height($wHeight);
-                                                $item.addClass('full-screen');
+                                      var $imageupload = $('.imageupload');
 
-                                                $('.carousel img').each(function () {
-                                                    var $src = $(this).attr('src');
-                                                    var $color = $(this).attr('data-color');
-                                                    $(this).parent().css({
-                                                        'background-image': 'url(' + $src + ')',
-                                                        'background-color': $color
-                                                    });
-                                                    $(this).remove();
-                                                });
+                                      $imageupload.imageupload();
 
-                                                $(window).on('resize', function () {
-                                                    $wHeight = $(window).height();
-                                                    $item.height($wHeight);
-                                                });
+                                      $imageupload.imageupload({
+                                          allowedFormats: ["jpg", "jpeg", "png", "gif"],
+                                          previewWidth: 350,
+                                          previewHeight: 350,
+                                          maxFileSizeKb: 4048
+                                      });
+    </script>
+    <script type="text/javascript">
+        function validateForm() {
+            return true;
+        }
+        $(document).ready(function () {
+            autosize($('.resizable_textarea'));
+        });
 
-                                                $('.carousel').carousel({
-                                                    interval: 6000,
-                                                    pause: "false"
-                                                });
+        $(document).ready(function () {
+            if (window.File && window.FileList && window.FileReader) {
+                $("#img_detail").on("change", function (e) {
+                    var files = e.target.files,
+                            filesLength = files.length;
+                    for (var i = 0; i < filesLength; i++) {
+                        var f = files[i]
+                        var fileReader = new FileReader();
+                        fileReader.onload = (function (e) {
+                            var file = e.target;
+                            $("#bound_img").append($("<span class=\"pip\">" +
+                                    "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+//                                        "<br/><span class=\"remove\">Remove</span>" +
+                                    "<br/><span class=\"remove\"><i class=\"fa fa-trash-o\"></i>Delete</span>" +
+                                    "</span>"))
+                            $(".remove").click(function () {
+                                $(this).parent(".pip").remove();
+                            });
 
-                                                var currentImage;
-                                                var currentIndex = -1;
-                                                var interval;
-                                                function showImage(index) {
-                                                    if (index < $('#bigPic img').length) {
-                                                        var indexImage = $('#bigPic img')[index]
-                                                        if (currentImage) {
-                                                            if (currentImage != indexImage) {
-                                                                $(currentImage).css('z-index', 2);
-                                                                clearTimeout(myTimer);
-                                                                $(currentImage).fadeOut(250, function () {
-                                                                    myTimer = setTimeout("showNext()", 3000);
-                                                                    $(this).css({'display': 'none', 'z-index': 1})
-                                                                });
-                                                            }
-                                                        }
-                                                        $(indexImage).css({'display': 'block', 'opacity': 1});
-                                                        currentImage = indexImage;
-                                                        currentIndex = index;
-                                                        $('#thumbs li').removeClass('active');
-                                                        $($('#thumbs li')[index]).addClass('active');
-                                                    }
-                                                }
-
-                                                function showNext() {
-                                                    var len = $('#bigPic img').length;
-                                                    var next = currentIndex < (len - 1) ? currentIndex + 1 : 0;
-                                                    showImage(next);
-                                                }
-
-                                                var myTimer;
-
-                                                $(document).ready(function () {
-                                                    myTimer = setTimeout("showNext()", 3000);
-                                                    showNext(); //loads first image
-                                                    $('#thumbs li').bind('click', function (e) {
-                                                        var count = $(this).attr('rel');
-                                                        showImage(parseInt(count) - 1);
-                                                    });
-                                                });
+                        });
+                        fileReader.readAsDataURL(f);
+                    }
+                });
+            } else {
+                alert("Your browser doesn't support to File API")
+            }
+        });
 
 
     </script>
-
+    <style>
+        input[type="file"] {
+            display: none;
+        }
+        .custom-file-upload {
+            border: 1px solid #ccc;
+            display: table;
+            padding: 6px 12px;
+            cursor: pointer;
+        }
+        .imageThumb {
+            max-height: 130px;
+            border: 2px solid;
+            padding: 1px;
+            cursor: pointer;
+        }
+        .pip {
+            display: inline-block;
+            margin: 10px 10px 0 0;
+        }
+        .remove {
+            display: block;
+            /*background: #444;*/
+            /*border: 1px solid black;*/
+            font-size: 14px;
+            color: red;
+            text-align: center;
+            cursor: pointer;
+        }
+        .remove:hover {
+            background: white;
+            color: black;
+        }
+    </style>
 </html>
+

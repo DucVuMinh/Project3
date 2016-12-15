@@ -49,6 +49,7 @@ public class UserEditPosts extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
@@ -69,7 +70,7 @@ public class UserEditPosts extends HttpServlet {
                 p.setTitle(title);
                 p.setContext(context);
                 p.update();
-                for (int i = 1; i < length - 2; i++) {
+                for (int i = 2; i < length; i++) {
 
                     Part filePart = (Part) arrParts[i];
                     String fileName = getFileName(filePart);

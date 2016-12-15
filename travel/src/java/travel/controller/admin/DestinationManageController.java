@@ -179,7 +179,7 @@ public class DestinationManageController {
     public String viewAddDestination(ModelMap mm, HttpServletRequest request, final RedirectAttributes redirectAttributes) throws IOException, ServletException {
         String name = request.getParameter("name_destination");
         String domain = request.getParameter("name_domain");
-        String desciption = request.getParameter("desciption");
+            String desciption = request.getParameter("desciption");
         String profile = request.getParameter("profile");
         System.out.println(name);
         System.out.println(domain);
