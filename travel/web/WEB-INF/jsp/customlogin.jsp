@@ -76,6 +76,7 @@
                                 Đăng nhập với Facebook
                             </button>
                             <span ng-show="disFalse">{{loginFalse}}</span>
+                            <p class="login-signup">Bạn chưa có tài khoản?   <a href="customcreateaccount.htm">Đăng ký</a></p>
                         </form>
                     </div>
                 </div>

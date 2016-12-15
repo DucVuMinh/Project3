@@ -30,12 +30,12 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     </head>
     <body>
-        <div class="modal-dialog">
+        <div class="modal-dialog" id="signup-dialog">
             <!-- Modal --> <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><center>Đăng ký</center></h4>
+            <div class="modal-content" id="signup_content">
+                <div class="modal-header" id="signup_header">
+                    <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+                    <h4 class="modal-title" style="margin-top: 20px;"><center>Đăng ký</center></h4>
                     <div class="modal-body" ng-app="creataccout" ng-controller="creatctr">
                         <form  ng-submit="sendRequest()">
                             <div class="form-group">
@@ -75,7 +75,7 @@
                                 <font>
                                 
                             </div>
-                            <button type="submit" class="btn btn-default">Đăng ký</button>
+                            <center style="margin-top: 25px;"><button type="submit" class="btn btn-info" style="width: 100px;">Đăng ký</button></center>
                         </form>
                     </div>
                 </div>
