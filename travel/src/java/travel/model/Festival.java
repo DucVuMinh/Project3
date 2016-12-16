@@ -296,7 +296,7 @@ public class Festival implements java.io.Serializable, InterfaceEntity, Interfac
         Criteria cr = session.createCriteria(Festival.class).setFetchMode("rankingfestivals", FetchMode.EAGER)
                 .setFetchMode("usersFavorite", FetchMode.EAGER)
                 .setFetchMode("imagedetailFestivals", FetchMode.EAGER)
-                .setFetchMode("discription", FetchMode.EAGER)
+                .setFetchMode("destination", FetchMode.EAGER)
                 .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
         cr.add(Restrictions.eq("title", title));
         List listFes = cr.list();
@@ -315,7 +315,7 @@ public class Festival implements java.io.Serializable, InterfaceEntity, Interfac
         Criteria cr = session.createCriteria(Festival.class).setFetchMode("rankingfestivals", FetchMode.EAGER)
                 .setFetchMode("usersFavorite", FetchMode.EAGER)
                 .setFetchMode("imagedetailFestivals", FetchMode.EAGER)
-                .setFetchMode("discription", FetchMode.EAGER)
+                .setFetchMode("destination", FetchMode.EAGER)
                 .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
         cr.add(Restrictions.eq("idFestival", id));
         List listFes = cr.list();
@@ -340,7 +340,7 @@ public class Festival implements java.io.Serializable, InterfaceEntity, Interfac
         cr.setFetchMode("rankingfestivals", FetchMode.EAGER)
                 .setFetchMode("usersFavorite", FetchMode.EAGER)
                 .setFetchMode("imagedetailFestivals", FetchMode.EAGER)
-                .setFetchMode("discription", FetchMode.EAGER)
+                .setFetchMode("destination", FetchMode.EAGER)
                 .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
         List lFes = cr.list();
         session.close();
@@ -353,7 +353,7 @@ public class Festival implements java.io.Serializable, InterfaceEntity, Interfac
         cr.setFetchMode("rankingfestivals", FetchMode.EAGER)
                 .setFetchMode("usersFavorite", FetchMode.EAGER)
                 .setFetchMode("imagedetailFestivals", FetchMode.EAGER)
-                .setFetchMode("discription", FetchMode.EAGER)
+                .setFetchMode("destination", FetchMode.EAGER)
                 .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
         List lDes = cr.list();
         session.close();
@@ -366,7 +366,7 @@ public class Festival implements java.io.Serializable, InterfaceEntity, Interfac
         cr.setFetchMode("rankingfestivals", FetchMode.EAGER)
                 .setFetchMode("usersFavorite", FetchMode.EAGER)
                 .setFetchMode("imagedetailFestivals", FetchMode.EAGER)
-                .setFetchMode("discription", FetchMode.EAGER)
+                .setFetchMode("destination", FetchMode.EAGER)
                 .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
         cr.add(Restrictions.eq("state", 1));
         List lDes = cr.list();

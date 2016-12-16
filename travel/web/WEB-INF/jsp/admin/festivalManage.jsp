@@ -147,7 +147,7 @@
                                                             <td><c:out value="${p.title}" /></td>
                                                             <td><c:out value="${p.destination.title}" /></td>
                                                             <td>
-                                                                <img style="width: 110px; height: 70px;" src="../img/festival/profile/<c:out value="${p.idLandscape}"/>.png" />
+                                                                <img style="width: 110px; height: 70px;" src="../img/festival/profile/<c:out value="${p.idFestival}"/>.png" />
                                                             </td>
                                                             <td>${fn:substring(p.discription, 0, 180)}........</td>         
                                                             <td><a class="btn btn-primary btn-xs" href="detailFestival.htm?idFestival=${p.idFestival}"><i class="fa fa-folder"></i>Xem</a></td>
