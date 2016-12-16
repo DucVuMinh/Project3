@@ -39,16 +39,13 @@ clientLogin.controller("deletefavoritectr", function ($scope, $http, $location) 
         });
     };
     $scope.delfavorPost  = function (idfavor) {
-        alert("delete favor "+String(idfavor));
         var str="posts_"+idfavor;
         $http({
             method: 'POST',
             url: 'deletefavor.htm',
             data: str 
         }).success(function (data, status, headers, config) {
-            alert(data);
             if (data == 1) {
-                alert(str);
                 var favor = document.getElementById(str);
                 favor.style.visibility = "hidden";
             }

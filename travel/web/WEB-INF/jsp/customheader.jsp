@@ -3,6 +3,7 @@
     Created on : 01-Dec-2016, 00:06:02
     Author     : DucVu
 --%>
+<%@page import="travel.model.User"%>
 <%@ page import="javax.servlet.http.HttpSession"%>
 <!DOCTYPE html>
 <html>
@@ -12,15 +13,17 @@
     </head>
     <%
         String username = (String) session.getAttribute("username");
+        String idimg="0";
         boolean login;
         boolean createAccount;
         boolean logout;
         String serverName = request.getServerName();
         if (username != null) {
-
+            User u=User.getUserByUserName(username);
             login = false;
             createAccount = false;
             logout = true;
+            idimg=String.valueOf(u.getIdUser());
         } else {
             login = true;
             createAccount = true;
@@ -60,7 +63,7 @@
                     <li>
                         <div class="dropdown-user" >
                             <a href="#profile">
-                                <img src="img/default/user.png" style="margin-top: 5px; margin-left: 15px;" class="img-circle" width="35" height="35">
+                                <img src="img/users/profile/<%=idimg%>.png" style="margin-top: 5px; margin-left: 15px;" class="img-circle" width="35" height="35">
                             </a>
                             <div class="dropdown-content">
                                 <a href="customupdateinfuser.htm">Sửa thông tin cá nhân</a>

@@ -57,6 +57,7 @@ public class PostsController {
     public ModelAndView destination(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView mv = new ModelAndView();
         try {
+            
             String idl = (String) (request.getParameter("id"));
             Posts p = Posts.getPostsById(Integer.valueOf(idl));
             //System.out.println("ducvu: state" +p.getState());

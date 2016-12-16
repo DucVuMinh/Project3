@@ -92,7 +92,10 @@
                                                      is-click="ratings[0].isClick"></div>
                                                 <h2>Đánh giá {{ratings[0].current}} từ {{numberUserRank}} thành viên</h2>
                                             </div>
-                                            <div>
+                                            <div class="popup">
+                                                <span class="popuptext" id="loginrating">Đăng nhập để thực hiện chức năng này</span>
+                                                <span class="popuptext" id="errorpage">lỗi trang, hãy reload lại trang web</span>
+                                                <span class="popuptext" id="waitadmin">bài viết đang chờ admin phê duyệt</span>
                                                 <h2>{{ratings[1].current}} /
                                                     {{ratings[1].max}}</h2>
                                                 <div star-rating rating-value="ratings[1].current" max="ratings[1].max" readonly= "ratings[1].readonly" 

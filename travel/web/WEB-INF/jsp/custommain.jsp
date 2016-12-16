@@ -48,40 +48,16 @@
                 </ol>
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
-                    <div class="item">
-                        <img src="img/default/2.jpg" data-color="lightblue" alt="First Image">
+                    <c:forEach var="d" items="${lisD}">
+                        <div class="item">
+                        <img src="img/destination/profile/${d.idDestination}.png" data-color="lightblue" alt="First Image">
                         <div class="carousel-caption">
-                            <h2>VỊNH HẠ LONG</h2>
-                            <h3>- Được Unesco công nhận là di sản thiên nhiên thế giới, là điểm đến không thể quên khi đến thăm đất nước hình chữ S </h3>
-
+                            <h2>${d.title}</h2>
                         </div>
                     </div>
-                    <div class="item">
-                        <img src="img/default/vietnam2.jpg" data-color="firebrick" alt="Second Image">
-                        <div class="carousel-caption">
-                            <h2>TÂY BẮC</h2>
-                            <h3>Những thửa ruộng bậc thang như những dây đàn chạy vòng quanh những ngọn núi, là điểm đặc trưng của Tây Bắc Việt Nam</h3>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="img/default/danang.jpg" data-color="violet" alt="Third Image">
-                        <div class="carousel-caption">
-                            <h2>Đà Nẵng</h2>
-                            <h3>Nơi được mệnh danh là thành phố đáng sống nhất Việt Nam,Đà Nẵng đang ngày càng khẳng định bản lĩnh trong công cuộc xây dựng đất nước</h3>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="img/default/mientay1.jpg" data-color="lightgreen" alt="Fourth Image">
-                        <div class="carousel-caption">
-                            <h3></h3>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <img src="img/default/vietnam3.jpg" data-color="tomato" alt="Fifth Image">
-                        <div class="carousel-caption">
-                            <h3>Fifth Image</h3>
-                        </div>
-                    </div>
+                    </c:forEach>
+                    
+                    
                 </div>
                 <!-- Controls -->
                 <a class="left carousel-control" href="#mycarousel" role="button" data-slide="prev">

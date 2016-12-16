@@ -17,6 +17,7 @@ import org.springframework.web.portlet.ModelAndView;
 import travel.controller.custom.FestivalTemp;
 import travel.controller.custom.Landtemp;
 import travel.controller.custom.PostsTemp;
+import travel.model.Destination;
 import travel.model.Festival;
 import travel.model.ImagedetailPosts;
 import travel.model.Landscape;
@@ -58,6 +59,8 @@ public class MainViewUserController {
             Posts temp = (Posts) listTopPosts.get(i);
             listTopPostsTemp.add(new PostsTemp(temp));
         }
+        List listD=Destination.getLazyAllListDesInstance();
+        mm.put("lisD", listD);
         mm.put("topland", listTopLandtemp);
         mm.put("topFes", listTopFesTemp);
         mm.put("topPost", listTopPostsTemp);
