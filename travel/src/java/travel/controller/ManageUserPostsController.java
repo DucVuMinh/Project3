@@ -23,7 +23,9 @@ import org.springframework.web.portlet.ModelAndView;
 import travel.controller.custom.ImageDetailTemp;
 import travel.controller.custom.PostsTemp;
 import travel.model.Destination;
+import travel.model.Festival;
 import travel.model.ImagedetailPosts;
+import travel.model.Landscape;
 import travel.model.Posts;
 import travel.model.User;
 
@@ -129,6 +131,39 @@ public class ManageUserPostsController {
             out.println("ok");
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @RequestMapping(value = "/cusdeleteposts", method = RequestMethod.POST)
+    public void deleteFavor(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        ServletOutputStream out = response.getOutputStream();
+        try {
+            String username = (String) session.getAttribute("username");
+            if (username != null) {
+                User u = User.getUserByUserName(username);
+                StringBuilder sb = new StringBuilder();
+                BufferedReader br = request.getReader();
+                String str = null;
+                while ((str = br.readLine()) != null) {
+                    sb.append(str);
+                }
+                String arr[] = sb.toString().split("=");
+                int idPosts = Integer.valueOf(arr[1]);
+                Posts p = Posts.getPostsById(idPosts);
+                System.out.println("ducvu: " + sb.toString());
+                p.delete();
+
+                out.println("done");
+            } else {
+                out.println("login");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            response.sendRedirect("requestlogin.htm");
+        } catch (Exception ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            response.sendRedirect("requestlogin.htm");
         }
     }
 }
