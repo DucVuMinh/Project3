@@ -379,11 +379,11 @@ public class Destination implements java.io.Serializable, InterfaceEntity {
                 .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
         String strregion;
         if (region == 1) {
-            strregion = "%Mien Bac%";
+            strregion = "%Miền Bắc%";
         } else if (region == 2) {
-            strregion = "% Mien Trung%";
+            strregion = "%Miền Trung%";
         } else {
-            strregion = "%Mien Nam%";
+            strregion = "%Miền Nam%";
         }
         cr.add(Restrictions.like("nameArea", strregion));
         List lDes = null;

@@ -14,9 +14,9 @@
     <%
         String username = (String) session.getAttribute("username");
         String idimg = "0";
-        boolean login = false;
+        boolean login = true;
         boolean createAccount = true;
-        boolean logout = true;
+        boolean logout = false;
         try {
             String serverName = request.getServerName();
             if (username != null) {
