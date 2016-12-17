@@ -6,6 +6,8 @@
 package travel.controller.admin;
 
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,5 +44,21 @@ public class LandscapeManageController {
             e.printStackTrace();
         }
         return "redirect:/admin/landscapeManage.htm";
+    }
+    
+    @RequestMapping(value = "/detailLandscape", method = RequestMethod.GET)
+    public ModelAndView viewDetailLandscape(ModelMap mm, HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView view = new ModelAndView();
+        try {
+            int idLandscape = Integer.parseInt(request.getParameter("idLandscape"));
+            Landscape detailLand = Landscape.getLandscapeById(idLandscape);
+            view.setViewName("admin/detailLandscape");
+
+            mm.put("detailLand", detailLand);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return view;
     }
 }

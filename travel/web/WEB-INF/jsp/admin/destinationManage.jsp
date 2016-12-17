@@ -92,9 +92,6 @@
                             <div class="alert alert-success" style="margin-top: 50px;">
                                 <div id="warning_cnt">${success}</div>
                             </div>
-                            <script>
-                                console.log("nguyen van duc");
-                            </script>
                         </c:if>
                         <!--/Flash Message-->
                         <div class="page-title">
@@ -134,7 +131,7 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width: 20px;">STT</th>
-                                                    <th>Tên địa điểm</th>
+                                                    <th>Địa điểm</th>
                                                     <th>Tên miền</th>
                                                     <th>Ảnh</th>
                                                     <th>Mô tả</th>

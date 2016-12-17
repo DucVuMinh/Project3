@@ -87,11 +87,14 @@
                 <!-- Page Content -->
                 <div class="right_col" role="main">
                     <div class="">
-                        <c:if test="${not empty message}">
+                        <!--Flash Message-->
+                        <c:if test="${not empty success}">
                             <div class="alert alert-success" style="margin-top: 50px;">
-                                <div id="warning_cnt">${message}</div>
+                                <div id="warning_cnt">${success}</div>
                             </div>
                         </c:if>
+                        <!--/Flash Message-->
+                        
                         <div class="page-title">
                             <div class="title_left">
                                 <h3>Quản lý lễ hội</h3>
@@ -151,7 +154,7 @@
                                                             </td>
                                                             <td>${fn:substring(p.discription, 0, 180)}........</td>         
                                                             <td><a class="btn btn-primary btn-xs" href="detailFestival.htm?idFestival=${p.idFestival}"><i class="fa fa-folder"></i>Xem</a></td>
-                                                            <td><a class="btn btn-info btn-xs" href="#"><i class="fa fa-pencil"></i>Sửa</a></td>
+                                                            <td><a class="btn btn-info btn-xs" href="editFestival.htm?idFestival=${p.idFestival}"><i class="fa fa-pencil"></i>Sửa</a></td>
                                                             <td><a class="btn btn-danger btn-xs" href="#" onclick="deleteFestival('${p.title}', ${p.idFestival})"><i class="fa fa-trash-o"></i>Xóa</a></td>
                                                         </tr>
                                                         <% i++;%>
