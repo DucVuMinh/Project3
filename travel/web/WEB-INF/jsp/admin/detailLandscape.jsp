@@ -1,6 +1,6 @@
 <%-- 
-    Document   : detailDestination
-    Created on : Dec 8, 2016, 5:04:11 PM
+    Document   : detailLandscape
+    Created on : Dec 17, 2016, 12:42:13 AM
     Author     : vanduc
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Admin | Thông tin địa điểm</title>
+        <title>Admin | Thông tin thắng cảnh</title>
         <meta charset="utf-8">
         <!-- Bootstrap -->
         <link href="../admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -95,25 +95,15 @@
                 <!-- Page Content -->
                 <div class="right_col" role="main">
                     <div class="">
-                        <!--Flash Message-->
-                        <c:if test="${not empty param.success && param.success == 'true'}">
-                            <div class="alert alert-success" style="margin-top: 50px;">
-                                <div>Sửa địa điểm thành công!</div>
-                            </div>
-                        </c:if>
-                        <!--/Flash Message-->
                         <div class="page-title">
                             <div class="title_left">
-                                <h1 style="margin-left: 50px">${detailDes.getTitle()}</h1>
+                                <h1 style="margin-left: 50px">${detailLand.getTitle()}</h1>
                             </div>
 
                             <div class="title-right">
                                 <div class="col-md-1 col-sm-1 col-xs-12 form-group pull-right top_search">
                                     <div class="input-group">
-                                        <button type="button" name="editLocation" class="btn btn-round btn-warning"
-                                                onclick="window.location = 'editDestination.htm?idDestination=${param.idDestination}';">
-                                            <i class="fa fa-edit" aria-hidden="true"></i>   Sửa
-                                        </button>
+                                        <button type="button" name="addLocation" class="btn btn-round btn-warning" onclick="window.location = 'editScenic.html';"><i class="fa fa-edit" aria-hidden="true"></i>   Sửa</button>
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +115,7 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="x_panel">
                                     <div class="x_title">
-                                        <h2>Thông tin địa điểm</h2>
+                                        <h2>Thông tin thắng cảnh</h2>
                                         <ul class="nav navbar-right panel_toolbox">
                                             <li><a href=""></a></li>
                                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
@@ -138,18 +128,22 @@
                                         <br/>
                                         <div class="group-content row">
                                             <div class="title-content col-md-3 col-xs-12 col-sm-3">
-                                                <p>Miền</p>
+                                                <p>Địa điểm</p>
                                             </div>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <p>${detailDes.getNameArea()}</p>
+                                                <p style="font-size: 18px"><i class="fa fa-map-marker" aria-hidden="true"></i> 
+                                                    <a href="detailDestination.htm?idDestination=${detailLand.getDestination().getIdDestination()}">
+                                                        ${detailLand.getDestination().getTitle()}
+                                                    </a>
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="group-content row">
                                             <div class="title-content col-md-3 col-xs-12 col-sm-3">
                                                 <p>Giới thiệu</p>
                                             </div>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <p>${detailDes.getDiscription()}</p>
+                                            <div class="col-md-8 col-sm col-xs-12">
+                                                <p>${detailLand.getDiscription()}</p>
                                             </div>
                                         </div>
                                         <br/>
@@ -158,7 +152,7 @@
                                                 <p>Ảnh đại diện</p>
                                             </div>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <img class="banner" src="../img/destination/profile/${detailDes.getIdDestination()}.png"/>
+                                                <img class="banner" src="../img/landscape/profile/${detailLand.getIdLandscape()}.png"/>
                                             </div>
                                         </div>
                                     </div>
@@ -166,7 +160,7 @@
 
                                 <div class="x_panel">
                                     <div class="x_title">
-                                        <h2>Hình ảnh địa điểm</h2>
+                                        <h2>Hình ảnh thắng cảnh</h2>
                                         <ul class="nav navbar-right panel_toolbox">
                                             <li><a href=""></a></li>
                                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
@@ -176,8 +170,8 @@
                                     </div>
 
                                     <div class="x_content">
-                                        <c:forEach items="${detailDes.getImagedetailDestinations()}" var="i">
-                                            <image src="../img/destination/detail/${i.getIdImage()}.png" class="img_detail thumbnail zoom"/>
+                                        <c:forEach items="${detailLand.getImagedetailLandscapes()}" var="i">
+                                            <image src="../img/landscape/detail/${i.getIdImage()}.png" class="img_detail thumbnail zoom"/>
                                         </c:forEach>
                                     </div>
                                 </div>

@@ -262,6 +262,7 @@ public class Landscape implements java.io.Serializable, InterfaceEntity, Interfa
         Session session = HibernateUtil.getSessionFactory().openSession();
         Criteria cr = session.createCriteria(Landscape.class).setFetchMode("imagedetailLandscapes", FetchMode.EAGER)
                 .setFetchMode("usersFavorite", FetchMode.EAGER).setFetchMode("rankinglandscapes", FetchMode.EAGER)
+                .setFetchMode("destination", FetchMode.EAGER)
                 .setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
         cr.add(Restrictions.eq("idLandscape", id));
         List listLand = cr.list();

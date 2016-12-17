@@ -40,6 +40,9 @@ import travel.model.ImagedetailDestination;
 @Controller
 @RequestMapping(value = "/admin")
 public class DestinationManageController {
+    
+    @Autowired
+    private ServletContext context;
 
     @RequestMapping(value = "/destinationManage", method = RequestMethod.GET)
     public ModelAndView viewDestinationManage(ModelMap mm) {
@@ -90,9 +93,9 @@ public class DestinationManageController {
     @RequestMapping(value = "/editDestination", method = RequestMethod.POST)
     public String editDestination(ModelMap mm, HttpServletRequest request, final RedirectAttributes redirectAttributes) throws IOException, ServletException {
         boolean check = true;
-        String name = request.getParameter("name_destination");
+        String name = request.getParameter("name_destination").trim();
         String domain = request.getParameter("name_domain");
-        String desciption = request.getParameter("desciption");
+        String desciption = request.getParameter("desciption").trim();
         Part profilePart = request.getPart("profile");
         int idDestination = Integer.parseInt(request.getParameter("idDestination"));
 
@@ -100,6 +103,7 @@ public class DestinationManageController {
         for (int i = 0; i < listDes.size(); i++) {
             if (listDes.get(i).getTitle().equals(name) && listDes.get(i).getIdDestination() != idDestination) {
                 check = false;
+                break;
             }
         }
 
@@ -172,14 +176,11 @@ public class DestinationManageController {
         return "admin/addDestination";
     }
 
-    @Autowired
-    private ServletContext context;
-
     @RequestMapping(value = "/addDestination", method = RequestMethod.POST)
     public String viewAddDestination(ModelMap mm, HttpServletRequest request, final RedirectAttributes redirectAttributes) throws IOException, ServletException {
-        String name = request.getParameter("name_destination");
+        String name = request.getParameter("name_destination").trim();
         String domain = request.getParameter("name_domain");
-            String desciption = request.getParameter("desciption");
+            String desciption = request.getParameter("desciption").trim();
         String profile = request.getParameter("profile");
         System.out.println(name);
         System.out.println(domain);
