@@ -57,7 +57,7 @@ public class PostsController {
     public ModelAndView destination(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView mv = new ModelAndView();
         try {
-            
+
             String idl = (String) (request.getParameter("id"));
             Posts p = Posts.getPostsById(Integer.valueOf(idl));
             //System.out.println("ducvu: state" +p.getState());
@@ -143,10 +143,19 @@ public class PostsController {
                     if (username != null) {
                         User u = User.getUserByUserName(username);
                         int rank = Integer.valueOf(arr[1]);
-                        Rankingposts userRanking
-                                = new Rankingposts(
-                                        new RankingpostsId(p.getIdPosts(), u.getIdUser()), p, u, rank);
-                        userRanking.add();
+                        Rankingposts rankp = Rankingposts.getRankingPostById(new RankingpostsId(p.getIdPosts(), u.getIdUser()));
+                        Rankingposts userRanking;
+                        if (rankp == null) {
+                            userRanking
+                                    = new Rankingposts(
+                                            new RankingpostsId(p.getIdPosts(), u.getIdUser()), p, u, rank);
+                            userRanking.add();
+                        } else {
+                            userRanking=rankp;
+                            rankp.setRank(rank);
+                            rankp.update();
+                        }
+
                         System.out.println(p.getRankingpostses().size());
                         if (p.getRankingpostses().contains(userRanking)) {
                             p.getRankingpostses().remove(userRanking);
@@ -169,6 +178,8 @@ public class PostsController {
         } catch (IOException ex) {
             response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -262,7 +273,7 @@ public class PostsController {
     private ServletContext context;
 
     @RequestMapping(value = "/addposts", method = RequestMethod.POST)
-    public String addPosts(ModelMap mm, HttpServletRequest request,HttpServletResponse response, final RedirectAttributes redirectAttributes) throws IOException, ServletException {
+    public String addPosts(ModelMap mm, HttpServletRequest request, HttpServletResponse response, final RedirectAttributes redirectAttributes) throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
@@ -277,7 +288,7 @@ public class PostsController {
         //System.out.println("ducvu: " + des);
         //System.out.println("ducvu :" + title);
         Destination d = Destination.getDesByTitle(des);
-        System.out.println("des "+d.getIdDestination());
+        System.out.println("des " + d.getIdDestination());
         //System.out.println("duc vu: " + d.getTitle());
         Posts p = new Posts(d, u, title, content, 0, new Date());
 
@@ -285,7 +296,7 @@ public class PostsController {
         Collection<Part> fileParts = request.getParts();
         Object arrParts[] = fileParts.toArray();
         int length = arrParts.length;
-        System.out.println("lenght parts "+arrParts.length);
+        System.out.println("lenght parts " + arrParts.length);
         for (int i = 2; i < length; i++) {
 
             Part filePart = (Part) arrParts[i];
@@ -331,7 +342,7 @@ public class PostsController {
                 }
             }
         }
-        return "redirect:customposts.htm?id="+p.getIdPosts();
+        return "redirect:customposts.htm?id=" + p.getIdPosts();
     }
 
     private String getFileName(final Part part) {

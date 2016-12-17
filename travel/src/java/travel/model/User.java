@@ -52,7 +52,7 @@ public class User implements java.io.Serializable, InterfaceEntity {
         this.state = state;
         this.typeUser = typeUser;
     }
-    
+
     public User(String name, int state, int typeUser, String facebookId) {
         this.fullname = name;
         this.username = facebookId;
@@ -78,7 +78,7 @@ public class User implements java.io.Serializable, InterfaceEntity {
         this.rankinglandscapes = rankinglandscapes;
         this.festivalFavorite = festivals;
     }
-    
+
     public User(String name, int state, String profile, int typeUser, String facebookId, Set rankingfestivals, Set postses, Set rankingpostses, Set landscapes, Set comments, Set postses_1, Set rankinglandscapes, Set festivals) {
         this.fullname = name;
         this.username = name;
@@ -167,7 +167,7 @@ public class User implements java.io.Serializable, InterfaceEntity {
     public void setFacebookId(String facebookId) {
         this.facebookId = facebookId;
     }
-    
+
     public Set getRankingfestivals() {
         return this.rankingfestivals;
     }
@@ -263,7 +263,7 @@ public class User implements java.io.Serializable, InterfaceEntity {
         }
         final User other = (User) obj;
         int id2 = other.idUser;
-        return (id1 == id2||this.username.compareTo(other.getUsername())==0);
+        return (id1 == id2 || this.username.compareTo(other.getUsername()) == 0);
     }
 
     @Override
@@ -273,7 +273,10 @@ public class User implements java.io.Serializable, InterfaceEntity {
         Integer id = -2;
         if (this.fullname != null && this.username != null) {
             User t = getUserByUserName(this.username);
-            User t2 = getUserByEmail(this.email);
+            User t2 = null;
+            if (this.email != null) {
+                t2 = getUserByEmail(this.email);
+            }
             if (t == null && t2 == null) {
                 try {
                     this.state = 1;
@@ -439,8 +442,8 @@ public class User implements java.io.Serializable, InterfaceEntity {
             }
         }
     }
-    
-    public static User checkLoginFb(String facebookId){
+
+    public static User checkLoginFb(String facebookId) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Criteria cr = session.createCriteria(User.class);
         cr.add(Restrictions.eq("facebookId", facebookId));

@@ -42,14 +42,17 @@ public class ManageUserPostsController {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("custommanageposts");
         String username = (String) session.getAttribute("username");
+        ArrayList<PostsTemp> listp = new ArrayList();
         if (username != null) {
             User u = User.getUserByUserName(username);
-            Object arrp[] = u.getPosts().toArray();
-            ArrayList<PostsTemp> listp = new ArrayList();
-            for (int i = 0; i < arrp.length; i++) {
-                Posts ptemp = (Posts) arrp[i];
-                if (ptemp.getState() != -1) {
-                    listp.add(new PostsTemp(ptemp,1));
+            if (u.getPosts() != null) {
+                Object arrp[] = u.getPosts().toArray();
+
+                for (int i = 0; i < arrp.length; i++) {
+                    Posts ptemp = (Posts) arrp[i];
+                    if (ptemp.getState() != -1) {
+                        listp.add(new PostsTemp(ptemp, 1));
+                    }
                 }
             }
             mm.put("listp", listp);
@@ -78,8 +81,6 @@ public class ManageUserPostsController {
 
         return mv;
     }
-
-
 
     @RequestMapping(value = "/customeditposts", method = RequestMethod.GET)
     public ModelAndView showEditPosts(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -133,6 +134,7 @@ public class ManageUserPostsController {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     @RequestMapping(value = "/cusdeleteposts", method = RequestMethod.POST)
     public void deleteFavor(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=UTF-8");

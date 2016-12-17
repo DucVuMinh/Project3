@@ -59,10 +59,6 @@ public class ManageUserInfController {
         try {
             StringBuilder sb = new StringBuilder();
             BufferedReader br = request.getReader();
-            HttpServletResponse httpResponse = (HttpServletResponse) response;
-            httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
-            httpResponse.setHeader("Pragma", "no-cache"); // HTTP 1.0
-            httpResponse.setDateHeader("Expires", 0); // Proxies.
             String str = null;
             while ((str = br.readLine()) != null) {
                 sb.append(str);
