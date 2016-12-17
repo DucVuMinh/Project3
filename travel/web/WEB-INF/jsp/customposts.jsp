@@ -119,9 +119,6 @@
                                 </div>
                             </div>
                             <div class="comment-of-post" id="comment-of-post">
-                                <div class="row">
-                                    <div class="content-comment ">-----------------------------------------------------------Comment bài viết-------------------------------------------------------------</div>
-                                </div>
                                 <c:forEach var="itemcomment" items="${comment}">
                                     <div class="row">
                                         <div class="col-lg-1"><a href="#"><img src="img/users/profile/${itemcomment.user.idUser}.png" class="img2"></a></div>

@@ -87,7 +87,7 @@
                                                required="required" value="${infpos.title}" class="form-control col-md-7 col-xs-12"/>
                                     </div>
                                 </div>
-                                
+
                                 <!--Ten mien-->
 
 
@@ -97,7 +97,7 @@
                                         Giới thiệu <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <textarea class="resizable_textarea form-control"  placeholder="Giới thiệu ngắn gọn về địa điểm.............." name="content" 
+                                        <textarea class="resizable_textarea form-control" style="width: 100%"  placeholder="Giới thiệu ngắn gọn về địa điểm.............." name="content" 
                                                   required>${infpos.context}</textarea>
                                     </div>
                                 </div>
@@ -107,12 +107,14 @@
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">
                                         Ảnh chi tiết <span class="required">*</span>
                                     </label>
-                                    <label  for="img_detail" class="custom-file-upload">
-                                        <i class="fa fa-cloud-upload"></i> Choose Image
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <label  for="img_detail" class="custom-file-upload">
+                                            <i class="fa fa-cloud-upload"></i> Choose Image
+                                        </label>
+                                        <input type="file" id="img_detail" name="img_detail" multiple="multiple"/>
+                                        <div class="col-md-8 col-sm-6 col-xs-12 col-md-offset-3 " id="bound_img"></div>
+                                    </div>
 
-                                    </label>
-                                    <input type="file" id="img_detail" name="img_detail" multiple="multiple"/>
-                                    <div class="col-md-8 col-sm-6 col-xs-12 col-md-offset-3 " id="bound_img"></div>
                                 </div>
                                 <div class="ln_solid"></div>
                                 <div class="form-group">
@@ -126,7 +128,6 @@
                         </div>
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Hình ảnh địa điểm</h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li><a href=""></a></li>
                                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
@@ -164,10 +165,10 @@
 
     </body>
     <script>
-        angular.element(document).ready(function () {
-            angular.bootstrap(document.getElementById("listimgpost"), ['deleteimgposts']);
-            
-        });
+                                      angular.element(document).ready(function () {
+                                          angular.bootstrap(document.getElementById("listimgpost"), ['deleteimgposts']);
+
+                                      });
                                       var $imageupload = $('.imageupload');
 
                                       $imageupload.imageupload();
