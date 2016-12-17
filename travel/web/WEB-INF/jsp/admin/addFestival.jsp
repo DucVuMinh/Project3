@@ -275,7 +275,7 @@
         <script src="../admin/vendors/dropzone/dist/min/dropzone.min.js"></script>
 
         <!-- Custom Theme Scripts -->
-        <script src="../js/custom.min.js"></script>
+        <script src="../admin/js/custom.min.js"></script>
         <script type="text/javascript" src="../admin/js/bootstrap-select.js"></script>
         <!-- Upload Image Banner -->
         <script type="text/javascript" src="../admin/js/bootstrap-imageupload.js"></script>

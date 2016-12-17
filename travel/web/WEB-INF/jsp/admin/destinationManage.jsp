@@ -93,6 +93,12 @@
                                 <div id="warning_cnt">${success}</div>
                             </div>
                         </c:if>
+                        
+                        <c:if test="${not empty message}">
+                            <div class="alert alert-success" style="margin-top: 50px;">
+                                <div id="warning_cnt">${message}</div>
+                            </div>
+                        </c:if>
                         <!--/Flash Message-->
                         <div class="page-title">
                             <div class="title_left">
@@ -206,7 +212,7 @@
         <script src="../admin/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
         <script src="../admin/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
         <script src="../admin/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-        <script src="../admin/vendors/datatables.net-scroller/js/datatables.scroller.min.js"></script>
+        <script src="../admin/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
         <script src="../admin/vendors/jszip/dist/jszip.min.js"></script>
         <script src="../admin/vendors/pdfmake/build/pdfmake.min.js"></script>
         <script src="../admin/vendors/pdfmake/build/vfs_fonts.js"></script>
