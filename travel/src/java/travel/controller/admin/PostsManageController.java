@@ -58,8 +58,10 @@ public class PostsManageController {
         Posts p = Posts.getPostsById(idPost);
         List cmtAct = new ArrayList();
         for(Object cmt : p.getComments()){
-            if(((Comment) cmt).getState() != -1){
-                cmtAct.add(cmt);
+            Comment com = (Comment) cmt;
+            com = com.getCommentById(com.getIdComment());
+            if(com.getState() != -1){
+                cmtAct.add(com);
             }
         }
         String cmtJson = "[";
@@ -94,12 +96,10 @@ public class PostsManageController {
                 r.set(4, r.get(4)+1);
             }
         }
-//        String flashmessage = "Comment";
         mm.put("cmtJson", cmtJson);
         mm.put("cmtAct", cmtAct);
         mm.put("rank", r);
         mm.put("p", p);
-//        mm.put("fm", flashmessage);
         return view;
     }
 
