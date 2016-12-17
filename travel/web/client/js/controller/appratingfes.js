@@ -19,7 +19,6 @@ starApp.controller('StarCtrl', function ($scope, $http, $location) {
             readonly: false,
             isClick: false
         }];
-
     $scope.getSelectedRating = function (rating) {
         console.log(rating);
         if ($scope.ratings[0].isClick) {

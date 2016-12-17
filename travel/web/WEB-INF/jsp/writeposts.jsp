@@ -28,6 +28,8 @@
         <link href="client/css/grayscale.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        
+        <link href="client/css/custom.min.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="admin/css/bootstrap-imageupload.css">
         <script src="admin/js/custom.min.js"></script>
@@ -78,7 +80,7 @@
                                                required="required" class="form-control col-md-7 col-xs-12"/>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="form-group">
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_destination">
                                         Địa điểm du lịch:     <span class="required">*</span>
                                     </label>
@@ -95,26 +97,29 @@
 
                                 <!--Gioi thieu-->
                                 <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
                                         Giới thiệu <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <textarea class="resizable_textarea form-control"  placeholder="Giới thiệu ngắn gọn về địa điểm.............." name="content" 
+                                        <textarea class="resizable_textarea form-control" style="width: 100%"   placeholder="Giới thiệu ngắn gọn về địa điểm.............." name="content" 
                                                   required></textarea>
                                     </div>
                                 </div>
 
                                 <!--Anh chi tiet-->
                                 <div class="form-group">
+                                    
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">
                                         Ảnh chi tiết <span class="required">*</span>
                                     </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
                                     <label  for="img_detail" class="custom-file-upload">
                                         <i class="fa fa-cloud-upload"></i> Choose Image
 
                                     </label>
                                     <input type="file" id="img_detail" name="img_detail" multiple="multiple" required/>
                                     <div class="col-md-8 col-sm-6 col-xs-12 col-md-offset-3 " id="bound_img"></div>
+                                    </div>
                                 </div>
                                 <div class="ln_solid"></div>
                                 <div class="form-group">

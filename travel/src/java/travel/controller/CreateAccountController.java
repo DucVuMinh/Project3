@@ -71,6 +71,7 @@ public class CreateAccountController {
                     File newProfile = new File(absoluteDiskPathNew + File.separator + "0.png");
                     File oldProfile = new File(absoluteDiskPathNew + File.separator + u.getIdUser() + ".png");
                     Files.copy(newProfile.toPath(), oldProfile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                    
                     session.setAttribute("username", arr[1]);
                     out.print("http://localhost:8080/travel/custommain.htm");
                 }
@@ -78,6 +79,7 @@ public class CreateAccountController {
 
             }
         } catch (IOException ex) {
+            ex.printStackTrace();
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

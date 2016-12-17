@@ -15,10 +15,10 @@ app.controller('setuserinfctr', function ($scope, $http) {
         $scope.fullname=name;
     }
     $scope.checkpasswordfn = function () {
-        var patt1 = /\d\w/;
-        var patt2 = /\w\d/;
+        var patt1 = /[0-9]+[A-Za-z]+/;
+        var patt2 = /[A-Za-z]+[0-9]+/;
         var pass = $scope.password;
-        $scope.checkpassword = !((patt1.test($scope.password) || patt2.test($scope.password)) && (('' + pass.length) > 8));
+        $scope.checkpassword = !((patt1.test($scope.password) || patt2.test($scope.password)) && (('' + pass.length) > 7));
 
     };
     $scope.checkrepass = function () {

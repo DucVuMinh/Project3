@@ -13,21 +13,21 @@
     </head>
     <%
         String username = (String) session.getAttribute("username");
-        String idimg="0";
-        boolean login;
-        boolean createAccount;
-        boolean logout;
-        String serverName = request.getServerName();
-        if (username != null) {
-            User u=User.getUserByUserName(username);
-            login = false;
-            createAccount = false;
-            logout = true;
-            idimg=String.valueOf(u.getIdUser());
-        } else {
-            login = true;
-            createAccount = true;
-            logout = false;
+        String idimg = "0";
+        boolean login = false;
+        boolean createAccount = true;
+        boolean logout = true;
+        try {
+            String serverName = request.getServerName();
+            if (username != null) {
+                User u = User.getUserByUserName(username);
+                login = false;
+                createAccount = false;
+                logout = true;
+                idimg = String.valueOf(u.getIdUser());
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     %>
     <nav class="navbar navbar-custom navbar-fixed-top" role="navigation" style="background:#1d508d">
@@ -76,7 +76,7 @@
             </div>
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse" >
                 <form class="navbar-form" role="search">
-                <div class="input-group">
+                    <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search" name="q" style="border-radius:8px;background:#fcfcfc" my-enter="search()" ng-model="datasearch" require>
                     </div>
                 </form>

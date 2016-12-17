@@ -41,11 +41,8 @@ public class ManageFavoriteController {
         mv.setView("custommanagefavorite");
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
+        try{
         if (username != null) {
-            HttpServletResponse httpResponse = (HttpServletResponse) response;
-            httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
-            httpResponse.setHeader("Pragma", "no-cache"); // HTTP 1.0
-            httpResponse.setDateHeader("Expires", 0); // Proxies.
             User u = User.getUserByUserName(username);
             Object arrLFavor[] = u.getLandscapeFavorite().toArray();
             Object arrFFavor[] = u.getFestivalFavorite().toArray();
@@ -79,6 +76,9 @@ public class ManageFavoriteController {
             mm.put("listP", listP);
         } else {
             response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+        }
+        }catch(Exception ex){
+            ex.printStackTrace();
         }
 
         return mv;
