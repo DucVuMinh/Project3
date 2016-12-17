@@ -33,41 +33,42 @@ public class MainViewUserController {
     @RequestMapping(value = "/custommain", method = RequestMethod.GET)
     public ModelAndView login(ModelMap mm) {
         ModelAndView mv = new ModelAndView();
-        
-        Landscape l = new Landscape();
-        List listTopLandscape = l.getTop(6);
-        ArrayList listTopLandtemp=new ArrayList();
-        int sizeL = listTopLandscape.size();
-        for (int i = 0; i < sizeL; i++) {
-            Landscape temp = (Landscape) listTopLandscape.get(i);
-            listTopLandtemp.add(new Landtemp(temp));
+        try {
+            Landscape l = new Landscape();
+            List listTopLandscape = l.getTop(6);
+            ArrayList listTopLandtemp = new ArrayList();
+            int sizeL = listTopLandscape.size();
+            for (int i = 0; i < sizeL; i++) {
+                Landscape temp = (Landscape) listTopLandscape.get(i);
+                listTopLandtemp.add(new Landtemp(temp));
+            }
+
+            Festival f = new Festival();
+            List listTopFestival = f.getTop(6);
+            ArrayList listTopFesTemp = new ArrayList();
+            int siezF = listTopFestival.size();
+            for (int i = 0; i < siezF; i++) {
+                Festival temp = (Festival) listTopFestival.get(i);
+                listTopFesTemp.add(new FestivalTemp(temp));
+            }
+
+            Posts p = new Posts();
+            List listTopPosts = p.getTop(6);
+            ArrayList listTopPostsTemp = new ArrayList<PostsTemp>();
+            for (int i = 0; i < listTopPosts.size(); i++) {
+                Posts temp = (Posts) listTopPosts.get(i);
+                listTopPostsTemp.add(new PostsTemp(temp));
+            }
+            List listD = Destination.getLazyAllListDesInstance();
+            mm.put("lisD", listD);
+            mm.put("topland", listTopLandtemp);
+            mm.put("topFes", listTopFesTemp);
+            mm.put("topPost", listTopPostsTemp);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        
-        Festival f = new Festival();
-        List listTopFestival = f.getTop(6);
-        ArrayList listTopFesTemp =new ArrayList();
-        int siezF = listTopFestival.size();
-        for (int i = 0; i < siezF; i++) {
-            Festival temp = (Festival) listTopFestival.get(i);
-            listTopFesTemp.add(new FestivalTemp(temp));
-        }
-        
-        Posts p = new Posts();
-        List listTopPosts = p.getTop(6);
-        ArrayList listTopPostsTemp = new ArrayList<PostsTemp>();
-        for (int i = 0; i < listTopPosts.size(); i++) {
-            Posts temp = (Posts) listTopPosts.get(i);
-            listTopPostsTemp.add(new PostsTemp(temp));
-        }
-        List listD=Destination.getLazyAllListDesInstance();
-        mm.put("lisD", listD);
-        mm.put("topland", listTopLandtemp);
-        mm.put("topFes", listTopFesTemp);
-        mm.put("topPost", listTopPostsTemp);
         mv.setViewName("custommain");
         return mv;
     }
 
-
-        
 }

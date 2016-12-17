@@ -35,19 +35,20 @@ public class ManageUserInfController {
     public ModelAndView updateinf(ModelMap mm, HttpServletRequest request, HttpServletResponse response) throws IOException {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("customupdateinfuser");
-        HttpSession session = request.getSession();
-        String username = (String) session.getAttribute("username");
-        HttpServletResponse httpResponse = (HttpServletResponse) response;
-        httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
-        httpResponse.setHeader("Pragma", "no-cache"); // HTTP 1.0
-        httpResponse.setDateHeader("Expires", 0); // Proxies.
-        if (username != null) {
-            User u = User.getUserByUserName(username);
-            String profile = "img/users/profile/" + u.getIdUser() + ".png";
-            mm.put("profile", profile);
-            mm.put("user", u);
-        } else {
-            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+        try {
+            HttpSession session = request.getSession();
+            String username = (String) session.getAttribute("username");
+            HttpServletResponse httpResponse = (HttpServletResponse) response;
+            if (username != null) {
+                User u = User.getUserByUserName(username);
+                String profile = "img/users/profile/" + u.getIdUser() + ".png";
+                mm.put("profile", profile);
+                mm.put("user", u);
+            } else {
+                response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
         return mv;
     }
