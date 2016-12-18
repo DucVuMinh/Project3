@@ -264,7 +264,7 @@
 
 
                         </div>
-                        <div class="right"> Xem thêm >> </div>
+                        <div class="right"> <a href="detailland.htm">Xem thêm >></a> </div>
                         <hr>
 
                         <h3><img src="img/default/lehoi.png">Lễ hội</h3>
@@ -312,7 +312,7 @@
 
 
                         </div>
-                        <div class="right"> Xem thêm >> </div>
+                        <div class="right"><a href="detailfes.htm">Xem thêm >></a>  </div>
                         <hr>
 
                         <h3><img src="img/default/baiviet.png">Bài viết</h3>
@@ -340,7 +340,7 @@
 
                             <div class="row" style="padding-bottom:40px">
 
-                            <c:forEach var="f" items="${topPost2}">
+                                <c:forEach var="f" items="${topPost2}">
                                     <div class="col-lg-6">
                                         <div class="row">
                                             <div class="col-lg-6">
@@ -354,20 +354,10 @@
 
                                     </div>
                                 </c:forEach>
-
                             </div>
-
-
-
                         </div>
-                        <div class="right"> Xem thêm >> </div>
+                        <div class="right"><a href="detailpost.htm">Xem thêm >> </a> </div>
                         <hr>
-
-
-
-
-
-
                     </div>
                 </div>
             </div>
