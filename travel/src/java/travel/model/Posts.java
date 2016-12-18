@@ -479,4 +479,12 @@ public static List getAllInstance() {
 
         return json;
     }
+    public static void main(String args[]){
+        Posts temp=new Posts();
+        List p=temp.getTop(6);
+        for(int i=0;i<p.size();i++){
+            Posts t=(Posts)p.get(i);
+            System.out.println(t.getTitle()+" "+t.getRank()+ " " +t.getIdPosts());
+        }
+    }
 }

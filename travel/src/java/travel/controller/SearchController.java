@@ -5,9 +5,12 @@
  */
 package travel.controller;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
@@ -77,6 +80,62 @@ public class SearchController {
         mm.put("query", query);
         mv.setViewName("customresultsearch");
         return mv;
+    }
+
+    @RequestMapping(value = "/cussearch", method = RequestMethod.POST)
+    public void ajaxsearch(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, IOException {
+        StringBuilder sb = new StringBuilder();
+        BufferedReader br = request.getReader();
+        String str = null;
+        while ((str = br.readLine()) != null) {
+            sb.append(str);
+        }
+        str = sb.toString();
+        String re = parseResultSearchToJson(str);
+        ServletOutputStream out = response.getOutputStream();
+        out.print(re);
+        System.out.println("ducvu: request search: "+re);
+        return;
+    }
+
+    public static String parseResultSearchToJson(String str) {
+        Landscape l = new Landscape();
+        List listLand = l.search(str);
+        StringBuilder strb = new StringBuilder("[{\"value\":[");
+        for (int i = 0; i < listLand.size(); i++) {
+            Landscape temp = (Landscape) listLand.get(i);
+            strb.append(temp.getJson());
+            if (i < (listLand.size() - 1)) {
+                strb.append(",");
+            }
+        }
+        strb.append("],\"typei\":\"lands\"},{\"value\":[");
+
+        Festival f = new Festival();
+        List listFest = f.search(str);
+        for (int i = 0; i < listFest.size(); i++) {
+            Festival temp = (Festival) listFest.get(i);
+            strb.append(temp.getJson());
+            if (i < (listFest.size() - 1)) {
+                strb.append(",");
+            }
+        }
+        strb.append("],\"typei\":\"fes\"},{\"value\":[");
+        Posts p = new Posts();
+        List listPost = p.search(str);
+        for (int i = 0; i < listPost.size(); i++) {
+            Posts temp = (Posts) listPost.get(i);
+            strb.append(temp.getJson());
+            if (i < (listPost.size() - 1)) {
+                strb.append(",");
+            }
+        }
+        strb.append("],\"typei\":\"posts\"}]");
+        return strb.toString();
+    }
+
+    public static void main(String args[]) {
+        System.out.println(parseResultSearchToJson("bài viết về hà nội"));
     }
 
 }

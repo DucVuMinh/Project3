@@ -6,11 +6,19 @@
 <%@page import="travel.model.User"%>
 <%@ page import="javax.servlet.http.HttpSession"%>
 <!DOCTYPE html>
-<html>
-    <head>
+
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
         <script src="client/js/controller/ClientHeader.js"></script>
-    </head>
+        <!-- JS file -->
+        <script src="client/js/jquery.easy-autocomplete.js"></script> 
+
+        <!-- CSS file -->
+        <link rel="stylesheet" href="client/css/easy-autocomplete.min.css"> 
+
+        <!-- Additional CSS Themes file - not required-->
+        <link rel="stylesheet" href="client/css/easy-autocomplete.themes.min.css"> 
+        <script src="client/js/cussearch.js"></script>
+
     <%
         String username = (String) session.getAttribute("username");
         String idimg = "0";
@@ -77,7 +85,7 @@
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse" >
                 <form class="navbar-form" role="search">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search" name="q" style="border-radius:8px;background:#fcfcfc" my-enter="search()" ng-model="datasearch" require>
+                        <input id="ajax-search" type="text" class="form-control" placeholder="Search" name="q" style="border-radius:8px;background:#fcfcfc" my-enter="search()" ng-model="datasearch" required>
                     </div>
                 </form>
             </div>
@@ -93,4 +101,4 @@
         </div>
         <!-- /.container -->
     </nav>
-</html>
+
