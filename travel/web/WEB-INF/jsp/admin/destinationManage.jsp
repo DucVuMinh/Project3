@@ -49,7 +49,7 @@
                             </div>
                             <div class="profile_info">
                                 <span>Welcome, </span>
-                                <h2>GT</h2>
+                                <h2>Admin</h2>
                             </div>
                         </div>
                         <!-- /Menu Profile Info -->
@@ -71,12 +71,12 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="">
                                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                        <img src="../admin/images/img.jpg" alt="">GT
+                                        <img src="../admin/images/img.jpg" alt="">Admin
                                         <span class="fa fa-angle-down"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-usermenu pull-right">
                                         <li><a href="javascript:;">Thông tin cá nhân</a></li>
-                                        <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i>Đăng xuất</a></li>
+                                        <li><a href="logout.htm"><i class="fa fa-sign-out pull-right"></i>Đăng xuất</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -93,7 +93,7 @@
                                 <div id="warning_cnt">${success}</div>
                             </div>
                         </c:if>
-                        
+
                         <c:if test="${not empty message}">
                             <div class="alert alert-success" style="margin-top: 50px;">
                                 <div id="warning_cnt">${message}</div>
@@ -138,7 +138,7 @@
                                                 <tr>
                                                     <th style="width: 20px;">STT</th>
                                                     <th>Địa điểm</th>
-                                                    <th>Tên miền</th>
+                                                    <th style="width: 40px">Tên miền</th>
                                                     <th>Ảnh</th>
                                                     <th>Mô tả</th>
                                                     <th>Chi tiết</th>
@@ -160,12 +160,30 @@
                                                             <td>${fn:substring(p.discription, 0, 180)}........</td>         
                                                             <td><a class="btn btn-primary btn-xs" href="detailDestination.htm?idDestination=${p.idDestination}"><i class="fa fa-folder"></i>Xem</a></td>
                                                             <td><a class="btn btn-info btn-xs" href="editDestination.htm?idDestination=${p.idDestination}"><i class="fa fa-pencil"></i>Sửa</a></td>
-                                                            <td><a class="btn btn-danger btn-xs" href="#" onclick="deleteDestination('${p.title}', ${p.idDestination})"><i class="fa fa-trash-o"></i>Xóa</a></td>
+                                                            <td><a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#<%=i%>" ><i class="fa fa-trash-o"></i> Xóa</a></td>
                                                         </tr>
-                                                        <% i++;%>
-                                                    </c:if>
 
-                                                </c:forEach>            
+                                                    <div class="modal fade" id="<%=i%>" role="dialog">
+                                                        <div class="modal-dialog modal-sm">
+
+                                                            <!-- Modal content-->
+                                                            <div class="modal-content">
+                                                                <div class="modal-body">
+                                                                    <h4 class="text-center">Bạn muốn xóa địa điểm ${p.title}?</h4>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-default" onclick="deleteDestination('${p.title}', ${p.idDestination})">OK</button>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <% i++;%>
+                                                </c:if>
+
+                                            </c:forEach>            
                                             </tbody>
                                         </table>
                                     </div>
@@ -189,10 +207,7 @@
 
         <script>
             function deleteDestination(title, id) {
-                var comfirmBox = confirm("Bạn muốn xóa địa điểm  " + title + " ?");
-                if (comfirmBox == true) {
-                    window.location.href = "/travel/admin/deleteDestination.htm?idDestination=" + id;
-                }
+                window.location.href = "/travel/admin/deleteDestination.htm?idDestination=" + id;
             }
         </script>
 

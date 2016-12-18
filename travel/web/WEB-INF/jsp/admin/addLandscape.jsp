@@ -60,7 +60,7 @@
                 /*background: #444;*/
                 /*border: 1px solid black;*/
                 font-size: 14px;
-                color: red;
+                color: #3e3232;
                 text-align: center;
                 cursor: pointer;
             }
@@ -91,7 +91,7 @@
                             </div>
                             <div class="profile_info">
                                 <span>Welcome, </span>
-                                <h2>GT</h2>
+                                <h2>Admin</h2>
                             </div>
                         </div>
                         <!-- /Menu Profile Info -->
@@ -113,12 +113,12 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="">
                                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                        <img src="../admin/images/img.jpg" alt="">GT
+                                        <img src="../admin/images/img.jpg" alt="">Admin
                                         <span class="fa fa-angle-down"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-usermenu pull-right">
                                         <li><a href="javascript:;">Thông tin cá nhân</a></li>
-                                        <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i>Đăng xuất</a></li>
+                                        <li><a href="logout.htm"><i class="fa fa-sign-out pull-right"></i>Đăng xuất</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -334,7 +334,7 @@
                                 $("#bound_img").append($("<span class=\"pip\">" +
                                         "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
 //                                        "<br/><span class=\"remove\">Remove</span>" +
-                                        "<br/><span class=\"remove\"><i class=\"fa fa-trash-o\"></i>Delete</span>" +
+                                        "<br/><span class=\"remove\"><i class=\"fa fa-2x fa-trash-o\"></i></span>" +
                                         "</span>"))
                                 $(".remove").click(function () {
                                     $(this).parent(".pip").remove();

@@ -52,7 +52,7 @@ public class DestinationManageController {
         mm.put("listDes", listDes);
         return mv;
     }
-
+    
     @RequestMapping(value = "/detailDestination", method = RequestMethod.GET)
     public ModelAndView viewDetailDestination(ModelMap mm, HttpServletRequest request, HttpServletResponse response) {
         ModelAndView view = new ModelAndView();

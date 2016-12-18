@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
  *
  * @author vanduc
  */
-@Controller
-public class Test {
-    @RequestMapping(value = "/admin/index", method = RequestMethod.GET)
-    public String index() {
-        return "admin/index";
-    }
-}
+//@Controller
+//public class Test {
+//    @RequestMapping(value = "/admin/index", method = RequestMethod.GET)
+//    public String index() {
+//        return "admin/index";
+//    }
+//}
