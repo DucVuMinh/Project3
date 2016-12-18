@@ -62,7 +62,7 @@
             </div>
 
         </header>
-        <body>
+    <body>
         <!-- About Section -->
         <section id="about" class="container content-section text-center">
             <div class="row">
@@ -81,8 +81,8 @@
                     <div class="slide-stage">
                         <c:forEach var="img" items="${imgdes}">
                             <div class="slide-image"><img src="${img}" class="img1"></div>
-                        </c:forEach>
-                        
+                            </c:forEach>
+
                     </div>
                 </div>
             </div>
@@ -97,110 +97,114 @@
 
                     <h2>Thắng cảnh, lễ hội, bài viết</h2>
                     <div class="main-content"> 
-                        <p>Danh lam thắng cảnh</p>
-                        <c:forEach var="lland" items="${listLand}">
-                            <div class="row">
-                                <c:forEach var="land" items="${lland.listLand}">
-                                    <div class="col-xs-6 col-lg-2 col-md-2 col-sm-4">
-                                        <div class="up-letter">
-                                            <a href="${land.link}">
-                                                <img src="${land.profile}" class="img1">
-
-                                                <div class="title-letter">${land.title}</div>
-                                                <div class="hidden-letter">
-                                                    <p><h6>${land.desciption}</h6></p>
+                        <h3><img src="img/default/thangcanh.png">Danh lam thắng cảnh</h3>
+                        <div class="row">
+                            <c:forEach var="lland" items="${listLand}">
+                                <div class="row" style="padding-bottom:40px">
+                                    <c:forEach var="land" items="${lland.listLand}">
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <img src="${land.profile}" class="img1">
                                                 </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </c:forEach>
-                            </div>                            
-                        </c:forEach>
-
-                        <p> Lễ hội</p>
-                        <c:forEach var="lfes" items="${listFes}">
-                            <div class="row">
-                                <c:forEach var="fes" items="${lfes.listfes}">
-                                    <div class="col-xs-6 col-lg-2 col-md-2 col-sm-4">
-                                        <div class="up-letter">
-                                            <a href="${fes.link}">
-                                                <img src="${fes.profile}" class="img1">
-
-                                                <div class="title-letter">${fes.title}</div>
-                                                <div class="hidden-letter">
-                                                    <p><h6>${fes.description} </h6></p>
+                                                <div class="col-lg-6">
+                                                    <div class="title-letter"><a href="${land.link}">${land.title}</a></div>
+                                                    <div class="hidden-letter ">${land.desciption}</div>
                                                 </div>
-                                            </a>
-                                        </div>
-                                    </div>  
-                                </c:forEach>
-                                
-                            </div>
-                        </c:forEach>
-                        
+                                            </div>
 
-                        <p> Bài viết</p>
-                        <c:forEach var="lpost" items="${listPosts}"> 
-                            <div class="row">
-                                <c:forEach var="post" items="${lpost.listPost}">
-                                    <div class="col-xs-6 col-lg-2 col-md-2 col-sm-4">
-                                        <div class="up-letter">
-                                            <a href="${post.link}">
-                                                <img src="${post.profile}" class="img1">
-                                                <div class="title-letter">${post.title}</div>
-                                                <div class="hidden-letter">
-                                                    <p><h6>${post.context}</h6></p>
-                                                </div>
-                                            </a>
                                         </div>
-                                    </div>
-                                </c:forEach>
-                            </div>
-                        </c:forEach>
+                                    </c:forEach>
+                                </div>
+                            </c:forEach>
+                        </div>   
+                        <h3><img src="img/default/lehoi.png">Lễ hội</h3>
+                        <div class="row">
+                            <c:forEach var="lfes" items="${listFes}">
+                                <div class="row" style="padding-bottom:40px">
+                                    <c:forEach var="fes" items="${lfes.listfes}">
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <img src="${fes.profile}" class="img1">
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="title-letter"><a href="${fes.link}">${fes.title}</a></div>
+                                                    <div class="hidden-letter ">${fes.description}</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </c:forEach>
+                                </div>
+                            </c:forEach>
+                        </div>
+
+                        <h3><img src="img/default/baiviet.png">Bài viết</h3>
+                        <div class="row">
+                            <c:forEach var="lpost" items="${listPosts}"> 
+                                <div class="row" style="padding-bottom:40px">
+                                    <c:forEach var="post" items="${lpost.listPost}">
+                                        <div class="col-lg-6">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <img src="${post.profile}"  class="img1">
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="title-letter"><a href="${post.link}">${post.title}</a></div>
+                                                    <div class="hidden-letter ">${post.context}</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </c:forEach>
+                                </div>
+                            </c:forEach>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
         <c:import url="http://localhost:8080/travel/customfooter.htm" />
-        </body>
-        <!-- jQuery -->
-        <script src="client/vendor/jquery/jquery.js"></script>
-        
-
-        <!-- Bootstrap Core JavaScript -->
-        <script src="client/vendor/bootstrap/js/bootstrap.min.js"></script>
-
-        <!-- Plugin JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-        <!-- Theme JavaScript -->
-        <script src="client/js/grayscale.min.js"></script>
-
     </body>
-    <script type="text/javascript">
-        var $item = $('.carousel .item');
-        var $wHeight = $(window).height();
-        $item.eq(0).addClass('active');
+    <!-- jQuery -->
+    <script src="client/vendor/jquery/jquery.js"></script>
+
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="client/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <!-- Theme JavaScript -->
+    <script src="client/js/grayscale.min.js"></script>
+
+</body>
+<script type="text/javascript">
+    var $item = $('.carousel .item');
+    var $wHeight = $(window).height();
+    $item.eq(0).addClass('active');
+    $item.height($wHeight);
+    $item.addClass('full-screen');
+
+    $('.carousel img').each(function () {
+        var $src = $(this).attr('src');
+        var $color = $(this).attr('data-color');
+        $(this).parent().css({
+            'background-image': 'url(' + $src + ')',
+            'background-color': $color
+        });
+        $(this).remove();
+    });
+
+    $(window).on('resize', function () {
+        $wHeight = $(window).height();
         $item.height($wHeight);
-        $item.addClass('full-screen');
+    });
 
-        $('.carousel img').each(function () {
-            var $src = $(this).attr('src');
-            var $color = $(this).attr('data-color');
-            $(this).parent().css({
-                'background-image': 'url(' + $src + ')',
-                'background-color': $color
-            });
-            $(this).remove();
-        });
-
-        $(window).on('resize', function () {
-            $wHeight = $(window).height();
-            $item.height($wHeight);
-        });
-
-        $('.carousel').carousel({
-            interval: 6000,
-            pause: "false"
-        });
-    </script>
+    $('.carousel').carousel({
+        interval: 6000,
+        pause: "false"
+    });
+</script>
 </html>

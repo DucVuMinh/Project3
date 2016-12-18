@@ -32,6 +32,9 @@
         <link href="client/css/custom.min.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="admin/css/bootstrap-imageupload.css">
+        
+        
+        
         <script src="admin/js/custom.min.js"></script>
         <script type="text/javascript" src="admin/js/bootstrap-imageupload.js"></script>
         <script type="text/javascript" src="client/js/jquery-1.10.2.min.js"></script>

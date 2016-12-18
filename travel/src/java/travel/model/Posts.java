@@ -323,6 +323,9 @@ public class Posts implements java.io.Serializable, InterfaceEntity, InterfacePa
                     
         }
         session.close();
+        if(listTop.size()<numberTop){
+            listTop.addAll(getAllInstance(numberTop-listTop.size()));
+        }
         return listTop;
     }
 
@@ -345,7 +348,23 @@ public class Posts implements java.io.Serializable, InterfaceEntity, InterfacePa
         session.close();
         return lDes;
     }
-
+    
+    public static List getAllInstance(int limitnumber) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria cr = session.createCriteria(Posts.class);
+        List lPosts = null;
+        cr.setMaxResults(limitnumber);
+        cr.setFirstResult(0);
+        cr.add(Restrictions.eq("state", 1));
+        try {
+            lPosts = cr.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        }
+        session.close();
+        return lPosts;
+    }
+    
     public static List getAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Criteria cr = session.createCriteria(Posts.class);

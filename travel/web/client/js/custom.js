@@ -1,4 +1,4 @@
-﻿$(function(){
+$(function(){
 	
 	// ========= Điều chỉnh các thông số cho slideshow =========
 	
@@ -7,7 +7,7 @@
 		
 
 
-        var display_image_number = 5;
+        var display_image_number = 3;
 		
 		// Lựa chọn cách thức xoay vòng (circle) của slide bằng cách thay đổi circle_method bằng các con số tương ứng
 		// Method = 1: Sau khi chạm đến giới hạn slide, slide stage sẽ trượt thẳng về vị trí cuối cùng hoặc đầu tiên
@@ -15,14 +15,14 @@
 		var circle_method = 2;
 		
 		// Tốc độ dịch chuyển của hình ảnh (đơn vị: milisecond)
-		var anispeed = 1000;
+		var anispeed = 0;
 		
 		// Lựa chọn có sử dụng chế độ tự động cuốn hình slide
 		// 1 = Kích hoạt, 0 = Không kích hoạt
-		var auto_scroll = 1;
+		var auto_scroll = 0;
 		
 		// Nếu giá trị auto_scroll = 1 thì có thể điều chỉnh giá trị sau để thay đổi thời gian cuộn
-		var timeinterval = 1200;
+		var timeinterval = 3000;
 		
 	
 	// ========= Xác định các thông số cơ bản của slideshow =========

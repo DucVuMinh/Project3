@@ -62,21 +62,19 @@ public class DestinationController {
                 int sizeLand = arrl.length;
 
                 int loop = 0;
-                if (sizeLand >= 6) {
-                    if (sizeLand % 6 == 0) {
-                        loop = sizeLand / 6;
+                if (sizeLand >= 2) {
+                    if (sizeLand % 2 == 0) {
+                        loop = sizeLand / 2;
                     } else {
-                        loop = sizeLand / 6 + 1;
+                        loop = sizeLand / 2 + 1;
                     }
                 }
                 for (int i = 0; i < loop - 1; i++) {
-
-                    listLand.add(new ListLandTemp((Landscape) arrl[i * 6], (Landscape) arrl[i * 6 + 1], (Landscape) arrl[i * 6 + 2], (Landscape) arrl[i * 6 + 3],
-                            (Landscape) arrl[i * 6 + 4], (Landscape) arrl[i * 6 + 5]));
+                    listLand.add(new ListLandTemp((Landscape) arrl[i * 2], (Landscape) arrl[i * 2 + 1]));
                 }
                 ListLandTemp ltemp = new ListLandTemp();
                 if (loop > 0) {
-                    for (int i = (loop - 1) * 6; i < sizeLand; i++) {
+                    for (int i = (loop - 1) * 2; i < sizeLand; i++) {
                         ltemp.add((Landscape) arrl[i]);
                     }
                 } else {
@@ -88,21 +86,19 @@ public class DestinationController {
 
                 int sizeFes = arrf.length;
                 loop = 0;
-                if (sizeFes >= 6) {
-                    if (sizeFes % 6 == 0) {
-                        loop = sizeFes / 6;
+                if (sizeFes >= 2) {
+                    if (sizeFes % 2 == 0) {
+                        loop = sizeFes / 2;
                     } else {
-                        loop = sizeFes / 6 + 1;
+                        loop = sizeFes / 2 + 1;
                     }
                 }
                 for (int i = 0; i < loop - 1; i++) {
-
-                    listFes.add(new ListFesTemp((Festival) arrf[i * 6], (Festival) arrf[i * 6 + 1], (Festival) arrf[i * 6 + 2], (Festival) arrf[i * 6 + 3],
-                            (Festival) arrf[i * 6 + 4], (Festival) arrf[i * 6 + 5]));
+                    listFes.add(new ListFesTemp((Festival) arrf[i * 2], (Festival) arrf[i * 2 + 1]));
                 }
                 ListFesTemp ftemp = new ListFesTemp();
                 if (loop > 0) {
-                    for (int i = (loop - 1) * 6; i < sizeFes; i++) {
+                    for (int i = (loop - 1) * 2; i < sizeFes; i++) {
                         ftemp.add((Festival) arrf[i]);
                     }
                 } else {
@@ -114,21 +110,20 @@ public class DestinationController {
 
                 int sizePos = arrp.length;
                 loop = 0;
-                if (sizePos >= 6) {
-                    if (sizePos % 6 == 0) {
-                        loop = sizePos / 6;
+                if (sizePos >= 2) {
+                    if (sizePos % 2 == 0) {
+                        loop = sizePos / 2;
                     } else {
-                        loop = sizePos / 6 + 1;
+                        loop = sizePos / 2 + 1;
                     }
                 }
                 for (int i = 0; i < loop - 1; i++) {
 
-                    listPost.add(new LisPostsTemp((Posts) arrp[i * 6], (Posts) arrp[i * 6 + 1], (Posts) arrp[i * 6 + 2], (Posts) arrp[i * 6 + 3],
-                            (Posts) arrp[i * 6 + 4], (Posts) arrp[i * 6 + 5]));
+                    listPost.add(new LisPostsTemp((Posts) arrp[i * 2], (Posts) arrp[i * 2 + 1]));
                 }
                 LisPostsTemp ptemp = new LisPostsTemp();
                 if (loop > 0) {
-                    for (int i = (loop - 1) * 6; i < sizePos; i++) {
+                    for (int i = (loop - 1) * 2; i < sizePos; i++) {
                         ptemp.add((Posts) arrp[i]);
                     }
                 } else {

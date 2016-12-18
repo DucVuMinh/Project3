@@ -119,6 +119,10 @@
                                 </div>
                             </div>
                             <div class="comment-of-post" id="comment-of-post">
+                                <div class="comment-line">
+                                    <h4 class="text-center"><img src="img/default/comment.jpg" style="width:5%; height:5%">Comment</h4>
+                                    <hr color="#1d508d">
+                                </div>
                                 <c:forEach var="itemcomment" items="${comment}">
                                     <div class="row">
                                         <div class="col-lg-1"><a href="#"><img src="img/users/profile/${itemcomment.user.idUser}.png" class="img2"></a></div>

@@ -35,35 +35,40 @@ public class MainViewUserController {
         ModelAndView mv = new ModelAndView();
         try {
             Landscape l = new Landscape();
-            List listTopLandscape = l.getTop(6);
+            List listTopLandscape = l.getTop(4);
             ArrayList listTopLandtemp = new ArrayList();
             int sizeL = listTopLandscape.size();
             for (int i = 0; i < sizeL; i++) {
                 Landscape temp = (Landscape) listTopLandscape.get(i);
-                listTopLandtemp.add(new Landtemp(temp));
+                listTopLandtemp.add(new Landtemp(temp,1));
             }
 
             Festival f = new Festival();
-            List listTopFestival = f.getTop(6);
+            List listTopFestival = f.getTop(4);
             ArrayList listTopFesTemp = new ArrayList();
             int siezF = listTopFestival.size();
             for (int i = 0; i < siezF; i++) {
                 Festival temp = (Festival) listTopFestival.get(i);
-                listTopFesTemp.add(new FestivalTemp(temp));
+                listTopFesTemp.add(new FestivalTemp(temp,1));
             }
 
             Posts p = new Posts();
-            List listTopPosts = p.getTop(6);
+            List listTopPosts = p.getTop(4);
             ArrayList listTopPostsTemp = new ArrayList<PostsTemp>();
             for (int i = 0; i < listTopPosts.size(); i++) {
                 Posts temp = (Posts) listTopPosts.get(i);
-                listTopPostsTemp.add(new PostsTemp(temp));
+                listTopPostsTemp.add(new PostsTemp(temp,1));
             }
             List listD = Destination.getLazyAllListDesInstance();
             mm.put("lisD", listD);
-            mm.put("topland", listTopLandtemp);
-            mm.put("topFes", listTopFesTemp);
-            mm.put("topPost", listTopPostsTemp);
+            System.out.println("ducvu: list fes "+listTopFesTemp.size());
+            mm.put("topland1", listTopLandtemp.subList(0, 2));
+            mm.put("topland2", listTopLandtemp.subList(2, 4));
+            mm.put("topFes1", listTopFesTemp.subList(0, 2));
+            mm.put("topFes2", listTopFesTemp.subList(2, 4));
+            mm.put("topPost1", listTopPostsTemp.subList(0, 2));
+            mm.put("topPost2", listTopPostsTemp.subList(2, 4));
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         }

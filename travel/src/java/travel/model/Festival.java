@@ -287,7 +287,12 @@ public class Festival implements java.io.Serializable, InterfaceEntity, Interfac
             Festival temp = (Festival) results.get(i);
             listTop.add(Festival.getFestivalById(temp.getIdFestival()));
         }
+        
         session.close();
+        if(listTop.size()<numberTop){
+            List additionItem=getAllInstance(numberTop-listTop.size());
+            listTop.addAll(additionItem);
+        }
         return listTop;
     }
 
@@ -346,6 +351,17 @@ public class Festival implements java.io.Serializable, InterfaceEntity, Interfac
         session.close();
         return lFes;
     }
+        public static List getAllInstance(int limitnumber) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria cr = session.createCriteria(Festival.class);
+        cr.setMaxResults(limitnumber);
+        cr.setFirstResult(0);
+        cr.add(Restrictions.eq("state", 1));
+        List lDes = cr.list();
+        session.close();
+        return lDes;
+
+    }
 
     public static List getAll() {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -389,5 +405,9 @@ public class Festival implements java.io.Serializable, InterfaceEntity, Interfac
                 + "}";
 
         return json;
+    }
+    public static void main(String args[]){
+        List t=getAllInstance(7);
+        System.out.println(t.size());
     }
 }

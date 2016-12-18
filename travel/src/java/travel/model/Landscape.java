@@ -294,10 +294,7 @@ public class Landscape implements java.io.Serializable, InterfaceEntity, Interfa
         this.update();
     }
 
-    public static void main(String args[]) {
-        Landscape l = Landscape.getLandscapeById(1);
-        l.deleteFavorite(User.getUserById(3));
-    }
+
 
     @Override
     public float getRank() {
@@ -332,7 +329,11 @@ public class Landscape implements java.io.Serializable, InterfaceEntity, Interfa
             Landscape temp = (Landscape) results.get(i);
             listTop.add(Landscape.getLandscapeById(temp.getIdLandscape()));
         }
+        
         session.close();
+        if(listTop.size()<numberTop){
+            listTop.addAll(getAllInstance(numberTop-listTop.size()));
+        }
         return listTop;
     }
 
@@ -351,6 +352,26 @@ public class Landscape implements java.io.Serializable, InterfaceEntity, Interfa
         List lLand = cr.list();
         session.close();
         return lLand;
+    }
+    public static List getAllInstance(int limitnumber) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Criteria cr = session.createCriteria(Landscape.class);
+        cr.setMaxResults(limitnumber);
+        cr.add(Restrictions.eq("state", 1));
+        cr.setFirstResult(0);
+        List lDes = cr.list();
+        
+        session.close();
+        return lDes;
+    }
+        public static void main(String args[]) {
+         List t=getAllInstance(4);
+         
+         System.out.println(t.size());
+         for(int i=0;i<t.size();i++){
+             Landscape temp=(Landscape)t.get(i);
+             System.out.println(temp.getIdLandscape());
+         }
     }
 
     public static List getAll() {
@@ -393,6 +414,5 @@ public class Landscape implements java.io.Serializable, InterfaceEntity, Interfa
 
         return json;
     }
-
 
 }
