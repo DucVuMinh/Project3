@@ -1,6 +1,6 @@
 <%-- 
-    Document   : editFestival
-    Created on : Dec 17, 2016, 10:30:12 AM
+    Document   : addFestival
+    Created on : Dec 17, 2016, 1:37:58 AM
     Author     : vanduc
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Admin | Sửa thông tin lễ hội</title>
+        <title>Admin | Thêm lễ hội</title>
         <meta charset="utf-8">
         <!-- Bootstrap -->
         <link href="../admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -30,11 +30,45 @@
 
         <!-- Custom Theme Style -->
         <link href="../admin/css/custom.min.css" rel="stylesheet">
-        <link href="../admin/css/css.css" rel="stylesheet">
         <link href="../admin/css/bootstrap-select.css" rel="stylesheet">
 
         <!-- Upload Image Banner -->
         <link rel="stylesheet" type="text/css" href="../admin/css/bootstrap-imageupload.css">
+
+        <style>
+            input[type="file"] {
+                display: none;
+            }
+            .custom-file-upload {
+                border: 1px solid #ccc;
+                display: table;
+                padding: 6px 12px;
+                cursor: pointer;
+            }
+            .imageThumb {
+                max-height: 130px;
+                border: 2px solid;
+                padding: 1px;
+                cursor: pointer;
+            }
+            .pip {
+                display: inline-block;
+                margin: 10px 10px 0 0;
+            }
+            .remove {
+                display: block;
+                /*background: #444;*/
+                /*border: 1px solid black;*/
+                font-size: 14px;
+                color: red;
+                text-align: center;
+                cursor: pointer;
+            }
+            .remove:hover {
+                background: white;
+                color: black;
+            }
+        </style>
 
     </head>
     <body class="nav-md">
@@ -79,7 +113,7 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="">
                                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                        <img src="../images/img.jpg" alt="">GT
+                                        <img src="../admin/images/img.jpg" alt="">GT
                                         <span class="fa fa-angle-down"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -96,15 +130,15 @@
                 <div class="right_col" role="main">
                     <div class="">
                         <!--Flash Message-->
-                        <c:if test="${not empty param.success && param.success == 'false'}">
+                        <c:if test="${not empty error}">
                             <div class="alert alert-danger" style="margin-top: 50px;">
-                                <div>Tên lễ hội đã tồn tại!</div>
+                                <div id="warning_cnt"><c:out value="${error}" /></div>
                             </div>
                         </c:if>
                         <!--/Flash Message-->
                         <div class="page_title">
                             <div class="title_left">
-                                <h3>Sửa thông tin lễ hội</h3>
+                                <h3>Thêm thắng cảnh</h3>
                             </div>
 
                         </div>
@@ -116,7 +150,7 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Form sửa thông tin lễ hội</h2>
+                                    <h2>Form thêm thắng cảnh</h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a href=""></a></li>
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
@@ -128,22 +162,26 @@
                                 <div class="x_content">
                                     <br/>
                                     <form id="form-addlocation" data-parsley-validate class="form-horizontal form-label-left"
-                                          action="editFestival.htm?idFestival=${fes.idFestival}" method="POST" enctype="multipart/form-data">
+                                          action="addLandscape.htm" method="POST" enctype="multipart/form-data">
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_festival">
-                                                Tên lễ hội <span class="required">*</span>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_landscape">
+                                                Tên thắng cảnh <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" name="name_festival" required class="form-control col-md-7 col-xs-12" value="${fes.title}">
+                                                <input type="text" name="name_landscape" class="form-control col-md-7 col-xs-12"
+                                                       required="required" <c:if test="${name_landscape != null}"> value="${name_landscape}"</c:if>/>
+
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_destination">Tên địa điểm <span class="required">*</span>
-                                            </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select id="name_destination" name="name_destination" class="selectpicker" data-live-search="true" title="Chọn địa điểm...">
+
+                                            <!--Địa điểm-->
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_destination">Địa điểm <span class="required">*</span>
+                                                </label>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <select id="name_destination" name="name_destination" class="selectpicker" data-live-search="true" title="Chọn địa điểm..." required>
                                                     <c:forEach items = "${listDes}" var = "p">
-                                                        <option value="${p.title}" <c:if test="${fes.destination.title eq p.title}"> selected</c:if> >
+                                                        <option value="${p.title}" <c:if test="${name_destination eq p.title}"> selected="true"</c:if> >
                                                             <c:out value="${p.title}" />
                                                         </option>
                                                     </c:forEach>
@@ -151,30 +189,33 @@
                                             </div>
                                         </div>
 
+
+                                        <!--Giới thiệu-->
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">
                                                 Giới thiệu <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <textarea class="resizable_textarea form-control" placeholder="Giới thiệu ngắn gọn lễ hội.............." name="desciption"
-                                                          required >${fes.discription}</textarea>
+                                                <textarea class="resizable_textarea form-control" placeholder="Giới thiệu ngắn gọn thắng cảnh.............." name="desciption" 
+                                                          required><c:if test="${desciption != null}">${desciption}</c:if></textarea>
                                             </div>
                                         </div>
 
+
+                                        <!--Anh dai dien-->
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">
                                                 Ảnh đại diện <span class="required">*</span>
                                             </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <div class="imageupload panel panel-default">
+                                            <div class="col-md-6 col-sm-6 col-xs-12 ">
+                                                <div class="imageupload panel panel-primary">
                                                     <div class="panel-heading clearfix">
-                                                        <h3 class="panel-title pull-left">Upload Image</h3>
+                                                        <h3 class="panel-title pull-left">Upload image</h3>
                                                     </div>
                                                     <div class="file-tab panel-body">
-                                                        <img src="../img/festival/profile/${fes.idFestival}.png" alt="Image preview" class="thumbnail">
-                                                        <label class="btn btn-default btn-file" />
-                                                        <span>Change</span>
-                                                        <input type="file" name="profile"/>
+                                                        <label class="btn btn-default btn-file">
+                                                            <span>Browse</span>
+                                                            <input type="file" name="profile" required/>
                                                         </label>
                                                         <button type="button" class="btn btn-default">Remove</button>
                                                     </div>
@@ -182,8 +223,22 @@
                                             </div>
                                         </div>
 
+                                        <!--Anh chi tiet-->
+                                        <div class="form-group" >
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                                Ảnh chi tiết <span class="required">*</span>
+                                            </label>
+                                            <label  for="img_detail" class="custom-file-upload">
+                                                <i class="fa fa-cloud-upload"></i> Choose Image
+
+                                            </label>
+                                            <input type="file" id="img_detail" name="img_detail" multiple required/>
+                                            <div class="col-md-8 col-sm-6 col-xs-12 col-md-offset-3 " id="bound_img"></div>
+                                        </div>
+
                                         <div class="ln_solid"></div>
-                                        
+
+
                                         <div class="form-group">
                                             <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                                 <input type="reset" class="btn btn-primary" value="Hủy"/>
@@ -191,29 +246,6 @@
                                             </div>
                                         </div>
                                     </form>
-                                </div>
-                            </div>
-
-                            <div class="x_panel">
-                                <div class="x_title">
-                                    <h2>Hình ảnh lễ hội</h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a href=""></a></li>
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-
-                                <div class="x_content">
-                                    <c:forEach items="${fes.imagedetailFestivals}" var="p">
-                                        <figure class="show-image">
-                                            <img src="../img/festival/detail/${p.idImage}.png" class="img_detail thumbnail zoom">
-                                            <figcaption class="figure-caption">
-                                                <a href="" class="delete-image"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                            </figcaption>
-                                        </figure>
-                                    </c:forEach>
                                 </div>
                             </div>
 
@@ -246,18 +278,17 @@
         <script src="../admin/js/custom.min.js"></script>
         <script type="text/javascript" src="../admin/js/bootstrap-select.js"></script>
         <!-- Upload Image Banner -->
-        <script type="text/javascript" src="../admin/js/bootstrap-imageedit.js"></script>
+        <script type="text/javascript" src="../admin/js/bootstrap-imageupload.js"></script>
 
         <script type="text/javascript">
             var $imageupload = $('.imageupload');
 
-            $imageupload.imageupload();
 
             $imageupload.imageupload({
                 allowedFormats: ["jpg", "jpeg", "png", "gif"],
                 previewWidth: 350,
                 previewHeight: 350,
-                maxFileSizeKb: 4048
+                maxFileSizeKb: 2048
             });
         </script>
         <!-- /Upload Image Banner -->
@@ -268,5 +299,55 @@
             });
         </script>
         <!-- /Autosize -->
+        <script>
+            $(document).ready(function () {
+                var mySelect = $('#first-disabled2');
+
+                $('#special').on('click', function () {
+                    mySelect.find('option:selected').prop('disabled', true);
+                    mySelect.selectpicker('refresh');
+                });
+
+                $('#special2').on('click', function () {
+                    mySelect.find('option:disabled').prop('disabled', false);
+                    mySelect.selectpicker('refresh');
+                });
+
+                $('#basic2').selectpicker({
+                    liveSearch: true,
+                    maxOptions: 1
+                });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                if (window.File && window.FileList && window.FileReader) {
+                    $("#img_detail").on("change", function (e) {
+                        var files = e.target.files,
+                                filesLength = files.length;
+                        for (var i = 0; i < filesLength; i++) {
+                            var f = files[i]
+                            var fileReader = new FileReader();
+                            fileReader.onload = (function (e) {
+                                var file = e.target;
+                                $("#bound_img").append($("<span class=\"pip\">" +
+                                        "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+//                                        "<br/><span class=\"remove\">Remove</span>" +
+                                        "<br/><span class=\"remove\"><i class=\"fa fa-trash-o\"></i>Delete</span>" +
+                                        "</span>"))
+                                $(".remove").click(function () {
+                                    $(this).parent(".pip").remove();
+                                });
+
+                            });
+                            fileReader.readAsDataURL(f);
+                        }
+                    });
+                } else {
+                    alert("Your browser doesn't support to File API")
+                }
+            });
+        </script>
     </body>
 </html>

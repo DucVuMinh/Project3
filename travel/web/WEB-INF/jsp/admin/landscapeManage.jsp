@@ -88,6 +88,12 @@
                 <div class="right_col" role="main">
                     <div class="">
                         <!--Flash Message-->
+                        <c:if test="${not empty success}">
+                            <div class="alert alert-success" style="margin-top: 50px;">
+                                <div id="warning_cnt">${success}</div>
+                            </div>
+                        </c:if>
+                        
                         <c:if test="${not empty message}">
                             <div class="alert alert-success" style="margin-top: 50px;">
                                 <div id="warning_cnt">${message}</div>
@@ -153,7 +159,7 @@
                                                             </td>
                                                             <td>${fn:substring(p.discription, 0, 180)}........</td>         
                                                             <td><a class="btn btn-primary btn-xs" href="detailLandscape.htm?idLandscape=${p.idLandscape}"><i class="fa fa-folder"></i>Xem</a></td>
-                                                            <td><a class="btn btn-info btn-xs" href="#"><i class="fa fa-pencil"></i>Sửa</a></td>
+                                                            <td><a class="btn btn-info btn-xs" href="editLandscape.htm?idLandscape=${p.idLandscape}"><i class="fa fa-pencil"></i>Sửa</a></td>
                                                             <td><a class="btn btn-danger btn-xs" href="#" onclick="deleteLandscape('${p.title}', ${p.idLandscape})"><i class="fa fa-trash-o"></i>Xóa</a></td>
                                                         </tr>
                                                         <% i++;%>
@@ -196,7 +202,7 @@
         <script src="../admin/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
         <script src="../admin/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
         <script src="../admin/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
-        <script src="../admin/vendors/datatables.net-scroller/js/datatables.scroller.min.js"></script>
+        <script src="../admin/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
         <script src="../admin/vendors/jszip/dist/jszip.min.js"></script>
         <script src="../admin/vendors/pdfmake/build/pdfmake.min.js"></script>
         <script src="../admin/vendors/pdfmake/build/vfs_fonts.js"></script>

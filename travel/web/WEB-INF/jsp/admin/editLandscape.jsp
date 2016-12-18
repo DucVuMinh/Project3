@@ -1,6 +1,6 @@
 <%-- 
-    Document   : editFestival
-    Created on : Dec 17, 2016, 10:30:12 AM
+    Document   : editLandscape
+    Created on : Dec 17, 2016, 9:05:05 PM
     Author     : vanduc
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Admin | Sửa thông tin lễ hội</title>
+        <title>Admin | Sửa thông tin thắng cảnh</title>
         <meta charset="utf-8">
         <!-- Bootstrap -->
         <link href="../admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -79,7 +79,7 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="">
                                     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                        <img src="../images/img.jpg" alt="">GT
+                                        <img src="../admin/images/img.jpg" alt="">GT
                                         <span class="fa fa-angle-down"></span>
                                     </a>
                                     <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -98,13 +98,13 @@
                         <!--Flash Message-->
                         <c:if test="${not empty param.success && param.success == 'false'}">
                             <div class="alert alert-danger" style="margin-top: 50px;">
-                                <div>Tên lễ hội đã tồn tại!</div>
+                                <div>Tên thắng cảnh đã tồn tại!</div>
                             </div>
                         </c:if>
                         <!--/Flash Message-->
                         <div class="page_title">
                             <div class="title_left">
-                                <h3>Sửa thông tin lễ hội</h3>
+                                <h3>Sửa thông tin thắng cảnh</h3>
                             </div>
 
                         </div>
@@ -116,7 +116,7 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Form sửa thông tin lễ hội</h2>
+                                    <h2>Form sửa thông tin thắng cảnh</h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a href=""></a></li>
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
@@ -128,39 +128,43 @@
                                 <div class="x_content">
                                     <br/>
                                     <form id="form-addlocation" data-parsley-validate class="form-horizontal form-label-left"
-                                          action="editFestival.htm?idFestival=${fes.idFestival}" method="POST" enctype="multipart/form-data">
+                                          action="editLandscape.htm?idLandscape=${land.idLandscape}" method="POST" enctype="multipart/form-data">
                                         <div class="form-group">
-                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_festival">
-                                                Tên lễ hội <span class="required">*</span>
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_landscape">
+                                                Tên thắng cảnh <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="text" name="name_festival" required class="form-control col-md-7 col-xs-12" value="${fes.title}">
+                                                <input type="text" name="name_landscape" required class="form-control col-md-7 col-xs-12" value="${land.title}">
                                             </div>
                                         </div>
+                                            
+                                            
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name_destination">Tên địa điểm <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select id="name_destination" name="name_destination" class="selectpicker" data-live-search="true" title="Chọn địa điểm...">
+                                                <select id="name-location" name="name_destination" class="selectpicker" data-live-search="true" title="Chọn địa điểm...">
                                                     <c:forEach items = "${listDes}" var = "p">
-                                                        <option value="${p.title}" <c:if test="${fes.destination.title eq p.title}"> selected</c:if> >
+                                                        <option value="${p.title}" <c:if test="${land.destination.title eq p.title}"> selected</c:if> >
                                                             <c:out value="${p.title}" />
                                                         </option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
                                         </div>
-
+                                            
+                                            
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">
                                                 Giới thiệu <span class="required">*</span>
                                             </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <textarea class="resizable_textarea form-control" placeholder="Giới thiệu ngắn gọn lễ hội.............." name="desciption"
-                                                          required >${fes.discription}</textarea>
+                                                          required >${land.discription}</textarea>
                                             </div>
                                         </div>
-
+                                            
+                                            
                                         <div class="form-group">
                                             <label class="control-label col-md-3 col-sm-3 col-xs-12">
                                                 Ảnh đại diện <span class="required">*</span>
@@ -171,7 +175,7 @@
                                                         <h3 class="panel-title pull-left">Upload Image</h3>
                                                     </div>
                                                     <div class="file-tab panel-body">
-                                                        <img src="../img/festival/profile/${fes.idFestival}.png" alt="Image preview" class="thumbnail">
+                                                        <img src="../img/landscape/profile/${land.idLandscape}.png" alt="Image preview" class="thumbnail">
                                                         <label class="btn btn-default btn-file" />
                                                         <span>Change</span>
                                                         <input type="file" name="profile"/>
@@ -181,7 +185,8 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                                        
+                                                        
                                         <div class="ln_solid"></div>
                                         
                                         <div class="form-group">
@@ -196,7 +201,7 @@
 
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Hình ảnh lễ hội</h2>
+                                    <h2>Hình ảnh thắng cảnh</h2>
                                     <ul class="nav navbar-right panel_toolbox">
                                         <li><a href=""></a></li>
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
@@ -206,9 +211,9 @@
                                 </div>
 
                                 <div class="x_content">
-                                    <c:forEach items="${fes.imagedetailFestivals}" var="p">
+                                    <c:forEach items="${land.imagedetailLandscapes}" var="p">
                                         <figure class="show-image">
-                                            <img src="../img/festival/detail/${p.idImage}.png" class="img_detail thumbnail zoom">
+                                            <img src="../img/landscape/detail/${p.idImage}.png" class="img_detail thumbnail zoom">
                                             <figcaption class="figure-caption">
                                                 <a href="" class="delete-image"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                             </figcaption>
@@ -257,7 +262,7 @@
                 allowedFormats: ["jpg", "jpeg", "png", "gif"],
                 previewWidth: 350,
                 previewHeight: 350,
-                maxFileSizeKb: 4048
+                maxFileSizeKb: 2048
             });
         </script>
         <!-- /Upload Image Banner -->

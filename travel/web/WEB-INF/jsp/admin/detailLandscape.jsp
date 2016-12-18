@@ -95,6 +95,13 @@
                 <!-- Page Content -->
                 <div class="right_col" role="main">
                     <div class="">
+                        <!--Flash Message-->
+                        <c:if test="${not empty param.success && param.success == 'true'}">
+                            <div class="alert alert-success" style="margin-top: 50px;">
+                                <div>Sửa thắng cảnh thành công!</div>
+                            </div>
+                        </c:if>
+                        <!--/Flash Message-->
                         <div class="page-title">
                             <div class="title_left">
                                 <h1 style="margin-left: 50px">${detailLand.getTitle()}</h1>
@@ -103,7 +110,10 @@
                             <div class="title-right">
                                 <div class="col-md-1 col-sm-1 col-xs-12 form-group pull-right top_search">
                                     <div class="input-group">
-                                        <button type="button" name="addLocation" class="btn btn-round btn-warning" onclick="window.location = 'editScenic.html';"><i class="fa fa-edit" aria-hidden="true"></i>   Sửa</button>
+                                        <button type="button" class="btn btn-round btn-warning"
+                                                onclick="window.location = 'editLandscape.htm?idLandscape=${param.idLandscape}';">
+                                            <i class="fa fa-edit" aria-hidden="true"></i> Sửa
+                                        </button>
                                     </div>
                                 </div>
                             </div>
