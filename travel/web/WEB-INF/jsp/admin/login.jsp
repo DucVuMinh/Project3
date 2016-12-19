@@ -29,14 +29,14 @@
         <link href="../admin/css/custom.min.css" rel="stylesheet">
     </head>
 
-    <body class="login">
+    <body class="login" style="background: #2a3f54">
         <div>
             <a class="hiddenanchor" id="signup"></a>
             <a class="hiddenanchor" id="signin"></a>
 
             <div class="login_wrapper">
                 <div class="animate form login_form">
-                    <section class="login_content">
+                    <section class="login_content" style="text-shadow: 0 0px 0">
                         <form method="POST" action="validateLogin.htm">
                             <h1>Login Form</h1>
                             <div>
