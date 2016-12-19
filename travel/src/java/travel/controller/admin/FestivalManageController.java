@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
@@ -32,6 +33,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import travel.model.Destination;
 import travel.model.Festival;
 import travel.model.ImagedetailFestival;
+import travel.model.Rankingfestival;
 
 /**
  *
@@ -74,6 +76,24 @@ public class FestivalManageController {
             Festival detailFes = Festival.getFestivalById(idFestival);
             view.setViewName("admin/detailFestival");
 
+            ArrayList<Integer> r = new ArrayList<Integer>();
+            for (int j = 0; j < 5; j++) {
+                r.add(0);
+            }
+            for (Object rp : detailFes.getRankingfestivals()) {
+                if (((Rankingfestival) rp).getRank() == 1) {
+                    r.set(0, r.get(0) + 1);
+                } else if (((Rankingfestival) rp).getRank() == 2) {
+                    r.set(1, r.get(1) + 1);
+                } else if (((Rankingfestival) rp).getRank() == 3) {
+                    r.set(2, r.get(2) + 1);
+                } else if (((Rankingfestival) rp).getRank() == 4) {
+                    r.set(3, r.get(3) + 1);
+                } else {
+                    r.set(4, r.get(4) + 1);
+                }
+            }
+            mm.put("rank", r);
             mm.put("detailFes", detailFes);
         } catch (Exception e) {
             e.printStackTrace();
@@ -176,7 +196,7 @@ public class FestivalManageController {
         mm.put("fes", fes);
         return "admin/editFestival";
     }
-    
+
     @RequestMapping(value = "/editFestival", method = RequestMethod.POST)
     public String editFestival(ModelMap mm, HttpServletRequest request, final RedirectAttributes redirectAttributes) throws IOException, ServletException {
         boolean check = true;

@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
@@ -33,6 +34,7 @@ import travel.model.Destination;
 import travel.model.Festival;
 import travel.model.ImagedetailLandscape;
 import travel.model.Landscape;
+import travel.model.Rankinglandscape;
 
 /**
  *
@@ -75,6 +77,24 @@ public class LandscapeManageController {
             Landscape detailLand = Landscape.getLandscapeById(idLandscape);
             view.setViewName("admin/detailLandscape");
 
+            ArrayList<Integer> r = new ArrayList<Integer>();
+            for (int j = 0; j < 5; j++) {
+                r.add(0);
+            }
+            for (Object rp : detailLand.getRankinglandscapes()) {
+                if (((Rankinglandscape) rp).getRank() == 1) {
+                    r.set(0, r.get(0) + 1);
+                } else if (((Rankinglandscape) rp).getRank() == 2) {
+                    r.set(1, r.get(1) + 1);
+                } else if (((Rankinglandscape) rp).getRank() == 3) {
+                    r.set(2, r.get(2) + 1);
+                } else if (((Rankinglandscape) rp).getRank() == 4) {
+                    r.set(3, r.get(3) + 1);
+                } else {
+                    r.set(4, r.get(4) + 1);
+                }
+            }
+            mm.put("rank", r);
             mm.put("detailLand", detailLand);
         } catch (Exception e) {
             e.printStackTrace();

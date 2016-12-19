@@ -86,7 +86,40 @@
                 <!-- /Top navbar -->
                 <!-- Page Content -->
                 <div class="right_col" role="main">
-                    <h3>Welcome to Admin Page</h3>
+                    <!-- top tiles -->
+                    <div class="row tile_count">
+                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                            <span class="count_top"><i class="fa fa-user"></i> Tổng người dùng</span>
+                            <div class="count green">2500</div>
+                            <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                            <span class="count_top"><i class="fa fa-clock-o"></i> Tổng địa điểm </span>
+                            <div class="count green">9</div>
+                            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                            <span class="count_top"><i class="fa fa-user"></i> Tổng lễ hội</span>
+                            <div class="count green">45</div>
+                            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                            <span class="count_top"><i class="fa fa-user"></i> Tổng thắng cảnh</span>
+                            <div class="count green">60</div>
+                            <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                            <span class="count_top"><i class="fa fa-user"></i> Tổng bài viết</span>
+                            <div class="count green">40</div>
+                            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+                            <span class="count_top"><i class="fa fa-user"></i> Total Connections</span>
+                            <div class="count green">7,325</div>
+                            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+                        </div>
+                    </div>
+                    <!-- /top tiles -->
                 </div>
                 <!-- /Page Content -->
                 <!-- Footer Content -->

@@ -123,6 +123,52 @@
 
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-xs-12">
+                                
+                                <div class="x_panel">
+                                    <div class="x_title">
+                                        <h2>Lượt yêu thích và đánh giá</h2>
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                    <div class="x_content">
+                                        <br/>
+                                        <div class="group-content row">
+                                            <div class="title-content col-md-3 col-xs-12 col-sm-3">
+                                                <p>Lượt yêu thích</p>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <p><i class="fa fa-heart-o" aria-hidden="true" style="color: red;"></i> ${detailFes.usersFavorite.size()}</p>
+                                            </div>
+                                        </div>
+                                        <div class="group-content row">
+                                            <div class="title-content col-md-3 col-xs-12 col-sm-3">
+                                                <p>Đánh giá</p>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <c:forEach begin="1" end="5" var="r">
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-md-4 col-xs-12">
+                                                            <c:forEach begin="1" end="5" var="ri">
+                                                                <c:choose>
+                                                                    <c:when test="${ri <= r}">
+                                                                        <i class="fa fa-star-o" aria-hidden="true" style="color: yellow; font-size: 20px;"></i>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <i class="fa fa-star-o" aria-hidden="true" style="font-size: 20px;"></i>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </c:forEach>
+                                                        </div>
+                                                        <div class="col-sm-8 col-md-8 col-xs-12">
+                                                            ${rank.get(r-1)} lượt
+                                                        </div>
+                                                    </div> 
+                                                </c:forEach>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <div class="x_panel">
                                     <div class="x_title">
                                         <h2>Thông tin lễ hội</h2>

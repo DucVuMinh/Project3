@@ -262,7 +262,7 @@
             function listCmt(data) {
                 var html = '';
                 $.each(data, function (index, item) {
-                    var url_img = "img/users/profile/" + item.profile + ".png";
+                    var url_img = "../img/users/profile/" + item.profile + ".png";
                     html += "<div class='row'>"
                             + "<div class='col-sm-1 col-md-1 col-xs-12'></div>"
                             + "<div class='col-sm-1 col-md-1 col-xs-2'>"
