@@ -38,14 +38,18 @@ public class ManageUserInfController {
         try {
             HttpSession session = request.getSession();
             String username = (String) session.getAttribute("username");
-            
+
             HttpServletResponse httpResponse = (HttpServletResponse) response;
             if (username != null) {
                 User u = User.getUserByUserName(username);
-                System.out.println("ducvu: user name "+u.getFacebookId());
-                String profile = "img/users/profile/" + u.getIdUser() + ".png";
-                mm.put("profile", profile);
-                mm.put("user", u);
+                if (u.getFacebookId() == null || u.getFacebookId().isEmpty()) {
+                    System.out.println("ducvu: user name " + u.getFacebookId());
+                    String profile = "img/users/profile/" + u.getIdUser() + ".png";
+                    mm.put("profile", profile);
+                    mm.put("user", u);
+                }else{
+                    response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+                }
             } else {
                 response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
             }

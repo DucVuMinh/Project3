@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.portlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import travel.controller.custom.CommentTemp;
 import travel.controller.custom.PostsTemp;
 import travel.model.Comment;
 import travel.model.Destination;
@@ -101,7 +102,7 @@ public class PostsController {
                 for (Object c : p.getComments()) {
                     Comment ctemp = (Comment) c;
                     if (ctemp.getState() == 1) {
-                        commentSet.add(Comment.getCommentById(ctemp.getIdComment()));
+                        commentSet.add(new CommentTemp(Comment.getCommentById(ctemp.getIdComment())));
                     }
                 }
 
@@ -151,7 +152,7 @@ public class PostsController {
                                             new RankingpostsId(p.getIdPosts(), u.getIdUser()), p, u, rank);
                             userRanking.add();
                         } else {
-                            userRanking=rankp;
+                            userRanking = rankp;
                             rankp.setRank(rank);
                             rankp.update();
                         }
@@ -207,7 +208,12 @@ public class PostsController {
                         if (p.getState() == 1) {
                             Comment comment = new Comment(p, u, new Date(), 1, arr[1]);
                             comment.add();
-                            out.print(u.getFullname() + "|" + arr[1] + "|" + u.getIdUser());
+
+                            if (u.getFacebookId() == null || u.getFacebookId().isEmpty()) {
+                                out.print(u.getFullname() + "|" + arr[1] + "|" + u.getIdUser());
+                            } else {
+                                out.print(u.getFullname() + "|" + arr[1] + "|" + u.getFacebookId() + "|fb");
+                            }
                         } else {
                             out.print("waitadmin");
                         }
@@ -263,7 +269,9 @@ public class PostsController {
         } catch (IOException ex) {
             ex.printStackTrace();
             response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger
+                    .getLogger(LoginController.class
+                            .getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             ex.printStackTrace();
             response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
