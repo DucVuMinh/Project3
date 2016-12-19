@@ -172,7 +172,7 @@ public class Comment implements java.io.Serializable, InterfaceEntity {
         json += "{"
                 + "\"id\":\"" + getIdComment() + "\","
                 + "\"username\":\"" + getUser().getUsername() + "\","
-                + "\"profile\":\"" + getUser().getProfile() + "\","
+                + "\"profile\":\"" + getUser().getIdUser()+ "\","
                 + "\"dateWrite\":\"" + getDateWrite() + "\","
                 + "\"state\":" + getState() + ","
                 + "\"context\":\"" + getContext() + "\""
