@@ -66,6 +66,7 @@ public class CreateAccountController {
                 } else {
                     User u = new User(arr[0], arr[1], arr[2], arr[3], 1, 1);
                     u.add();
+                    u=User.getUserById(u.getIdUser());
                     HttpSession session = request.getSession();
                     String absoluteDiskPathNew = session.getServletContext().getRealPath("img/users/profile");
                     File newProfile = new File(absoluteDiskPathNew + File.separator + "0.png");
@@ -89,6 +90,7 @@ public class CreateAccountController {
             @ModelAttribute("facebookid") String facebookid) throws IOException {
         User u = new User(name, 1, 1, facebookid);
         u.add();
+        u=User.getUserById(u.getIdUser());
         HttpSession session = request.getSession();
         String absoluteDiskPathNew = session.getServletContext().getRealPath("img/users/profile");
         File newProfile = new File(absoluteDiskPathNew + File.separator + "0.png");

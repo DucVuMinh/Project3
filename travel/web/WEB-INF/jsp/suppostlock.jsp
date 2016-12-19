@@ -44,7 +44,7 @@
         <div class="container" style="padding-top:200px;padding-bottom:30px" >
             <div class= "container-border">
                 <div class="title"> Tài khoản của bạn bị khóa?
-                    <br>Hãy liên hệ admin với main <a href="http://mail.google.com/">duc0103195@gmail.com</a> để biết thông tin chi tiết và mở tài khoản.
+                    <br>Hãy liên hệ admin theo mail <a href="http://mail.google.com/">duc0103195@gmail.com</a> để biết thông tin chi tiết và mở tài khoản.
                 </div>
             </div>
             

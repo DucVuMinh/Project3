@@ -323,7 +323,7 @@ public class User implements java.io.Serializable, InterfaceEntity {
     public void update() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = null;
-        if (this.fullname != null && this.username != null && this.password != null && this.email != null && this.idUser != null) {
+        if (this.fullname != null && this.username != null &&this.idUser != null) {
             try {
                 tx = session.beginTransaction();
                 session.update(this);
@@ -529,6 +529,9 @@ public class User implements java.io.Serializable, InterfaceEntity {
         return json;
     }
     public static void main(String args[]){
-        System.out.println(getCountDelete());
+        User u =User.getUserByUserName("107519903079908");
+        System.out.println(u.getState());
+        u.lock();
+        System.out.println(u.getState());
     }
 }
