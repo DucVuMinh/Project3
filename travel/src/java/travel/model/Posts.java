@@ -481,7 +481,42 @@ public static List getAllInstance() {
         this.update();
 
     }
-
+    public static long getCountAll() {
+        String sql = "SELECT count(*)  FROM Posts";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(sql);
+        List results = query.list();
+        session.close();
+        long number = (Long)results.get(0);
+        return number;
+    }
+    public static long getCountAllInstance() {
+        String sql = "SELECT count(*)  FROM Posts p WHERE p.state=1";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(sql);
+        List results = query.list();
+        session.close();
+        long number = (Long)results.get(0);
+        return number;
+    }
+    public static long getCountNeedApprove() {
+        String sql = "SELECT count(*)  FROM Posts p WHERE p.state=0";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(sql);
+        List results = query.list();
+        session.close();
+        long number = (Long)results.get(0);
+        return number;
+    }
+    public static long getCountDeleted() {
+        String sql = "SELECT count(*)  FROM Posts p WHERE p.state=0";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(sql);
+        List results = query.list();
+        session.close();
+        long number = (Long)results.get(0);
+        return number;
+    }
     @Override
     public String getJson() {
         String json = "";
@@ -499,11 +534,6 @@ public static List getAllInstance() {
         return json;
     }
     public static void main(String args[]){
-        Posts temp=new Posts();
-        List p=temp.getTop(6);
-        for(int i=0;i<p.size();i++){
-            Posts t=(Posts)p.get(i);
-            System.out.println(t.getTitle()+" "+t.getRank()+ " " +t.getIdPosts());
-        }
+        System.out.println(getCountNeedApprove());
     }
 }

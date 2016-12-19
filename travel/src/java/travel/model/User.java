@@ -9,6 +9,7 @@ import java.util.Set;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.CriteriaSpecification;
@@ -474,7 +475,42 @@ public class User implements java.io.Serializable, InterfaceEntity {
         List user = cr.list();
         return user;
     }
-
+    public static long getCountAll() {
+        String sql = "SELECT count(*)  FROM User";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(sql);
+        List results = query.list();
+        session.close();
+        long number = (Long)results.get(0);
+        return number;
+    }
+    public static long getCountInstance() {
+        String sql = "SELECT count(*)  FROM User u WHERE u.state=1";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(sql);
+        List results = query.list();
+        session.close();
+        long number = (Long)results.get(0);
+        return number;
+    }
+    public static long getCountLocked() {
+        String sql = "SELECT count(*)  FROM User u WHERE u.state=0";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(sql);
+        List results = query.list();
+        session.close();
+        long number = (Long)results.get(0);
+        return number;
+    }
+    public static long getCountDelete() {
+        String sql = "SELECT count(*)  FROM User u WHERE u.state=-1";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(sql);
+        List results = query.list();
+        session.close();
+        long number = (Long)results.get(0);
+        return number;
+    }
     @Override
     public String getJson() {
         String json = "";
@@ -491,5 +527,8 @@ public class User implements java.io.Serializable, InterfaceEntity {
                 + "}";
 
         return json;
+    }
+    public static void main(String args[]){
+        System.out.println(getCountDelete());
     }
 }

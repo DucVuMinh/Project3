@@ -47,7 +47,28 @@
 
         <!-- Navigation -->
         <%@ include file = "customheader.jsp" %>
+        <header class="intro" style="height: 215px">
 
+            <div id="myCarousel" class="carousel slide" data-ride="carousel"style="height: 215px"  >
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox" style="height: 215px">
+
+                    <div class="item active">
+                        <img src="img/default/bannerHL.jpg" alt="Halong" style="height: 215px; width:100%" >
+                        <div class="carousel-caption">
+                            <h3>Hạ Long</h3>
+                            <p>Vẻ đẹp thiên nhiên</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </header>
 
         <section id="sight" class="content-section ">
             <div class="download-section">
@@ -82,23 +103,26 @@
 
 
         <!-- Contact Section -->
-    <c:import url="http://localhost:8080/travel/customfooter.htm" />
+        <c:import url="http://localhost:8080/travel/customfooter.htm" />
+        <script>
+            var nar = document.getElementById("headerele");
+            nar.removeAttribute("style");
+        </script>
+        <!-- jQuery -->
+        <script src="client/vendor/jquery/jquery.js"></script>
 
-    <!-- jQuery -->
-    <script src="client/vendor/jquery/jquery.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="client/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="client/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <!-- Plugin JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
 
-    <!-- Plugin JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+        <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
 
-    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
+        <!-- Theme JavaScript -->
+        <script src="client/js/grayscale.min.js"></script>
 
-    <!-- Theme JavaScript -->
-    <script src="client/js/grayscale.min.js"></script>
-
-</body>
+    </body>
 
 </html>

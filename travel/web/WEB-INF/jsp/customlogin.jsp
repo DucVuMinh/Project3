@@ -68,7 +68,6 @@
                             <div class="checkbox">
                                 <label><input type="checkbox"> Remember me</label>
                             </div>
-                            <hr/>
                             <button type="submit" class="btn btn-info" >Đăng nhập</button>
                             <span class="or-login">hoặc</span>
                             <button type="button" class="btn btn-primary" style="width: 49%;" onclick="loginFB()">
@@ -85,6 +84,7 @@
         </div>
     </body>
     <script src="client/js/controller/ClientLogin.js"></script>
+    <script src="client/js/bootbox.min.js"></script>
     <script>
         function loginFB() {
             window.location.href = "<%= APIWrapper.getDialogLink()%>";

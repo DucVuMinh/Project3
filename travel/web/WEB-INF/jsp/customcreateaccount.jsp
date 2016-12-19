@@ -54,10 +54,10 @@
                                 <label for="pwd">Password:</label>
                                 <input type="password" class="form-control" id="pwd" placeholder="Enter password" ng-keypress="checkUserInput()" ng-change="checkpasswordfn()" required="true" ng-model="password">
                                 <font color="red">
-                                    <span ng-show="checkpassword">Ít nhất 8 kí tự, gồm chữ cái và số</span>
-                                    <span ng-show="checkPasswordFormat">password không được chứa các kí tự:|,\,",',-,=,+</span>
+                                <span ng-show="checkpassword">Ít nhất 8 kí tự, gồm chữ cái và số</span>
+                                <span ng-show="checkPasswordFormat">password không được chứa các kí tự:|,\,",',-,=,+</span>
                                 </font>
-                                
+
                             </div>
                             <div class="form-group">
                                 <label for="pwd">Nhập lại Password:</label>
@@ -72,10 +72,11 @@
                                 <input type="email" class="form-control" id="email" placeholder="Enter Email" required="true" ng-model="email">
                                 <font color="red">
                                 <span ng-show="checkemail" color="red">email đã có người dùng</span>
-                                <font>
-                                
+                                </font>
+
                             </div>
                             <center style="margin-top: 25px;"><button type="submit" class="btn btn-info" style="width: 100px;">Đăng ký</button></center>
+                                <p class="login-signup">Bạn đã có tài khoản?   <a href="customlogin.htm">Đăng nhập</a></p>
                         </form>
                     </div>
                 </div>
@@ -84,5 +85,5 @@
         </div>
         <script src="client/js/controller/createaccount.js"></script>
     </body>
-    
+
 </html>

@@ -47,7 +47,25 @@
 
         <!-- Navigation -->
         <%@ include file = "customheader.jsp" %>
+<header class="intro" style="height: 215px">
 
+            <div id="myCarousel" class="carousel slide" data-ride="carousel"style="height: 215px"  >
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                </ol>
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox" style="height: 215px">
+
+                    <div class="item active">
+                        <img src="img/default/phuotbanner.jpg" alt="Halong" style="height: 215px; width:100%" >
+                        
+                    </div>
+                </div>
+            </div>
+
+        </header>
 
         <section id="sight" class="content-section ">
             <div class="download-section">
@@ -83,7 +101,10 @@
 
         <!-- Contact Section -->
         <c:import url="http://localhost:8080/travel/customfooter.htm" />
-
+        <script>
+            var nar = document.getElementById("headerele");
+            nar.removeAttribute("style");
+        </script>
         <!-- jQuery -->
         <script src="client/vendor/jquery/jquery.js"></script>
 

@@ -277,8 +277,7 @@ a:focus {
 }
 .btn-default {
   border: 1px solid #1d508d;
-  color: #fff;
-  background-color: transparent;
+  color: #1d508d;
 }
 .btn-default:hover,
 .btn-default:focus {
@@ -408,7 +407,7 @@ display: block;
   padding-right:0px;
 }
 .img1{
-  width:220px;
+  width:200px;
   height:140px;
  
 }
@@ -643,8 +642,7 @@ div.contact-info>h6{
     /*-------- form group--------*/
    
     .modal-content{
-   
-      background: url(https://1.bp.blogspot.com/-6B5OUHrQ-S8/VnOtUrwDtWI/AAAAAAAAH1E/Thh96nxI6_k/s1600/ao-dai-trang%2B%252814%2529.jpg) no-repeat center center fixed; 
+      background: #ffffff;
       
     }
 
@@ -878,7 +876,7 @@ div.thumb-paper>a:hover>p{
   float: right;
 
 }
-/* container*/
+/* ontainer*/
 .container{
     padding-left: 80px;
     padding-right: 80px;
@@ -1249,7 +1247,7 @@ display: block;
  margin-left: auto;
   margin-right: auto;
   padding:0 20px ;
-  color: #fff;
+  color: #1d508d;
 }
 @media (min-width: 768px){
 .modal-dialog {
@@ -1291,7 +1289,7 @@ height: 60px;
 background: #1d508d;
 line-height: 60px;
 color: #fff;
-cursor: pointer;
+cursor: pointer; 
 top: 20px;
 left: -30px;
 }

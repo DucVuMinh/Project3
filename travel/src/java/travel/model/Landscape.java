@@ -365,13 +365,7 @@ public class Landscape implements java.io.Serializable, InterfaceEntity, Interfa
         return lDes;
     }
         public static void main(String args[]) {
-         List t=getAllInstance(4);
-         
-         System.out.println(t.size());
-         for(int i=0;i<t.size();i++){
-             Landscape temp=(Landscape)t.get(i);
-             System.out.println(temp.getIdLandscape());
-         }
+            System.out.println(getCountDeleted());
     }
 
     public static List getAll() {
@@ -398,7 +392,33 @@ public class Landscape implements java.io.Serializable, InterfaceEntity, Interfa
         session.close();
         return lDes;
     }
-
+    public static long getCountAll() {
+        String sql = "SELECT count(*)  FROM Landscape";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(sql);
+        List results = query.list();
+        session.close();
+        long number = (Long)results.get(0);
+        return number;
+    }
+    public static long getCountAllInstance() {
+        String sql = "SELECT count(*)  FROM Landscape l WHERE l.state=1";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(sql);
+        List results = query.list();
+        session.close();
+        long number = (Long)results.get(0);
+        return number;
+    }
+    public static long getCountDeleted() {
+        String sql = "SELECT count(*)  FROM Landscape l WHERE l.state=-1";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(sql);
+        List results = query.list();
+        session.close();
+        long number = (Long)results.get(0);
+        return number;
+    }
     @Override
     public String getJson() {
         String json = "";

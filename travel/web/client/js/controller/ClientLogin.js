@@ -8,9 +8,9 @@ clientLogin.controller("clientLoginCtrl", function ($scope, $http, $location) {
     $scope.username = "";
     $scope.password = "";
     $scope.loingFalse = "";
-    $scope.disFalse=false;
-    $scope.checkUsername=false;
-    $scope.checkPassword=false;
+    $scope.disFalse = false;
+    $scope.checkUsername = false;
+    $scope.checkPassword = false;
     $scope.cusLogin = function () {
         var data = $.param({
             fName: $scope.username,
@@ -23,22 +23,31 @@ clientLogin.controller("clientLoginCtrl", function ($scope, $http, $location) {
             data: strl
         }).success(function (data, status, headers, config) {
             if (data === "username") {
-            	$scope.disFalse=true;
-                $scope.loginFalse = "Wrong username";
-            } else if (data ==="password") {
-            	$scope.disFalse=true;
-                $scope.loginFalse = "Wrong password";
+                $scope.disFalse = true;
+                $scope.loginFalse = "Sai Username";
+            } else if (data === "password") {
+                $scope.disFalse = true;
+                $scope.loginFalse = "Sai mật khẩu";
+            } else if (data === "lock") {
+                $scope.disFalse = true;
+                $scope.loginFalse = "Tài khoản đã bị khóa";
+                bootbox.confirm({
+                    message: "Tài khoản của bạn đã bị khóa, bạn muốn xem chi tiết?",
+                    callback: function (result) {
+                        if (result)
+                            window.location = "suppostlock.htm";
+                    }
+                });
             } else {
-                
-                window.location=data;
+                window.location = data;
             }
         }).error(function (data, status, headers, config) {
             alert("Network error");
         });
     };
-    $scope.checkUserInput=function(){
-    	$scope.checkUsername=/[-=+\s\\]/.test($scope.username);
-    	$scope.checkPassword=/[=+\s\\]/.test($scope.password);
+    $scope.checkUserInput = function () {
+        $scope.checkUsername = /[-=+\s\\]/.test($scope.username);
+        $scope.checkPassword = /[=+\s\\]/.test($scope.password);
 
     };
 });

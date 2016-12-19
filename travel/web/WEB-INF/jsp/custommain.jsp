@@ -382,6 +382,8 @@
 
     </body>
     <script type="text/javascript">
+        var nar =document.getElementById("headerele");
+        nar.removeAttribute("style");
         var $item = $('.carousel .item');
         var $wHeight = $(window).height();
         $item.eq(0).addClass('active');

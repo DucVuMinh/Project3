@@ -71,8 +71,13 @@ public class LoginController {
                     } else if (check == -2) {
                         out.print("password");
                     } else {
-                        session.setAttribute("username", arr[0]);
-                        out.print("http://localhost:8080/travel/custommain.htm");
+                        User u = User.getUserByUserName(arr[0]);
+                        if (u.getState() == 0||u.getState() == -1) {
+                            out.print("lock");
+                        } else {
+                            session.setAttribute("username", arr[0]);
+                            out.print("http://localhost:8080/travel/custommain.htm");
+                        }
                     }
                 } else {
                 }
@@ -87,32 +92,36 @@ public class LoginController {
 
     @RequestMapping(value = "/customLoginFb", method = RequestMethod.GET)
     public String customLoginFb(@RequestParam("code") String code, ModelMap mm,
-            HttpServletRequest request, HttpServletResponse response, 
-            final RedirectAttributes redirectAttributes){
+            HttpServletRequest request, HttpServletResponse response,
+            final RedirectAttributes redirectAttributes) {
         response.setContentType("text/html;charset=UTF-8");
         try {
             APIWrapper wrapper = new APIWrapper();
             String accessToken = wrapper.getAccessToken(code);
             wrapper.setAccessToken(accessToken);
-          
+
             User user = wrapper.getUserFB();
-            User fbExit=User.checkLoginFb(user.getFacebookId()) ;
-            boolean userExist =(fbExit != null);
-            if(!userExist){
-                redirectAttributes.addFlashAttribute("name",user.getFullname());
-                redirectAttributes.addFlashAttribute("facebookid",user.getFacebookId());
+            User fbExit = User.checkLoginFb(user.getFacebookId());
+            boolean userExist = (fbExit != null);
+            if (!userExist) {
+                redirectAttributes.addFlashAttribute("name", user.getFullname());
+                redirectAttributes.addFlashAttribute("facebookid", user.getFacebookId());
                 return "redirect:/creatAccountFb.htm";
             }
-            
-            HttpSession session = request.getSession();
-            session.setAttribute("username", user.getFacebookId() );
-            return "redirect:/custommain.htm";
+            if (fbExit.getState() == 0||fbExit.getState() == -1) {
+                return "redirect:/suppostlock.htm";
+            } else {
+
+                HttpSession session = request.getSession();
+                session.setAttribute("username", user.getFacebookId());
+                return "redirect:/custommain.htm";
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "redirect:/custommain.htm";
     }
-    
+
     @RequestMapping(value = "/customhandlinglogout", method = RequestMethod.POST)
     public void customHandlingLogout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html;charset=UTF-8");

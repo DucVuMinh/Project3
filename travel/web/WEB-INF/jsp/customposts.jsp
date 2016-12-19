@@ -64,7 +64,7 @@
                     <div class="title">${infpos.title}</div>
                     <div class="content-post">
                         ${infpos.context}
-                        <div class="slide-holder">
+                        <div class="slide-holder" style="width:870px" >
                             <div class="slide-pager">
                                 <div class="slide-control-prev">«</div>
                                 <div class="slide-control-next">»</div>
@@ -73,7 +73,7 @@
                                 <div class="slide-stage">
                                     <c:forEach var="img" items="${imgDetail}">
                                         <div class="slide-image"><img src="${img}" class="img1"></div>
-                                        </c:forEach>
+                                    </c:forEach>
                                 </div>
                             </div>
                         </div>
@@ -114,7 +114,7 @@
                                     <form  ng-submit="sendComment()">
                                         <textarea name="message" rows="5" cols="100" style="border:1px solid #ddd" class="form-control" ng-model="content" required></textarea>
                                         <br>
-                                        <input type="submit" class="btn btn-default" style="background:#1d508d">
+                                        <input type="submit" class="btn btn-default" >
                                     </form>
                                 </div>
                             </div>

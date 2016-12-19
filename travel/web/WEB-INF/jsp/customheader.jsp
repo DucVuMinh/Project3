@@ -43,7 +43,7 @@
         ex.printStackTrace();
     }
 %>
-<nav class="navbar navbar-custom navbar-fixed-top" role="navigation" style="background:#1d508d">
+<nav id="headerele" class="navbar navbar-custom navbar-fixed-top" role="navigation" style="background: #1d508d" >
     <div class="container" ng-app="headerapp" ng-controller="headerctr" ng-init="int(<%=login%>,<%=logout%>,<%=createAccount%>)">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
@@ -65,13 +65,13 @@
                     <a href="custommain.htm">Trang chủ</a>
                 </li>
                 <li>
-                    <a href="detailland.htm">Địa Điểm</a>
+                    <a href="detailland.htm">Thắng cảnh</a>
                 </li>
                 <li>
-                    <a href="detailfes.htm">Thắng cảnh</a>
+                    <a href="detailfes.htm">Lễ hội</a>
                 </li>
                 <li>
-                    <a href="detailpost.htm">Lễ hội</a>
+                    <a href="detailpost.htm">Bài viết</a>
                 </li>
                 <li>
                     <div class="dropdown-user" >

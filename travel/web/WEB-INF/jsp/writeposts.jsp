@@ -18,6 +18,7 @@
         <title>S-travel</title>
 
         <!-- Bootstrap Core CSS -->
+        <link href="client/css/custom.min.css" rel="stylesheet">
         <link href="client/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!-- Custom Fonts -->
         <link href="client/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -28,13 +29,13 @@
         <link href="client/css/grayscale.css" rel="stylesheet">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        
-        <link href="client/css/custom.min.css" rel="stylesheet">
+
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="admin/css/bootstrap-imageupload.css">
-        
-        
-        
+
+
+
         <script src="admin/js/custom.min.js"></script>
         <script type="text/javascript" src="admin/js/bootstrap-imageupload.js"></script>
         <script type="text/javascript" src="client/js/jquery-1.10.2.min.js"></script>
@@ -59,7 +60,13 @@
                     <div class="x_panel">
                         <div class="x_title">
                             <div class= "container-border">
-                                <div class="title"> Chia sẻ những trải nghiệm của bạn</div>
+                                <div class="title"><img src="img/default/baiviet.png"> Chia sẻ những trải nghiệm của bạn</div>
+                                <div class="poster">
+                                    <p style="text-align:justify">Du lịch và trải nghiệm luôn mang lại cho chúng ta một cuộc sống tươi mới và hạnh phúc hơn, và để lan tỏa điều này Dalat Trip thân mời các bạn chia sẻ những cảm xúc, suy tư, kỷ niệm, sự khám phá của bạn qua chuyến đi du lịch cũng như những lời khuyên hữu ích của bạn cho các du khách khác. Mỗi du khách đều có một câu chuyện về chuyến đi, còn câu chuyện của bạn thì sao?</p>
+                                    <p style="text-align:justify">Hãy chia sẻ câu chuyện của bạn với chúng tôi. Hãy nghĩ đến một trải nghiệm tuyệt vời với các động vật hoang dã địa phương, khung cảnh thiên nhiên, con người, hoặc một khoảnh khắc đặc biệt với một ai đó. Thậm chí nếu đó là những điều khó chịu, sự trải nghiệm không hài lòng đối với bạn.</p>
+                                    <p style="text-align:justify">Đơn giản và nhanh nhất bạn có thể chia sẻ câu chuyện của bạn bằng form bên dưới của trang này. Xin lưu ý các điều khoản: Để được xuất bản lên website  câu chuyện của bạn phải ít nhất 500 từ,. Những từ ngữ mang tích chất kích động, vi phạm pháp luật sẽ không được chấp nhận.</p>
+                                    <p style="text-align:justify"> Xin cảm ơn chia sẻ của bạn! Chúc bạn có nhiều trải nghiệm thú vị !</p>
+                                </div>
                             </div>
                             <ul class="nav navbar-right panel_toolbox">
                                 <li><a href=""></a></li>
@@ -100,7 +107,7 @@
 
                                 <!--Gioi thieu-->
                                 <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">
                                         Giới thiệu <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
@@ -111,17 +118,17 @@
 
                                 <!--Anh chi tiet-->
                                 <div class="form-group">
-                                    
+
                                     <label class="control-label col-md-3 col-sm-3 col-xs-12">
                                         Ảnh chi tiết <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <label  for="img_detail" class="custom-file-upload">
-                                        <i class="fa fa-cloud-upload"></i> Choose Image
+                                        <label  for="img_detail" class="custom-file-upload">
+                                            <i class="fa fa-cloud-upload"></i> Choose Image
 
-                                    </label>
-                                    <input type="file" id="img_detail" name="img_detail" multiple="multiple" required/>
-                                    <div class="col-md-8 col-sm-6 col-xs-12 col-md-offset-3 " id="bound_img"></div>
+                                        </label>
+                                        <input type="file" id="img_detail" name="img_detail" multiple="multiple" required/>
+                                        <div class="col-md-8 col-sm-6 col-xs-12 col-md-offset-3 " id="bound_img"></div>
                                     </div>
                                 </div>
                                 <div class="ln_solid"></div>

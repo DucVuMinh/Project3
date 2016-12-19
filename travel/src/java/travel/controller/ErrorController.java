@@ -23,4 +23,10 @@ public class ErrorController {
         mv.setViewName("requestlogin");
         return mv;
     }
+    @RequestMapping(value = "suppostlock", method = RequestMethod.GET)
+    public ModelAndView showsuppostlock(ModelMap mm) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("suppostlock");
+        return mv;
+    }
 }
