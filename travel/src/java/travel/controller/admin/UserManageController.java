@@ -33,9 +33,12 @@ public class UserManageController {
         int idUser = Integer.parseInt(request.getParameter("idUser"));
         System.out.println(idUser);
         User user = User.getUserById(idUser);
+        System.out.println(user.getFullname()+ user.getState());
         user.lock();
-        List<User> listUser = User.getAllListUser();
-        mm.put("listUser", listUser);
+        System.out.println(user.getState());
+        
+//        List<User> listUser = User.getAllListUser();
+//        mm.put("listUser", listUser);
         return "redirect:/admin/userManage.htm";
     }
     

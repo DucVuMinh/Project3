@@ -86,40 +86,267 @@
                 <!-- /Top navbar -->
                 <!-- Page Content -->
                 <div class="right_col" role="main">
-                    <!-- top tiles -->
-                    <div class="row tile_count">
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                            <span class="count_top"><i class="fa fa-user"></i> Tổng người dùng</span>
-                            <div class="count green">2500</div>
-                            <span class="count_bottom"><i class="green">4% </i> From last Week</span>
+
+                    <div class="row top_tiles">
+                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon"><i class="fa fa-users"></i></div>
+                                <div class="count ">${totalUser}</div>
+                                <h3>Người dùng</h3>
+                            </div>
                         </div>
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                            <span class="count_top"><i class="fa fa-clock-o"></i> Tổng địa điểm </span>
-                            <div class="count green">9</div>
-                            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
+                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon"><i class="fa fa-car"></i></div>
+                                <div class="count ">${totalFes}</div>
+                                <h3 >Lễ hội</h3>
+                            </div>
                         </div>
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                            <span class="count_top"><i class="fa fa-user"></i> Tổng lễ hội</span>
-                            <div class="count green">45</div>
-                            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon"><i class="fa fa-car"></i></div>
+                                <div class="count ">${totalLand}</div>
+                                <h3 >Thắng cảnh</h3>
+                            </div>
                         </div>
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                            <span class="count_top"><i class="fa fa-user"></i> Tổng thắng cảnh</span>
-                            <div class="count green">60</div>
-                            <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
-                        </div>
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                            <span class="count_top"><i class="fa fa-user"></i> Tổng bài viết</span>
-                            <div class="count green">40</div>
-                            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
-                        </div>
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                            <span class="count_top"><i class="fa fa-user"></i> Total Connections</span>
-                            <div class="count green">7,325</div>
-                            <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+                        <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                            <div class="tile-stats">
+                                <div class="icon"><i class="fa fa-newspaper-o"></i></div>
+                                <div class="count ">${totalPosts}</div>
+                                <h3 >Bài viết</h3>
+                            </div>
                         </div>
                     </div>
-                    <!-- /top tiles -->
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2>Transaction Summary</h2>
+                                    <div class="filter">
+                                        <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+                                            <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                                            <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+
+                                    <div class="col-md-3 col-sm-12 col-xs-12">
+                                        <div>
+                                            <div class="x_title">
+                                                <h2>Top User</h2>
+                                                <ul class="nav navbar-right panel_toolbox" style="min-width: 0px">
+                                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                                    </li>
+                                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                                    </li>
+                                                </ul>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <ul class="list-unstyled top_profiles scroll-view">
+                                                <li class="media event">
+                                                    <a class="pull-left border-aero profile_thumb">
+                                                        <i class="fa fa-user aero"></i>
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a class="title" href="#">Ms. Mary Jane</a>
+                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                                                        <p> <small>12 Sales Today</small>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="media event">
+                                                    <a class="pull-left border-aero profile_thumb">
+                                                        <i class="fa fa-user aero"></i>
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a class="title" href="#">Ms. Mary Jane</a>
+                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                                                        <p> <small>12 Sales Today</small>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="media event">
+                                                    <a class="pull-left border-green profile_thumb">
+                                                        <i class="fa fa-user green"></i>
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a class="title" href="#">Ms. Mary Jane</a>
+                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                                                        <p> <small>12 Sales Today</small>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-12 col-xs-12">
+                                        <div>
+                                            <div class="x_title">
+                                                <h2>Top Lễ hội</h2>
+                                                <ul class="nav navbar-right panel_toolbox" style="min-width: 0px">
+                                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                                    </li>
+                                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                                    </li>
+                                                </ul>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <ul class="list-unstyled top_profiles scroll-view">
+                                                <li class="media event">
+                                                    <a class="pull-left border-aero profile_thumb">
+                                                        <i class="fa fa-user aero"></i>
+                                                        <!--<img width="20px" height="" src="../img/festival/profile/1.png"/>-->
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a class="title" href="#">Ms. Mary Jane</a>
+                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                                                        <p> <small>12 Sales Today</small>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="media event">
+                                                    <a class="pull-left border-aero profile_thumb">
+                                                        <i class="fa fa-user aero"></i>
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a class="title" href="#">Ms. Mary Jane</a>
+                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                                                        <p> <small>12 Sales Today</small>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="media event">
+                                                    <a class="pull-left border-green profile_thumb">
+                                                        <i class="fa fa-user green"></i>
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a class="title" href="#">Ms. Mary Jane</a>
+                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                                                        <p> <small>12 Sales Today</small>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-12 col-xs-12">
+                                        <div>
+                                            <div class="x_title">
+                                                <h2>Top thắng cảnh</h2>
+                                                <ul class="nav navbar-right panel_toolbox" style="min-width: 0px">
+                                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                                    </li>
+                                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                                    </li>
+                                                </ul>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <ul class="list-unstyled top_profiles scroll-view">
+                                                <li class="media event">
+                                                    <a class="pull-left border-aero profile_thumb">
+                                                        <i class="fa fa-user aero"></i>
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a class="title" href="#">Ms. Mary Jane</a>
+                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                                                        <p> <small>12 Sales Today</small>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="media event">
+                                                    <a class="pull-left border-aero profile_thumb">
+                                                        <i class="fa fa-user aero"></i>
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a class="title" href="#">Ms. Mary Jane</a>
+                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                                                        <p> <small>12 Sales Today</small>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="media event">
+                                                    <a class="pull-left border-green profile_thumb">
+                                                        <i class="fa fa-user green"></i>
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a class="title" href="#">Ms. Mary Jane</a>
+                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                                                        <p> <small>12 Sales Today</small>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-12 col-xs-12">
+                                        <div>
+                                            <div class="x_title">
+                                                <h2>Top bài viết</h2>
+                                                <ul class="nav navbar-right panel_toolbox" style="min-width: 0px">
+                                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                                    </li>
+                                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                                    </li>
+                                                </ul>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <ul class="list-unstyled top_profiles scroll-view">
+                                                <li class="media event">
+                                                    <a class="pull-left border-aero profile_thumb">
+                                                        <i class="fa fa-user aero"></i>
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a class="title" href="#">Ms. Mary Jane</a>
+                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                                                        <p> <small>12 Sales Today</small>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="media event">
+                                                    <a class="pull-left border-aero profile_thumb">
+                                                        <i class="fa fa-user aero"></i>
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a class="title" href="#">Ms. Mary Jane</a>
+                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                                                        <p> <small>12 Sales Today</small>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                                <li class="media event">
+                                                    <a class="pull-left border-green profile_thumb">
+                                                        <i class="fa fa-user green"></i>
+                                                    </a>
+                                                    <div class="media-body">
+                                                        <a class="title" href="#">Ms. Mary Jane</a>
+                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
+                                                        <p> <small>12 Sales Today</small>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
                 </div>
                 <!-- /Page Content -->
                 <!-- Footer Content -->

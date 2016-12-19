@@ -493,6 +493,15 @@ public class User implements java.io.Serializable, InterfaceEntity {
         long number = (Long)results.get(0);
         return number;
     }
+    public static long getCountFb() {
+        String sql = "SELECT count(*)  FROM User u WHERE u.state=1 and u.facebookId != null";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(sql);
+        List results = query.list();
+        session.close();
+        long number = (Long)results.get(0);
+        return number;
+    }
     public static long getCountLocked() {
         String sql = "SELECT count(*)  FROM User u WHERE u.state=0";
         Session session = HibernateUtil.getSessionFactory().openSession();

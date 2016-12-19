@@ -165,6 +165,72 @@
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <div class="x_panel">
                                     <div class="x_title">
+                                        <h2>Danh sách người dùng FaceBook</h2>
+                                        <ul class="nav navbar-right panel_toolbox">
+                                            <li><a href=""></a></li>
+                                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                                            <li><a class="close-link"><i class="fa fa-close"></i></a></li>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="x_content">
+                                        <table id="datatable" class="table table-striped table-bordered" >
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 20px">STT</th>
+                                                    <th>Họ tên</th>
+                                                    <th>Id FaceBook</th>
+                                                    <th>Ảnh đại diện </th>
+                                                    <th>Email</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% int k = 1;%>
+                                                <c:forEach items = "${listUser}" var = "p">
+                                                    <c:if test="${p.state == 1 && p.facebookId != null}">
+                                                        <tr>
+                                                            <td><c:out value="<%=k%>" /></td>
+                                                            <td><c:out value="${p.fullname}" /></td>
+                                                            <td><c:out value="${p.username}" /></td>
+                                                            <td>
+                                                                <img style="width: 60px; height: 60px;" src="http://graph.facebook.com/${p.facebookId}/picture" />
+                                                            </td>
+                                                            <td><c:out value="${p.email}" /></td>         
+                                                            <td><a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#${p.username}" ><i class="fa fa-lock"></i> Khóa</a></td>
+
+                                                        </tr>
+
+                                                    <div class="modal fade" id="${p.username}" role="dialog">
+                                                        <div class="modal-dialog modal-sm">
+
+                                                            <!-- Modal content-->
+                                                            <div class="modal-content">
+                                                                <div class="modal-body">
+                                                                    <h4 class="text-center">Bạn muốn khóa người dùng FaceBook ${p.fullname}?</h4>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-default" onclick="lockUser('${p.idUser}')">OK</button>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <% k++;%>
+                                                </c:if>
+
+                                            </c:forEach>  
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="x_panel">
+                                    <div class="x_title">
                                         <h2 style="color: red">Danh sách người dùng bị khóa </h2>
                                         <ul class="nav navbar-right panel_toolbox">
                                             <li><a href=""></a></li>
@@ -199,7 +265,7 @@
                                                             <td><c:out value="${p.email}" /></td>         
                                                             <td><a class="btn btn-success btn-xs" data-toggle="modal" data-target="#${p.username}" ><i class="fa fa-unlock"></i> Mở khóa</a></td>
                                                         </tr>
-                                                        
+
                                                     <div class="modal fade" id="${p.username}" role="dialog">
                                                         <div class="modal-dialog modal-sm">
 

@@ -8,6 +8,7 @@ import java.util.Set;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.CriteriaSpecification;
@@ -463,6 +464,16 @@ public class Destination implements java.io.Serializable, InterfaceEntity {
         session.close();
         return lDes;
     }
+    
+    public static long getCountAll() {
+        String sql = "SELECT count(*)  FROM Destination";
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Query query = session.createQuery(sql);
+        List results = query.list();
+        session.close();
+        long number = (Long)results.get(0);
+        return number;
+    }
 
     @Override
     public String getJson() {
@@ -480,15 +491,4 @@ public class Destination implements java.io.Serializable, InterfaceEntity {
         return json;
     }
 
-    public static void main(String args[]) {
-        Destination d = getDesByTitle("Sài Gòn");
-        List l = d.search("Hà Nội");
-        d.add();
-        if (d == null) {
-            System.out.println("null");
-        } else {
-
-            System.out.println(d.getIdDestination());
-        }
-    }
 }
