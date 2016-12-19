@@ -138,17 +138,8 @@
                                         <div>
                                             <div class="x_title">
                                                 <h2>Top User</h2>
-                                                <ul class="nav navbar-right panel_toolbox">
+                                                <ul class="nav navbar-right panel_toolbox" style="min-width: 0px">
                                                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                                    </li>
-                                                    <li class="dropdown">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="#">Settings 1</a>
-                                                            </li>
-                                                            <li><a href="#">Settings 2</a>
-                                                            </li>
-                                                        </ul>
                                                     </li>
                                                     <li><a class="close-link"><i class="fa fa-close"></i></a>
                                                     </li>
@@ -196,17 +187,8 @@
                                         <div>
                                             <div class="x_title">
                                                 <h2>Top Lễ hội</h2>
-                                                <ul class="nav navbar-right panel_toolbox">
+                                                <ul class="nav navbar-right panel_toolbox" style="min-width: 0px">
                                                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                                    </li>
-                                                    <li class="dropdown">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="#">Settings 1</a>
-                                                            </li>
-                                                            <li><a href="#">Settings 2</a>
-                                                            </li>
-                                                        </ul>
                                                     </li>
                                                     <li><a class="close-link"><i class="fa fa-close"></i></a>
                                                     </li>
@@ -217,6 +199,7 @@
                                                 <li class="media event">
                                                     <a class="pull-left border-aero profile_thumb">
                                                         <i class="fa fa-user aero"></i>
+                                                        <!--<img width="20px" height="" src="../img/festival/profile/1.png"/>-->
                                                     </a>
                                                     <div class="media-body">
                                                         <a class="title" href="#">Ms. Mary Jane</a>
@@ -254,17 +237,8 @@
                                         <div>
                                             <div class="x_title">
                                                 <h2>Top thắng cảnh</h2>
-                                                <ul class="nav navbar-right panel_toolbox">
+                                                <ul class="nav navbar-right panel_toolbox" style="min-width: 0px">
                                                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                                    </li>
-                                                    <li class="dropdown">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="#">Settings 1</a>
-                                                            </li>
-                                                            <li><a href="#">Settings 2</a>
-                                                            </li>
-                                                        </ul>
                                                     </li>
                                                     <li><a class="close-link"><i class="fa fa-close"></i></a>
                                                     </li>
@@ -312,17 +286,8 @@
                                         <div>
                                             <div class="x_title">
                                                 <h2>Top bài viết</h2>
-                                                <ul class="nav navbar-right panel_toolbox">
+                                                <ul class="nav navbar-right panel_toolbox" style="min-width: 0px">
                                                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                                    </li>
-                                                    <li class="dropdown">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="#">Settings 1</a>
-                                                            </li>
-                                                            <li><a href="#">Settings 2</a>
-                                                            </li>
-                                                        </ul>
                                                     </li>
                                                     <li><a class="close-link"><i class="fa fa-close"></i></a>
                                                     </li>
