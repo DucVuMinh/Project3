@@ -23,7 +23,6 @@ clientLogin.controller("deletefavoritectr", function ($scope, $http, $location) 
         });
     };
     $scope.delfavorFes  = function (idfavor) {
-        alert("delete favor "+String(idfavor));
         var str="fes_"+idfavor;
         $http({
             method: 'POST',
