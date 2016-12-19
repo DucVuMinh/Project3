@@ -136,4 +136,17 @@ public class PostsManageController {
         }
         return "redirect:/admin/postsManage.htm";
     }
+    
+    @RequestMapping(value = "/deleteComment", method = RequestMethod.GET)
+    public String deleteComment(@RequestParam("idPost") int idPost, @RequestParam("idCmt") int idCmt, final RedirectAttributes redirectAttributes){
+        Comment cmt = Comment.getCommentById(idCmt);
+        System.out.println(idCmt);
+        try {
+            cmt.delete();
+            redirectAttributes.addFlashAttribute("message","Xóa bình luận thành công");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/admin/detailPosts.htm?idPost="+idPost;
+    }
 }
