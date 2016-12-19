@@ -14,6 +14,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import travel.model.Destination;
+import travel.model.Festival;
+import travel.model.Landscape;
+import travel.model.Posts;
+import travel.model.User;
 
 /**
  *
@@ -35,7 +40,19 @@ public class LoginAdminController {
     }
     
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String index() {
+    public String index(ModelMap mm) {
+        long totalUser = User.getCountAll();
+        long totalUserFb = User.getCountFb();
+        long totalDes = Destination.getCountAll();
+        long totalLand = Landscape.getCountAll();
+        long totalFes = Festival.getCountAll();
+        long totalPosts = Posts.getCountAll();
+        mm.put("totalUser", totalUser);
+//        mm.put("totalUserFb", totalUserFb);
+//        mm.put("totalDes", totalDes);
+        mm.put("totalLand", totalLand);
+        mm.put("totalFes", totalFes);
+        mm.put("totalPosts", totalPosts);
         return "admin/index";
     }
 
