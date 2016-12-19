@@ -34,13 +34,18 @@ comment.controller('commentpostsctr', function ($scope, $http, $location) {
     $scope.insertComment = function (data) {
         var nodeComment = document.getElementById("comment-of-post");
         var arr = data.split("|");
+        var linkprofile;
+        if(arr.length==3){
+            linkprofile="http://localhost:8080/travel/img/users/profile/"+arr[2]+".png";
+        }else{
+            linkprofile="http://graph.facebook.com/"+arr[2]+"/picture";
+        }
         var noderow = document.createElement("div");
         noderow.setAttribute("class", "row");
         var nodecolumn1=document.createElement("div");
         nodecolumn1.setAttribute("class", "col-lg-1");
         var link=document.createElement("a");
         var profile=document.createElement("img");
-        var linkprofile="http://localhost:8080/travel/img/users/profile/"+arr[2]+".png";
         profile.setAttribute("src", linkprofile);
         profile.setAttribute("class", "img2");
         link.appendChild(profile);

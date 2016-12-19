@@ -22,6 +22,7 @@
 <%
     String username = (String) session.getAttribute("username");
     String idimg = "0";
+    String profile="img/users/profile/0.png";
     boolean login = true;
     boolean createAccount = true;
     boolean logout = false;
@@ -32,7 +33,13 @@
             login = false;
             createAccount = false;
             logout = true;
-            idimg = String.valueOf(u.getIdUser());
+            if (u.getFacebookId() == null || u.getFacebookId().isEmpty()) {
+                idimg = String.valueOf(u.getIdUser());
+                profile="img/users/profile/"+u.getIdUser()+".png";
+            } else {
+                profile="http://graph.facebook.com/"+u.getFacebookId()+"/picture";
+                        
+            }
         }
     } catch (Exception ex) {
         ex.printStackTrace();
@@ -71,7 +78,7 @@
                 <li>
                     <div class="dropdown-user" >
                         <a href="#profile">
-                            <img src="img/users/profile/<%=idimg%>.png" style="margin-top: 5px; margin-left: 15px;" class="img-circle" width="35" height="35">
+                            <img src="<%=profile%>" style="margin-top: 5px; margin-left: 15px;" class="img-circle" width="35" height="35">
                         </a>
                         <div class="dropdown-content">
                             <a href="customupdateinfuser.htm">Sửa thông tin cá nhân</a>

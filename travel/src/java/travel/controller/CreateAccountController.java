@@ -66,14 +66,15 @@ public class CreateAccountController {
                 } else {
                     User u = new User(arr[0], arr[1], arr[2], arr[3], 1, 1);
                     u.add();
-                    u=User.getUserById(u.getIdUser());
+                    u.update();
+                    User un=User.getUserById(u.getIdUser());
                     HttpSession session = request.getSession();
                     String absoluteDiskPathNew = session.getServletContext().getRealPath("img/users/profile");
                     File newProfile = new File(absoluteDiskPathNew + File.separator + "0.png");
-                    File oldProfile = new File(absoluteDiskPathNew + File.separator + u.getIdUser() + ".png");
+                    File oldProfile = new File(absoluteDiskPathNew + File.separator + un.getIdUser() + ".png");
                     Files.copy(newProfile.toPath(), oldProfile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                     
-                    session.setAttribute("username", arr[1]);
+                    session.setAttribute("username", un.getUsername());
                     out.print("http://localhost:8080/travel/custommain.htm");
                 }
             } else {
@@ -90,11 +91,14 @@ public class CreateAccountController {
             @ModelAttribute("facebookid") String facebookid) throws IOException {
         User u = new User(name, 1, 1, facebookid);
         u.add();
-        u=User.getUserById(u.getIdUser());
+        u.update();
+        System.out.println("Ducvu: "+u.getIdUser());
+        User u2=User.getUserById(u.getIdUser());
+        System.out.println("userlogin fb create "+u2.getIdUser());
         HttpSession session = request.getSession();
         String absoluteDiskPathNew = session.getServletContext().getRealPath("img/users/profile");
         File newProfile = new File(absoluteDiskPathNew + File.separator + "0.png");
-        File oldProfile = new File(absoluteDiskPathNew + File.separator + u.getIdUser() + ".png");
+        File oldProfile = new File(absoluteDiskPathNew + File.separator + u2.getIdUser() + ".png");
         Files.copy(newProfile.toPath(), oldProfile.toPath(), StandardCopyOption.REPLACE_EXISTING);
         session.setAttribute("username", facebookid);
         return "redirect:/custommain.htm";

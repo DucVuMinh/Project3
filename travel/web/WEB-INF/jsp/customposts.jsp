@@ -125,7 +125,7 @@
                                 </div>
                                 <c:forEach var="itemcomment" items="${comment}">
                                     <div class="row">
-                                        <div class="col-lg-1"><a href="#"><img src="img/users/profile/${itemcomment.user.idUser}.png" class="img2"></a></div>
+                                        <div class="col-lg-1"><a href="#"><img src=${itemcomment.profileUser} class="img2"></a></div>
                                         <div class="col-lg-11">
                                             <div class="username"> ${itemcomment.user.fullname}</div>
                                             <div class="content-comment">${itemcomment.context} </div>
