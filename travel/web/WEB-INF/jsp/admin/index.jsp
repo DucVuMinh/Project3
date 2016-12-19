@@ -90,28 +90,28 @@
                     <div class="row top_tiles">
                         <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="tile-stats">
-                                <div class="icon"><i class="fa fa-users"></i></div>
+                                <div class="icon"><i class="fa fa-users green"></i></div>
                                 <div class="count ">${totalUser}</div>
                                 <h3>Người dùng</h3>
                             </div>
                         </div>
                         <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="tile-stats">
-                                <div class="icon"><i class="fa fa-car"></i></div>
+                                <div class="icon"><i class="fa fa-car green"></i></div>
                                 <div class="count ">${totalFes}</div>
                                 <h3 >Lễ hội</h3>
                             </div>
                         </div>
                         <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="tile-stats">
-                                <div class="icon"><i class="fa fa-car"></i></div>
+                                <div class="icon"><i class="fa fa-car green"></i></div>
                                 <div class="count ">${totalLand}</div>
                                 <h3 >Thắng cảnh</h3>
                             </div>
                         </div>
                         <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="tile-stats">
-                                <div class="icon"><i class="fa fa-newspaper-o"></i></div>
+                                <div class="icon"><i class="fa fa-newspaper-o green"></i></div>
                                 <div class="count ">${totalPosts}</div>
                                 <h3 >Bài viết</h3>
                             </div>
@@ -152,9 +152,9 @@
                                                         <i class="fa fa-user aero"></i>
                                                     </a>
                                                     <div class="media-body">
-                                                        <a class="title" href="#">Ms. Mary Jane</a>
-                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                                                        <p> <small>12 Sales Today</small>
+                                                        <a class="title" href="#">Nguyễn Văn Đức</a>
+                                                        <p><strong>ducnv</strong></p>
+                                                        <p> <small>ducbac230895@gmail.com</small>
                                                         </p>
                                                     </div>
                                                 </li>
@@ -163,23 +163,35 @@
                                                         <i class="fa fa-user aero"></i>
                                                     </a>
                                                     <div class="media-body">
-                                                        <a class="title" href="#">Ms. Mary Jane</a>
-                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                                                        <p> <small>12 Sales Today</small>
+                                                        <a class="title" href="#">Vũ Minh Đức</a>
+                                                        <p><strong>Duc Vu</strong></p>
+                                                        <p> <small>ducvu@gmail.com</small>
                                                         </p>
                                                     </div>
                                                 </li>
                                                 <li class="media event">
-                                                    <a class="pull-left border-green profile_thumb">
-                                                        <i class="fa fa-user green"></i>
+                                                    <a class="pull-left border-aero profile_thumb">
+                                                        <i class="fa fa-user aero"></i>
                                                     </a>
                                                     <div class="media-body">
-                                                        <a class="title" href="#">Ms. Mary Jane</a>
-                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                                                        <p> <small>12 Sales Today</small>
+                                                        <a class="title" href="#">Hoàng Thế Hà</a>
+                                                        <p><strong>The Ha</strong></p>
+                                                        <p> <small>hoangha95@gmail.com</small>
                                                         </p>
                                                     </div>
                                                 </li>
+<!--                                                <li class="media event">
+                                                    <img class="pull-left" height="60px" src="../img/users/profile/2.png"/>
+                                                    <div class="media-body">
+                                                        <p class="text-center text-uppercase"><strong>Đền Bạch Mã</strong></p>
+                                                    </div>
+                                                </li>
+                                                <li class="media event">
+                                                    <img class="pull-left" height="60px" src="../img/users/profile/3.png"/>
+                                                    <div class="media-body">
+                                                        <p class="text-center text-uppercase"><strong>Đền Bạch Mã</strong></p>
+                                                    </div>
+                                                </li>-->
                                             </ul>
                                         </div>
                                     </div>
@@ -197,37 +209,21 @@
                                             </div>
                                             <ul class="list-unstyled top_profiles scroll-view">
                                                 <li class="media event">
-                                                    <a class="pull-left border-aero profile_thumb">
-                                                        <i class="fa fa-user aero"></i>
-                                                        <!--<img width="20px" height="" src="../img/festival/profile/1.png"/>-->
-                                                    </a>
+                                                    <img class="pull-left" height="60px" src="../img/festival/profile/1.png"/>
                                                     <div class="media-body">
-                                                        <a class="title" href="#">Ms. Mary Jane</a>
-                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                                                        <p> <small>12 Sales Today</small>
-                                                        </p>
+                                                        <p class="text-center text-uppercase"><strong>Lễ hội đình và đền Kim Liên</strong></p>
                                                     </div>
                                                 </li>
                                                 <li class="media event">
-                                                    <a class="pull-left border-aero profile_thumb">
-                                                        <i class="fa fa-user aero"></i>
-                                                    </a>
+                                                    <img class="pull-left" height="60px" src="../img/festival/profile/2.png"/>
                                                     <div class="media-body">
-                                                        <a class="title" href="#">Ms. Mary Jane</a>
-                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                                                        <p> <small>12 Sales Today</small>
-                                                        </p>
+                                                        <p class="text-center text-uppercase"><strong>Đêm hội Giã La</strong></p>
                                                     </div>
                                                 </li>
                                                 <li class="media event">
-                                                    <a class="pull-left border-green profile_thumb">
-                                                        <i class="fa fa-user green"></i>
-                                                    </a>
+                                                    <img class="pull-left" height="60px" src="../img/festival/profile/3.png"/>
                                                     <div class="media-body">
-                                                        <a class="title" href="#">Ms. Mary Jane</a>
-                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                                                        <p> <small>12 Sales Today</small>
-                                                        </p>
+                                                        <p class="text-center text-uppercase"><strong>Hội đền Hát Môn</strong></p>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -247,36 +243,21 @@
                                             </div>
                                             <ul class="list-unstyled top_profiles scroll-view">
                                                 <li class="media event">
-                                                    <a class="pull-left border-aero profile_thumb">
-                                                        <i class="fa fa-user aero"></i>
-                                                    </a>
+                                                    <img class="pull-left" height="60px" src="../img/landscape/profile/1.png"/>
                                                     <div class="media-body">
-                                                        <a class="title" href="#">Ms. Mary Jane</a>
-                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                                                        <p> <small>12 Sales Today</small>
-                                                        </p>
+                                                        <p class="text-center text-uppercase"><strong>Đền Bạch Mã</strong></p>
                                                     </div>
                                                 </li>
                                                 <li class="media event">
-                                                    <a class="pull-left border-aero profile_thumb">
-                                                        <i class="fa fa-user aero"></i>
-                                                    </a>
+                                                    <img class="pull-left" height="60px" src="../img/landscape/profile/4.png"/>
                                                     <div class="media-body">
-                                                        <a class="title" href="#">Ms. Mary Jane</a>
-                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                                                        <p> <small>12 Sales Today</small>
-                                                        </p>
+                                                        <p class="text-center text-uppercase"><strong>NHÀ SÀN BÁC HỒ</strong></p>
                                                     </div>
                                                 </li>
                                                 <li class="media event">
-                                                    <a class="pull-left border-green profile_thumb">
-                                                        <i class="fa fa-user green"></i>
-                                                    </a>
+                                                    <img class="pull-left" height="60px" src="../img/landscape/profile/3.png"/>
                                                     <div class="media-body">
-                                                        <a class="title" href="#">Ms. Mary Jane</a>
-                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                                                        <p> <small>12 Sales Today</small>
-                                                        </p>
+                                                        <p class="text-center text-uppercase"><strong>LĂNG CHỦ TỊCH HỒ CHÍ MINH</strong></p>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -296,38 +277,24 @@
                                             </div>
                                             <ul class="list-unstyled top_profiles scroll-view">
                                                 <li class="media event">
-                                                    <a class="pull-left border-aero profile_thumb">
-                                                        <i class="fa fa-user aero"></i>
-                                                    </a>
+                                                    <img class="pull-left" height="60px" src="../img/posts/detail/1.png"/>
                                                     <div class="media-body">
-                                                        <a class="title" href="#">Ms. Mary Jane</a>
-                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                                                        <p> <small>12 Sales Today</small>
-                                                        </p>
+                                                        <p class="text-center text-uppercase"><strong>Hà Nội Một Biển Trời Yêu Thương</strong></p>
                                                     </div>
                                                 </li>
                                                 <li class="media event">
-                                                    <a class="pull-left border-aero profile_thumb">
-                                                        <i class="fa fa-user aero"></i>
-                                                    </a>
+                                                    <img class="pull-left" height="60px" src="../img/posts/detail/2.png"/>
                                                     <div class="media-body">
-                                                        <a class="title" href="#">Ms. Mary Jane</a>
-                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                                                        <p> <small>12 Sales Today</small>
-                                                        </p>
+                                                        <p class="text-center text-uppercase"><strong>Huế Một Kỳ Nghỉ Hạnh Phúc</strong></p>
                                                     </div>
                                                 </li>
                                                 <li class="media event">
-                                                    <a class="pull-left border-green profile_thumb">
-                                                        <i class="fa fa-user green"></i>
-                                                    </a>
+                                                    <img class="pull-left" height="60px" src="../img/posts/detail/3.png"/>
                                                     <div class="media-body">
-                                                        <a class="title" href="#">Ms. Mary Jane</a>
-                                                        <p><strong>$2300. </strong> Agent Avarage Sales </p>
-                                                        <p> <small>12 Sales Today</small>
-                                                        </p>
+                                                        <p class="text-center text-uppercase"><strong>Sài Gòn sống lại và Sài Gòn Hối Hả</strong></p>
                                                     </div>
                                                 </li>
+                                                
                                             </ul>
                                         </div>
                                     </div>
