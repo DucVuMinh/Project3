@@ -71,6 +71,7 @@ public class APIWrapper {
     public static String getDialogLink(String domain){
         String dialogLink = "https://www.facebook.com/dialog/oauth?client_id=%s&redirect_uri=%s";
         APIWrapper.redirectUrl=domain+redirectUrl;
+        System.out.println(redirectUrl);
         return String.format(dialogLink, appID, redirectUrl);
         
     }
