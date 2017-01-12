@@ -20,7 +20,7 @@ public class APIWrapper {
     
     private static String appID = "361231914229921";
     private static String appSecret = "0ab03d5fb40067315035bd55a6b0c4bd";
-    private static String redirectUrl = "http://localhost:8080/travel/customLoginFb.htm";
+    private static String redirectUrl = "/customLoginFb.htm";
     private static String accessToken;
     private Gson gson;
 
@@ -68,9 +68,11 @@ public class APIWrapper {
         gson = new Gson();
     }
     
-    public static String getDialogLink(){
+    public static String getDialogLink(String domain){
         String dialogLink = "https://www.facebook.com/dialog/oauth?client_id=%s&redirect_uri=%s";
+        APIWrapper.redirectUrl=domain+redirectUrl;
         return String.format(dialogLink, appID, redirectUrl);
+        
     }
     
     public String getAccessToken(String code){

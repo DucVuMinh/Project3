@@ -85,9 +85,15 @@
     </body>
     <script src="client/js/controller/ClientLogin.js"></script>
     <script src="client/js/bootbox.min.js"></script>
+    <%
+        String baseUrl =
+        request.getScheme() + "://" +
+        request.getServerName() + ":" + request.getServerPort() +
+        request.getContextPath();
+     %>
     <script>
         function loginFB() {
-            window.location.href = "<%= APIWrapper.getDialogLink()%>";
+            window.location.href = "<%= APIWrapper.getDialogLink(baseUrl)%>";
         }
     </script>
 </html>
