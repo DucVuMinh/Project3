@@ -44,7 +44,7 @@ public class LandscapeController {
                 ArrayList listImgDetail = new ArrayList<String>();
                 for (Object temp : l.getImagedetailLandscapes()) {
                     ImagedetailLandscape imgtemp = (ImagedetailLandscape) temp;
-                    listImgDetail.add("http://localhost:8080/travel/img/landscape/detail/" + imgtemp.getIdImage() + ".png");
+                    listImgDetail.add("img/landscape/detail/" + imgtemp.getIdImage() + ".png");
                 }
 
                 HttpSession session = request.getSession();
@@ -70,11 +70,11 @@ public class LandscapeController {
                 System.out.println("ducvu" + ltemp.getTitle());
                 mv.setViewName("customlandscape");
             } else {
-                response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+                response.sendRedirect("requestlogin.htm");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            response.sendRedirect("requestlogin.htm");
         }
         
         return mv;
@@ -168,11 +168,11 @@ public class LandscapeController {
 
         } catch (IOException ex) {
             ex.printStackTrace();
-            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            response.sendRedirect("requestlogin.htm");
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             ex.printStackTrace();
-            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            response.sendRedirect("requestlogin.htm");
         }
     }
 

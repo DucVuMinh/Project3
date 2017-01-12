@@ -21,11 +21,11 @@ public class ImageDetailTemp {
         this.idimg = idimg;
         this.type = type;
         if(type==1){
-            this.link="http://localhost:8080/travel/img/landscape/detail/" + idimg + ".png";
+            this.link="img/landscape/detail/" + idimg + ".png";
         }else if(type==2){
-            this.link="http://localhost:8080/travel/img/festival/detail/" + idimg + ".png";
+            this.link="img/festival/detail/" + idimg + ".png";
         }else{
-            this.link="http://localhost:8080/travel/img/posts/detail/" + idimg + ".png";
+            this.link="img/posts/detail/" + idimg + ".png";
         }
         
     }

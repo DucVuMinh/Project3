@@ -9,7 +9,7 @@ clientLogin.controller("deleteimgpostsctr", function ($scope, $http, $location) 
     $scope.deleteimg = function (idimg) {
         $http({
             method: 'POST',
-            url: 'http://localhost:8080/travel/deleteimgposts.htm',
+            url: 'deleteimgposts.htm',
             data: idimg
         }).success(function (data, status, headers, config) {
             var imgdelete = document.getElementById(idimg);

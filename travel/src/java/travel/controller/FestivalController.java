@@ -49,7 +49,7 @@ public class FestivalController {
                 ArrayList listImgDetail = new ArrayList<String>();
                 for (Object temp : f.getImagedetailFestivals()) {
                     ImagedetailFestival imgtemp = (ImagedetailFestival) temp;
-                    listImgDetail.add("http://localhost:8080/travel/img/festival/detail/" + imgtemp.getIdImage() + ".png");
+                    listImgDetail.add("img/festival/detail/" + imgtemp.getIdImage() + ".png");
                 }
                 HttpSession session = request.getSession();
                 String username = (String) session.getAttribute("username");
@@ -73,11 +73,11 @@ public class FestivalController {
                 mm.put("imgDetail", listImgDetail);
                 mv.setViewName("customfestival");
             } else {
-                response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+                response.sendRedirect("requestlogin.htm");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            response.sendRedirect("requestlogin.htm");
         }
         return mv;
     }
@@ -168,11 +168,11 @@ public class FestivalController {
 
         } catch (IOException ex) {
             ex.printStackTrace();
-            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            response.sendRedirect("requestlogin.htm");
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             ex.printStackTrace();
-            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            response.sendRedirect("requestlogin.htm");
         }
     }
 }

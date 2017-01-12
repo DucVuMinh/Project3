@@ -107,7 +107,7 @@ public class UserEditPosts extends HttpServlet {
 
                             LOGGER.log(Level.SEVERE, "Problems during file upload. Error: {0}",
                                     new Object[]{fne.getMessage()});
-                            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+                            response.sendRedirect("requestlogin.htm");
                         } finally {
                             if (out != null) {
                                 out.close();
@@ -118,12 +118,12 @@ public class UserEditPosts extends HttpServlet {
                         }
                     }
                 }
-                response.sendRedirect("http://localhost:8080/travel/customposts.htm?id=" + idpost);
+                response.sendRedirect("customposts.htm?id=" + idpost);
             } else {
-                response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+                response.sendRedirect("requestlogin.htm");
             }
         } else {
-            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            response.sendRedirect("requestlogin.htm");
         }
 
     }

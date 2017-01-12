@@ -75,7 +75,7 @@ public class CreateAccountController {
                     Files.copy(newProfile.toPath(), oldProfile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                     
                     session.setAttribute("username", un.getUsername());
-                    out.print("http://localhost:8080/travel/custommain.htm");
+                    out.print("custommain.htm");
                 }
             } else {
 

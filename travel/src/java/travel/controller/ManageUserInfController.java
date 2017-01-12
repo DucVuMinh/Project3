@@ -48,10 +48,10 @@ public class ManageUserInfController {
                     mm.put("profile", profile);
                     mm.put("user", u);
                 }else{
-                    response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+                    response.sendRedirect("requestlogin.htm");
                 }
             } else {
-                response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+                response.sendRedirect("requestlogin.htm");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -89,7 +89,7 @@ public class ManageUserInfController {
                         System.out.println("ducvu: copy file to new" + oldProfile.getPath());
                         Files.copy(newProfile.toPath(), oldProfile.toPath(), StandardCopyOption.REPLACE_EXISTING);
                     }
-                    out.print("http://localhost:8080/travel/customlogin.htm");
+                    out.print("customlogin.htm");
                 }
             } else {
 

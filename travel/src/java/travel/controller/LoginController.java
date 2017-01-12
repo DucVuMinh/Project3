@@ -37,7 +37,7 @@ public class LoginController {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
         if (username != null) {
-            response.sendRedirect("http://localhost:8080/travel/custommain.htm");
+            response.sendRedirect("custommain.htm");
         }
         return mv;
     }
@@ -76,13 +76,13 @@ public class LoginController {
                             out.print("lock");
                         } else {
                             session.setAttribute("username", arr[0]);
-                            out.print("http://localhost:8080/travel/custommain.htm");
+                            out.print("custommain.htm");
                         }
                     }
                 } else {
                 }
             } else {
-                out.print("http://localhost:8080/travel/custommain.htm");
+                out.print("custommain.htm");
             }
         } catch (IOException ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -137,13 +137,13 @@ public class LoginController {
                 session.invalidate();
             } catch (IOException ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                response.sendRedirect("http://localhost:8080/travel/custommain.htm");
+                response.sendRedirect("custommain.htm");
             } finally {
                 try {
                     out.close();
                 } catch (IOException ex) {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-                    response.sendRedirect("http://localhost:8080/travel/custommain.htm");
+                    response.sendRedirect("custommain.htm");
                 }
             }
         }

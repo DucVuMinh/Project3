@@ -58,7 +58,7 @@ public class ManageUserPostsController {
             mm.put("listp", listp);
             mm.put("user", u.getFullname());
         } else {
-            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            response.sendRedirect("requestlogin.htm");
         }
 
         return mv;
@@ -76,7 +76,7 @@ public class ManageUserPostsController {
             System.out.println("ducvu: " + lisDes.size());
 
         } else {
-            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            response.sendRedirect("requestlogin.htm");
         }
 
         return mv;
@@ -105,11 +105,11 @@ public class ManageUserPostsController {
                 mm.put("infpos", ptemp);
                 mm.put("imgDetail", listImgDetail);
             } else {
-                response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+                response.sendRedirect("requestlogin.htm");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            response.sendRedirect("requestlogin.htm");
         }
         mv.setViewName("customeditposts");
         return mv;

@@ -139,11 +139,11 @@ public class DestinationController {
                 mm.put("listFes", listFes);
                 mm.put("listPosts", listPost);
             } else {
-                response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+                response.sendRedirect("requestlogin.htm");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            response.sendRedirect("requestlogin.htm");
         }
         mv.setViewName("customdestination");
         return mv;

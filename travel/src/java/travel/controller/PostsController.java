@@ -68,7 +68,7 @@ public class PostsController {
                 if (p.getImagedetailPostses() != null) {
                     for (Object temp : p.getImagedetailPostses()) {
                         ImagedetailPosts imgtemp = (ImagedetailPosts) temp;
-                        listImgDetail.add("http://localhost:8080/travel/img/posts/detail/" + imgtemp.getIdImage() + ".png");
+                        listImgDetail.add("img/posts/detail/" + imgtemp.getIdImage() + ".png");
                     }
                 }
                 HttpSession session = request.getSession();
@@ -111,11 +111,11 @@ public class PostsController {
                 mm.put("comment", commentSet);
                 mv.setViewName("customposts");
             } else {
-                response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+                response.sendRedirect("requestlogin.htm");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            response.sendRedirect("requestlogin.htm");
         }
         return mv;
     }
@@ -177,7 +177,7 @@ public class PostsController {
             }
 
         } catch (IOException ex) {
-            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            response.sendRedirect("requestlogin.htm");
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -227,7 +227,7 @@ public class PostsController {
             }
 
         } catch (IOException ex) {
-            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            response.sendRedirect("requestlogin.htm");
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -268,13 +268,13 @@ public class PostsController {
 
         } catch (IOException ex) {
             ex.printStackTrace();
-            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            response.sendRedirect("requestlogin.htm");
             Logger
                     .getLogger(LoginController.class
                             .getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             ex.printStackTrace();
-            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            response.sendRedirect("requestlogin.htm");
         }
     }
     @Autowired

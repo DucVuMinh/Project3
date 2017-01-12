@@ -31,8 +31,8 @@ public class FestivalTemp {
         this.numberUserRank = numberUserRank;
         this.avgRank = avgRank;
         this.rankOfUser = rankOfUser;
-        this.link="http://localhost:8080/travel/customfestival.htm?id=" + this.id;
-        this.profile="http://localhost:8080/travel/img/festival/profile/"+this.id+".png";
+        this.link="customfestival.htm?id=" + this.id;
+        this.profile="img/festival/profile/"+this.id+".png";
     }
     public FestivalTemp(Festival f){
         this.id=f.getIdFestival();
@@ -40,15 +40,15 @@ public class FestivalTemp {
         this.title=f.getTitle();
         this.numberUserRank=f.getRankingfestivals().size();
         this.avgRank=f.getRank();
-        this.link="http://localhost:8080/travel/customfestival.htm?id=" + this.id;
-        this.profile="http://localhost:8080/travel/img/festival/profile/"+this.id+".png";
+        this.link="customfestival.htm?id=" + this.id;
+        this.profile="img/festival/profile/"+this.id+".png";
     }
     public FestivalTemp(Festival f,int typeuse){
         this.id=f.getIdFestival();
         this.description=f.getDiscription();
         this.title=f.getTitle();
-        this.link="http://localhost:8080/travel/customfestival.htm?id=" + this.id;
-        this.profile="http://localhost:8080/travel/img/festival/profile/"+this.id+".png";
+        this.link="customfestival.htm?id=" + this.id;
+        this.profile="img/festival/profile/"+this.id+".png";
     }
     public int getId() {
         return id;

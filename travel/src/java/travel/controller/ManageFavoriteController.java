@@ -75,7 +75,7 @@ public class ManageFavoriteController {
             mm.put("listF", listF);
             mm.put("listP", listP);
         } else {
-            response.sendRedirect("http://localhost:8080/travel/requestlogin.htm");
+            response.sendRedirect("requestlogin.htm");
         }
         }catch(Exception ex){
             ex.printStackTrace();

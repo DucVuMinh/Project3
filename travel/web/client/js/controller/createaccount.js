@@ -48,7 +48,7 @@ app.controller('creatctr', function ($scope, $http) {
             
             $http({
                 method: 'POST',
-                url: 'http://localhost:8080/travel/customhandlingcreateaccount.htm',
+                url: 'customhandlingcreateaccount.htm',
                 data: strl
             }).success(function (data, status, headers, config) {
                 if (data === "username") {

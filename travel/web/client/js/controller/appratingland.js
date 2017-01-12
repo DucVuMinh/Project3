@@ -22,7 +22,7 @@ starApp.controller('StarCtrl', function ($scope, $http, $location) {
             var rank = url + '|' + $scope.ratings[1].current;
             $http({
                 method: 'POST',
-                url: 'http://localhost:8080/travel/rankingland.htm',
+                url: 'rankingland.htm',
                 data: rank
             }).success(function (data, status, headers, config) {
                 if (data === "login") {

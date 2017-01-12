@@ -32,8 +32,8 @@ public class Landtemp {
         this.numberUserRank = numberUserRank;
         this.avgRank = avgRank;
         this.rankOfUser = rankOfUser;
-        this.link = "http://localhost:8080/travel/customlandscape.htm?id=" + this.id;
-        this.profile="http://localhost:8080/travel/img/landscape/profile/"+this.id+".png";
+        this.link = "customlandscape.htm?id=" + this.id;
+        this.profile="img/landscape/profile/"+this.id+".png";
     }
     public Landtemp(Landscape l){
         this.id=l.getIdLandscape();
@@ -41,15 +41,15 @@ public class Landtemp {
         this.desciption=l.getDiscription();
         this.numberUserRank=l.getRankinglandscapes().size();
         this.avgRank=l.getRank();
-        this.link="http://localhost:8080/travel/customlandscape.htm?id=" + this.id;
-        this.profile="http://localhost:8080/travel/img/landscape/profile/"+this.id+".png";
+        this.link="customlandscape.htm?id=" + this.id;
+        this.profile="img/landscape/profile/"+this.id+".png";
     }
     public Landtemp(Landscape l,int typeuse){
         this.id=l.getIdLandscape();
         this.title=l.getTitle();
         this.desciption=l.getDiscription();
-        this.link="http://localhost:8080/travel/customlandscape.htm?id=" + this.id;
-        this.profile="http://localhost:8080/travel/img/landscape/profile/"+this.id+".png";
+        this.link="customlandscape.htm?id=" + this.id;
+        this.profile="img/landscape/profile/"+this.id+".png";
     }
     public String getTitle() {
         return title;

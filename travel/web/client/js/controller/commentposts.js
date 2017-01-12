@@ -11,7 +11,7 @@ comment.controller('commentpostsctr', function ($scope, $http, $location) {
         var strl = idposts + '|' + $scope.content;
         $http({
             method: 'POST',
-            url: 'http://localhost:8080/travel/customhandlingcomment.htm',
+            url: 'customhandlingcomment.htm',
             data: strl
         }).success(function (data, status, headers, config) {
             if (data === "login") {
@@ -36,7 +36,7 @@ comment.controller('commentpostsctr', function ($scope, $http, $location) {
         var arr = data.split("|");
         var linkprofile;
         if(arr.length==3){
-            linkprofile="http://localhost:8080/travel/img/users/profile/"+arr[2]+".png";
+            linkprofile="img/users/profile/"+arr[2]+".png";
         }else{
             linkprofile="http://graph.facebook.com/"+arr[2]+"/picture";
         }

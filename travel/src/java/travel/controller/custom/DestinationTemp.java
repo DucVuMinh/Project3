@@ -27,15 +27,15 @@ public class DestinationTemp {
         this.id = id;
         this.title = title;
         this.desciption = desciption;
-        this.profile="http://localhost:8080/img/destination/profile/"+this.id+".png";
-        this.link="http://localhost:8080/travel/customdestination.htm?id=" + this.id;
+        this.profile="img/destination/profile/"+this.id+".png";
+        this.link="customdestination.htm?id=" + this.id;
     }
     public DestinationTemp(Destination d){
         this.id=d.getIdDestination();
         this.title=d.getTitle();
         this.desciption=d.getDiscription();
-        this.profile="http://localhost:8080/travel/img/destination/profile/"+this.id+".png";
-        this.link="http://localhost:8080/travel/customdestination.htm?id=" + this.id;
+        this.profile="img/destination/profile/"+this.id+".png";
+        this.link="customdestination.htm?id=" + this.id;
     }
     
     public int getId() {

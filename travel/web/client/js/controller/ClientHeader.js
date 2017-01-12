@@ -20,7 +20,7 @@ clientLogin.controller("headerctr", function ($scope, $http, $location) {
         var strl = "logout";
         $http({
             method: 'POST',
-            url: 'http://localhost:8080/travel/customhandlinglogout.htm',
+            url: 'customhandlinglogout.htm',
             data: strl
         }).success(function (data, status, headers, config) {
             if (data ==1) {

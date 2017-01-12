@@ -42,7 +42,7 @@ app.controller('setuserinfctr', function ($scope, $http) {
         if (!($scope.checkPasswordFormat || $scope.checkpassword || $scope.matchPass)) {
             $http({
                 method: 'POST',
-                url: 'http://localhost:8080/travel/customupdateinf.htm',
+                url: 'customupdateinf.htm',
                 data: strl
             }).success(function (data, status, headers, config) {
                 if(data!=null){

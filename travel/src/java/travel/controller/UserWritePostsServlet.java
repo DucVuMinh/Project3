@@ -120,7 +120,7 @@ public class UserWritePostsServlet extends HttpServlet {
                 }
             }
         }
-        response.sendRedirect("http://localhost:8080/travel/customposts.htm?id=" + idpost);
+        response.sendRedirect("customposts.htm?id=" + idpost);
         return;
     }
 
